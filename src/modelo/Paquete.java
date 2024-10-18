@@ -10,24 +10,30 @@ package modelo;
  */
 public class Paquete {
   private int id_paquete;
+  private String nombrePaquete;
   private Ciudad ciudadOrigen;
   private Ciudad ciudadDestino;
   private Alojamiento alojamiento;
   private Pasaje pasaje;
+  private boolean estado;
 
-    public Paquete(int id_paquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje) {
+    public Paquete(int id_paquete, String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado) {
         this.id_paquete = id_paquete;
+        this.nombrePaquete = nombrePaquete;
         this.ciudadOrigen = ciudadOrigen;
         this.ciudadDestino = ciudadDestino;
         this.alojamiento = alojamiento;
         this.pasaje = pasaje;
+        this.estado = estado;
     }
 
-    public Paquete(Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje) {
+    public Paquete(String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado) {
+        this.nombrePaquete = nombrePaquete;
         this.ciudadOrigen = ciudadOrigen;
         this.ciudadDestino = ciudadDestino;
         this.alojamiento = alojamiento;
         this.pasaje = pasaje;
+        this.estado = estado;
     }
 
     public Paquete() {
@@ -39,6 +45,14 @@ public class Paquete {
 
     public void setId_paquete(int id_paquete) {
         this.id_paquete = id_paquete;
+    }
+
+    public String getNombrePaquete() {
+        return nombrePaquete;
+    }
+
+    public void setNombrePaquete(String nombrePaquete) {
+        this.nombrePaquete = nombrePaquete;
     }
 
     public Ciudad getCiudadOrigen() {
@@ -73,11 +87,19 @@ public class Paquete {
         this.pasaje = pasaje;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
-        return "Paquete{" + "id_paquete=" + id_paquete + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", alojamiento=" + alojamiento + ", pasaje=" + pasaje + '}';
+        return "Paquete{" + "id_paquete=" + id_paquete + ", nombrePaquete=" + nombrePaquete + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", alojamiento=" + alojamiento + ", pasaje=" + pasaje + ", estado=" + estado + '}';
     }
-  
-  
+
+    
   
 }
