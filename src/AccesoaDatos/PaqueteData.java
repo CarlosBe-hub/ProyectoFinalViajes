@@ -8,6 +8,7 @@ import java.sql.Connection;
 import modelo.*;
 import java.sql.*;
 import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -93,4 +94,36 @@ public class PaqueteData {
 
         }
     }
+    public Paquete buscarPaquete(String nombrePaquete) {
+    Paquete paqueteEncontrado = null;
+  
+    String query = "SELECT id_paquete, nombre_paquete, id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje, estado FROM paquete WHERE nombre_paquete = ?";
+
+    try (PreparedStatement ps = red.prepareStatement(query)) {
+        ps.setString(1, nombrePaquete);
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            paqueteEncontrado = new Paquete();
+                paqueteEncontrado.setId_paquete(rs.getInt("id_paquete"));
+                paqueteEncontrado.setNombrePaquete(rs.getString("nombre_paquete"));
+                int idCiudadOrigen = rs.getInt("id_ciudadOrigen");
+                int idCiudadDestino = rs.getInt("id_ciduadDestino");
+                
+                
+                
+                paqueteEncontrado.setCiudadOrigen(ciudadOrigen);
+                paqueteEncontrado.setCiudadDestino(ciudadDestino);
+                
+            
+            
+                
+            
+        }
+    } catch (SQLException e) {
+    }
+    
+    return paqueteEncontrado;
+}
+    
 }
