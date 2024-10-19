@@ -63,22 +63,22 @@ public class ProyectoFinal {
 //        pd.EliminarPaquete(3);
 
 
-         PaqueteData pd = new PaqueteData();
-         
-         String nombre = "viaje familiar";
-         Paquete encontrar = pd.buscarPaquete(nombre);
-         
-         if(encontrar != null){
-             System.out.println("id: "+encontrar.getId_paquete());
-             System.out.println("nombre: "+encontrar.getNombrePaquete());
-             System.out.println("C origen: "+encontrar.getCiudadOrigen());
-             System.out.println("D origen: "+encontrar.getCiudadDestino());
-             System.out.println("alojamineto: "+encontrar.getAlojamiento());
-             System.out.println("pasaje: "+encontrar.getPasaje());
-             System.out.println("estado: "+encontrar.isEstado());
-             
-         }
-
+    PaqueteData paqueteData = new PaqueteData();
+    int idBuscar = 3; // Aca cambiamos el id dependiendo que paquete estamos buscando en este caso el 3 
+    
+    Paquete paquete = paqueteData.buscarPaquete(idBuscar);
+    
+    if (paquete != null) {
+        System.out.println("Paquete encontrado: ");
+        System.out.println("Nombre del Paquete: " + paquete.getNombrePaquete());
+        System.out.println("ID Paquete: " + paquete.getId_paquete());
+        System.out.println("Ciudad Origen: " + paquete.getCiudadOrigen().getId_ciudad());
+        System.out.println("Ciudad Destino: " + paquete.getCiudadDestino().getId_ciudad());
+        System.out.println("Alojamiento ID: " + paquete.getAlojamiento().getId_alojamiento());
+        System.out.println("Pasaje ID: " + paquete.getPasaje().getId_pasaje());
+    } else {
+        System.out.println("No se encontro ingunaquete con ese ID.");
     }
-
+}   
 }
+
