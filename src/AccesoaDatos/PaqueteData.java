@@ -48,7 +48,7 @@ public class PaqueteData {
         try {
             PreparedStatement ps = red.prepareStatement(sql);
             ps.setInt(1, id);
-            
+
             int i = ps.executeUpdate();
 
             if (i == 1) {
@@ -59,14 +59,13 @@ public class PaqueteData {
             JOptionPane.showMessageDialog(null, "Error al modificar Paquete");
         }
     }
-    
-    
-        public void ModificarPaqueteAlta(int id) {
+
+    public void ModificarPaqueteAlta(int id) {
         String sql = "UPDATE paquete SET estado = 1 WHERE id_paquete =?";
         try {
             PreparedStatement ps = red.prepareStatement(sql);
             ps.setInt(1, id);
-            
+
             int i = ps.executeUpdate();
 
             if (i == 1) {
@@ -94,36 +93,224 @@ public class PaqueteData {
 
         }
     }
+
+    /*
+    public Paquete buscarPaquete(String nombrePaquete) {
+        Paquete paqueteEncontrado = null;
+
+        String query = "SELECT p.id_paquete, p.nombre_paquete, "
+                 + "co.id_ciudad AS idCiudadOrigen, co.nombre AS nombreCiudadOrigen, "
+                 + "cd.id_ciudad AS idCiudadDestino, cd.nombre AS nombreCiudadDestino, "
+                 + "p.id_alojamiento, p.id_pasaje, p.estado "
+                 + "FROM paquete p "
+                 + "JOIN ciudad co ON p.id_ciudadOrigen = co.id_ciudad "
+                 + "JOIN ciudad cd ON p.id_ciudadDestino = cd.id_ciudad "
+                 + "WHERE p.nombre_paquete = ?";
+
+        try (PreparedStatement ps = red.prepareStatement(query)) {
+            ps.setString(1, nombrePaquete);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                paqueteEncontrado = new Paquete();
+                paqueteEncontrado.setId_paquete(rs.getInt("id_paquete"));
+                paqueteEncontrado.setNombrePaquete(rs.getString("nombre_paquete"));
+
+                Ciudad ciudadOrigen = new Ciudad();
+                ciudadOrigen.setId_ciudad(rs.getInt("id_ciudadOrigen"));
+                paqueteEncontrado.setCiudadOrigen(ciudadOrigen);
+
+                Ciudad ciudadDestino = new Ciudad();
+                ciudadDestino.setId_ciudad(rs.getInt("id_ciudadDestino"));
+                paqueteEncontrado.setCiudadDestino(ciudadDestino);
+
+                paqueteEncontrado.setEstado(rs.getBoolean("estado"));
+            }
+
+        } catch (SQLException e) {
+        }
+
+        return paqueteEncontrado;
+    }
+     */
+ /*
     public Paquete buscarPaquete(String nombrePaquete) {
     Paquete paqueteEncontrado = null;
-  
-    String query = "SELECT id_paquete, nombre_paquete, id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje, estado FROM paquete WHERE nombre_paquete = ?";
+
+    String query = "SELECT p.id_paquete, p.nombre_paquete, "
+                 + "co.id_ciudad AS idCiudadOrigen, co.nombre AS nombreCiudadOrigen, "
+                 + "co.pais AS paisOrigen, co.estado AS estadoOrigen, co.provincia AS provinciaOrigen, "
+                 + "cd.id_ciudad AS idCiudadDestino, cd.nombre AS nombreCiudadDestino, "
+                 + "cd.pais AS paisDestino, cd.estado AS estadoDestino, cd.provincia AS provinciaDestino, "
+                 + "p.id_alojamiento, p.id_pasaje, p.estado "
+                 + "FROM paquete p "
+                 + "JOIN ciudad co ON p.id_ciudadOrigen = co.id_ciudad "
+                 + "JOIN ciudad cd ON p.id_ciudadDestino = cd.id_ciudad "
+                 + "WHERE p.nombre_paquete = ?";
 
     try (PreparedStatement ps = red.prepareStatement(query)) {
         ps.setString(1, nombrePaquete);
         ResultSet rs = ps.executeQuery();
-        
+
         if (rs.next()) {
             paqueteEncontrado = new Paquete();
-                paqueteEncontrado.setId_paquete(rs.getInt("id_paquete"));
-                paqueteEncontrado.setNombrePaquete(rs.getString("nombre_paquete"));
-                int idCiudadOrigen = rs.getInt("id_ciudadOrigen");
-                int idCiudadDestino = rs.getInt("id_ciduadDestino");
-                
-                
-                
-                paqueteEncontrado.setCiudadOrigen(ciudadOrigen);
-                paqueteEncontrado.setCiudadDestino(ciudadDestino);
-                
-            
-            
-                
-            
+            paqueteEncontrado.setId_paquete(rs.getInt("id_paquete"));
+            paqueteEncontrado.setNombrePaquete(rs.getString("nombre_paquete"));
+
+            // Crear Ciudad de Origen
+            Ciudad ciudadOrigen = new Ciudad(
+                rs.getInt("idCiudadOrigen"),
+                rs.getString("nombreCiudadOrigen"),
+                rs.getString("paisOrigen"),
+                rs.getBoolean("estadoOrigen"),
+                rs.getString("provinciaOrigen")
+            );
+
+            // Crear Ciudad de Destino
+            Ciudad ciudadDestino = new Ciudad(
+                rs.getInt("idCiudadDestino"),
+                rs.getString("nombreCiudadDestino"),
+                rs.getString("paisDestino"),
+                rs.getBoolean("estadoDestino"),
+                rs.getString("provinciaDestino")
+            );
+
+            // Asignar las ciudades al paquete
+            paqueteEncontrado.setCiudadOrigen(ciudadOrigen);
+            paqueteEncontrado.setCiudadDestino(ciudadDestino);
+
+            // Aquí podrías asignar alojamiento y pasaje si fuera necesario
+            paqueteEncontrado.setEstado(rs.getBoolean("estado"));
         }
     } catch (SQLException e) {
+        e.printStackTrace();
     }
-    
+
     return paqueteEncontrado;
 }
-    
+     *//*
+    public Paquete buscarPaquete(String nombrePaquete) {
+    Paquete paqueteEncontrado = null;
+
+    String query = "SELECT p.id_paquete, p.nombre_paquete, "
+                 + "co.id_ciudad AS idCiudadOrigen, co.nombre AS nombreCiudadOrigen, "
+                 + "co.pais AS paisOrigen, co.estado AS estadoOrigen, co.provincia AS provinciaOrigen, "
+                 + "cd.id_ciudad AS idCiudadDestino, cd.nombre AS nombreCiudadDestino, "
+                 + "cd.pais AS paisDestino, cd.estado AS estadoDestino, cd.provincia AS provinciaDestino, "
+                 + "a.id_alojamiento, a.nombre AS nombreAlojamiento, "
+                 + "s.id_pasaje, s.tipo AS tipoPasaje, "
+                 + "p.estado "
+                 + "FROM paquete p "
+                 + "JOIN ciudad co ON p.id_ciudadOrigen = co.id_ciudad "
+                 + "JOIN ciudad cd ON p.id_ciudadDestino = cd.id_ciudad "
+                 + "JOIN alojamiento a ON p.id_alojamiento = a.id_alojamiento "
+                 + "JOIN pasaje s ON p.id_pasaje = s.id_pasaje "
+                 + "WHERE p.nombre_paquete = ?";
+
+    try (PreparedStatement ps = red.prepareStatement(query)) {
+        ps.setString(1, nombrePaquete);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            paqueteEncontrado = new Paquete();
+            paqueteEncontrado.setId_paquete(rs.getInt("id_paquete"));
+            paqueteEncontrado.setNombrePaquete(rs.getString("nombre_paquete"));
+
+            // Crear las ciudades de origen y destino
+            Ciudad ciudadOrigen = new Ciudad(
+                rs.getInt("idCiudadOrigen"), 
+                rs.getString("nombreCiudadOrigen"), 
+                rs.getString("paisOrigen"), 
+                rs.getBoolean("estadoOrigen"), 
+                rs.getString("provinciaOrigen")
+            );
+
+            Ciudad ciudadDestino = new Ciudad(
+                rs.getInt("idCiudadDestino"), 
+                rs.getString("nombreCiudadDestino"), 
+                rs.getString("paisDestino"), 
+                rs.getBoolean("estadoDestino"), 
+                rs.getString("provinciaDestino")
+            );
+
+            paqueteEncontrado.setCiudadOrigen(ciudadOrigen);
+            paqueteEncontrado.setCiudadDestino(ciudadDestino);
+
+            // Crear y asignar el alojamiento
+            Alojamiento alojamiento = new Alojamiento(
+                rs.getInt("id_alojamiento"), 
+                rs.getString("nombreAlojamiento")
+            );
+            paqueteEncontrado.setAlojamiento(alojamiento);
+
+            // Crear y asignar el pasaje
+            Pasaje pasaje = new Pasaje(
+                rs.getInt("id_pasaje"), 
+                rs.getString("tipoPasaje")
+            );
+            paqueteEncontrado.setPasaje(pasaje);
+
+            paqueteEncontrado.setEstado(rs.getBoolean("estado"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return paqueteEncontrado;
+}*/
+    public Paquete buscarPaquete(String nombrePaquete) {
+        Paquete paqueteEncontrado = null;
+
+        String query = "SELECT p.id_paquete, p.nombre_paquete, "
+                + "a.id_alojamiento, a.fecha_inicio, a.fecha_fin, a.estado AS estadoAlojamiento, "
+                + "a.servicio, a.importe_diario, a.tipo_alojamiento, cd.id_ciudad AS idCiudadDestino, "
+                + "s.id_pasaje, s.tipo_transporte, s.importe, co.id_ciudad AS idCiudadOrigen, "
+                + "s.estado AS estadoPasaje, p.estado "
+                + "FROM paquete p "
+                + "JOIN alojamiento a ON p.id_alojamiento = a.id_alojamiento "
+                + "JOIN pasaje s ON p.id_pasaje = s.id_pasaje "
+                + "JOIN ciudad co ON s.ciudad_origen = co.id_ciudad "
+                + "JOIN ciudad cd ON a.ciudad_destino = cd.id_ciudad "
+                + "WHERE p.nombre_paquete = ?";
+
+        try (PreparedStatement ps = red.prepareStatement(query)) {
+            ps.setString(1, nombrePaquete);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                // Crear el Alojamiento
+                Alojamiento alojamiento = new Alojamiento(
+                        rs.getInt("id_alojamiento"),
+                        rs.getDate("fecha_inicio").toLocalDate(),
+                        rs.getDate("fecha_fin").toLocalDate(),
+                        rs.getBoolean("estadoAlojamiento"),
+                        rs.getString("servicio"),
+                        rs.getDouble("importe_diario"),
+                        new Ciudad(rs.getInt("idCiudadDestino"), rs.getString("cd")), // Usar el nombre de la ciudad
+                        rs.getString("tipo_alojamiento")
+                );
+
+// Crear el Pasaje
+                Pasaje pasaje = new Pasaje(
+                        rs.getInt("id_pasaje"),
+                        rs.getString("tipo_transporte"),
+                        rs.getDouble("importe"),
+                        new Ciudad(rs.getInt("idCiudadOrigen"), rs.getString("id_ciudadOrigen")), // Usar el nombre de la ciudad
+                        rs.getBoolean("estadoPasaje")
+                );
+
+                // Crear el Paquete
+                paqueteEncontrado = new Paquete();
+                paqueteEncontrado.setId_paquete(rs.getInt("id_paquete"));
+                paqueteEncontrado.setNombrePaquete(rs.getString("nombre_paquete"));
+                paqueteEncontrado.setAlojamiento(alojamiento);
+                paqueteEncontrado.setPasaje(pasaje);
+                paqueteEncontrado.setEstado(rs.getBoolean("estado"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return paqueteEncontrado;
+    }
 }

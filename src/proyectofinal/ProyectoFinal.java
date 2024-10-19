@@ -53,15 +53,31 @@ public class ProyectoFinal {
 //        pd.AgregarPaquete(paquetes);
         
         //MODIFICAMOS EL ESTADO DEL PAQUETE , SI ESTA ACTIVO O NO!
-         PaqueteData pd = new PaqueteData();
-         pd.ModificarPaqueteBaja(3); // cambiamos es estado a 0, lo que quiere decir es que esta inactivo
-         pd.ModificarPaqueteAlta(3); // cambiamos es estado a 1, lo que quiere decir es que esta activo
+//         PaqueteData pd = new PaqueteData();
+//         pd.ModificarPaqueteBaja(3); // cambiamos es estado a 0, lo que quiere decir es que esta inactivo
+//         pd.ModificarPaqueteAlta(3); // cambiamos es estado a 1, lo que quiere decir es que esta activo
 
 
 //        BORRAR EL PAQUETE TURISTICO
 //        PaqueteData pd = new PaqueteData();
 //        pd.EliminarPaquete(3);
 
+
+         PaqueteData pd = new PaqueteData();
+         
+         String nombre = "viaje familiar";
+         Paquete encontrar = pd.buscarPaquete(nombre);
+         
+         if(encontrar != null){
+             System.out.println("id: "+encontrar.getId_paquete());
+             System.out.println("nombre: "+encontrar.getNombrePaquete());
+             System.out.println("C origen: "+encontrar.getCiudadOrigen());
+             System.out.println("D origen: "+encontrar.getCiudadDestino());
+             System.out.println("alojamineto: "+encontrar.getAlojamiento());
+             System.out.println("pasaje: "+encontrar.getPasaje());
+             System.out.println("estado: "+encontrar.isEstado());
+             
+         }
 
     }
 
