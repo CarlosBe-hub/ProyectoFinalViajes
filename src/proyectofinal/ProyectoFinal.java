@@ -24,7 +24,12 @@ public class ProyectoFinal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //EL INSERT SE INSERTA DE 1 SOLA VEZ Y GUARDA TODO
+        
+
+
+        //PARA GUARDAR UN PAQUETE PRIMERO CREAMOS UNA CIUDAD DE ORIGEN, UNA CIUDAD DESTINO, UN ALOJAMIENTO Y UN PASAJE, LUEGO DE ESO LLAMAMOS AL METODO GUARDAR PAQUETE 
+        // Y LE PASAMOS LO CREADO ANTERIORMENTE PARA QUE SE CREE UN PAQUETE DE VIAJE..
+           
 
         //GUARDAR UNA CIUDAD
         
@@ -54,31 +59,32 @@ public class ProyectoFinal {
         
         //MODIFICAMOS EL ESTADO DEL PAQUETE , SI ESTA ACTIVO O NO!
 //         PaqueteData pd = new PaqueteData();
-//         pd.ModificarPaqueteBaja(3); // cambiamos es estado a 0, lo que quiere decir es que esta inactivo
-//         pd.ModificarPaqueteAlta(3); // cambiamos es estado a 1, lo que quiere decir es que esta activo
+//         pd.ModificarPaqueteBaja(3); // cambiamos el estado del paquete a 0, lo que quiere decir es que esta inactivo
+//         pd.ModificarPaqueteAlta(3); // cambiamos el estadodel paquete a 1, lo que quiere decir es que esta activo
 
 
+
+        // BUSCAMOS EL PAQUETE POR EL ID 
+        PaqueteData paqueteData = new PaqueteData();
+        int idBuscar = 3; // Aca cambiamos el id dependiendo que paquete estamos buscando en este caso el 3 
+
+        Paquete paquete = paqueteData.buscarPaquete(idBuscar);
+
+        if (paquete != null) {
+            System.out.println("Paquete encontrado: ");
+            System.out.println("Nombre del Paquete: " + paquete.getNombrePaquete());
+            System.out.println("ID Paquete: " + paquete.getId_paquete());
+            System.out.println("Ciudad Origen: " + paquete.getCiudadOrigen().getId_ciudad());
+            System.out.println("Ciudad Destino: " + paquete.getCiudadDestino().getId_ciudad());
+            System.out.println("Alojamiento ID: " + paquete.getAlojamiento().getId_alojamiento());
+            System.out.println("Pasaje ID: " + paquete.getPasaje().getId_pasaje());
+        } else {
+            System.out.println("No se encontro ingunaquete con ese ID.");
+        }
+    
 //        BORRAR EL PAQUETE TURISTICO
 //        PaqueteData pd = new PaqueteData();
 //        pd.EliminarPaquete(3);
-
-
-    PaqueteData paqueteData = new PaqueteData();
-    int idBuscar = 3; // Aca cambiamos el id dependiendo que paquete estamos buscando en este caso el 3 
-    
-    Paquete paquete = paqueteData.buscarPaquete(idBuscar);
-    
-    if (paquete != null) {
-        System.out.println("Paquete encontrado: ");
-        System.out.println("Nombre del Paquete: " + paquete.getNombrePaquete());
-        System.out.println("ID Paquete: " + paquete.getId_paquete());
-        System.out.println("Ciudad Origen: " + paquete.getCiudadOrigen().getId_ciudad());
-        System.out.println("Ciudad Destino: " + paquete.getCiudadDestino().getId_ciudad());
-        System.out.println("Alojamiento ID: " + paquete.getAlojamiento().getId_alojamiento());
-        System.out.println("Pasaje ID: " + paquete.getPasaje().getId_pasaje());
-    } else {
-        System.out.println("No se encontro ingunaquete con ese ID.");
-    }
 }   
 }
 
