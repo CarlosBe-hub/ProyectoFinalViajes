@@ -97,7 +97,7 @@ public class Paquete {
 
     @Override
     public String toString() {
-        return  id_paquete + ", " + nombrePaquete + ", " + ciudadOrigen + ", " + ciudadDestino + ", " + alojamiento + ", " + pasaje + ", " + estado;
+        return  id_paquete + ", " + nombrePaquete;
     }
 
     

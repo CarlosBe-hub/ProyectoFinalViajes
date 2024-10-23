@@ -24,7 +24,7 @@ public class PaqueteData {
     }
 
     public void AgregarPaquete(Paquete paquete) {
-        String sql = "INSERT INTO paquete (id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO paquete (nombre_paquete,id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement ps = red.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, paquete.getNombrePaquete());

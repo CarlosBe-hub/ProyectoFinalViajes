@@ -48,25 +48,25 @@ public class ProyectoFinal {
 //        Ciudad ciudadO = new Ciudad("San Luis", "Argentina", true, "San Luis");
 //        d.agregarCiudad(ciudadO);
 //        
-//        Pasaje pasajes = new Pasaje("Avion", 50000, ciudadesO, true);
+//        Pasaje pasajes = new Pasaje("Avion", 50000, ciudadO, true);
 //        PasajeData p = new PasajeData();
 //        p.guardarPasaje(pasajes);
 //        
 //        //GUARDAR PAQUETE
-//        Paquete paquetes = new Paquete(ciudadO,ciudadD,alojamientos,pasajes,true);
+//        Paquete paquetes = new Paquete("Paquete Familiar",ciudadO,ciudadD,alojamientos,pasajes,true);
 //        PaqueteData pd = new PaqueteData();
 //        pd.AgregarPaquete(paquetes);
         
-        //MODIFICAMOS EL ESTADO DEL PAQUETE , SI ESTA ACTIVO O NO!
+//        MODIFICAMOS EL ESTADO DEL PAQUETE , SI ESTA ACTIVO O NO!
 //         PaqueteData pd = new PaqueteData();
-//         pd.ModificarPaqueteBaja(3); // cambiamos el estado del paquete a 0, lo que quiere decir es que esta inactivo
-//         pd.ModificarPaqueteAlta(3); // cambiamos el estadodel paquete a 1, lo que quiere decir es que esta activo
+//         pd.ModificarPaqueteBaja(5); // cambiamos el estado del paquete a 0, lo que quiere decir es que esta inactivo
+//         pd.ModificarPaqueteAlta(5); // cambiamos el estadodel paquete a 1, lo que quiere decir es que esta activo
 
 
 
         // BUSCAMOS EL PAQUETE POR EL ID 
         PaqueteData paqueteData = new PaqueteData();
-        int idBuscar = 3; // Aca cambiamos el id dependiendo que paquete estamos buscando en este caso el 3 
+        int idBuscar = 5; // Aca cambiamos el id dependiendo del paquete que estamos buscando en este caso el 3 
 
         Paquete paquete = paqueteData.buscarPaquete(idBuscar);
 
@@ -81,6 +81,10 @@ public class ProyectoFinal {
         } else {
             System.out.println("No se encontro ingunaquete con ese ID.");
         }
+        
+        Turista turista = new Turista(42220800,"Agustin",24,paquete);
+        System.out.println("Informacion del turista");
+        System.out.println("Dni: "+turista.getDni()+","+" Nombre: "+turista.getNombre()+","+" Edad: "+turista.getEdad()+","+" Numero y Nombre de paquete adquirido: "+turista.getId_paquete());
     
 //        BORRAR EL PAQUETE TURISTICO
 //        PaqueteData pd = new PaqueteData();
