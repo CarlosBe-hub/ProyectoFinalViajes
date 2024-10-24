@@ -5,6 +5,8 @@
 package AccesoaDatos;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.Ciudad;
 
@@ -41,6 +43,104 @@ public class CiudadData {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error en acceder a la tabla ciudad");
         }
+    }
+    
+    public Ciudad buscarCiudad(String ciudad){
+    
+        String sql =" SELECT * FROM ciudad WHERE nombre=?";
+        Ciudad c =null;
+        
+        try {
+            PreparedStatement ps = red.prepareStatement(sql);
+            ps.setString(1, ciudad);
+            ResultSet rs =ps.executeQuery();
+            
+            if(rs.next()){
+                c = new Ciudad();
+                c.setId_ciudad(rs.getInt("id_ciudad"));
+                c.setNombre(ciudad);
+                c.setPais(rs.getString("pais"));
+                c.setEstado(rs.getBoolean("estado"));
+                c.setProvincia(rs.getString("provincia"));
+                
+                JOptionPane.showMessageDialog(null, "Se ha encontrado la ciudad");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla ciudad!");
+        }
+        return c;
+    }
+    
+    public List<String> listarPaises(){
+        String sql ="SELECT DISTINCT pais FROM ciudad";
+        List<String> pais = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = red.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                String a = rs.getString("pais");
+                pais.add(a);
+                JOptionPane.showMessageDialog(null, "lista de paises");
+            }
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla ciudad!");
+        }
+        return pais;
+    }
+    
+    public List<Ciudad> listarPaisYProvincia(String pais, String provincia){
+        String sql= "SELECT id_ciudad, nombre FROM ciudad WHERE provincia=? AND pais=?";
+        ArrayList<Ciudad> ciudad = new ArrayList<>();
+        
+        
+        try {
+            PreparedStatement ps = red.prepareStatement(sql);
+            ps.setString(1, provincia);
+            ps.setString(2, pais);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Ciudad c = new  Ciudad();
+                c.setId_ciudad(rs.getInt("id_ciudad"));
+                c.setNombre(rs.getString("nombre"));
+                c.setEstado(true);
+                c.setProvincia(provincia);
+                c.setPais(pais);
+                
+                ciudad.add(c);
+                
+               
+            }
+            
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error ListarPaisYProvincia");
+        }
+        return ciudad;
+    }
+    
+    public List<Ciudad> listarProvinciaXPais(String pais){
+        String sql = "SELECT id_ciudad, nombre FROM ciudad WHERE provincia =? AND pais =?";
+        ArrayList<Ciudad> ciudad = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = red.prepareStatement(sql);
+            ps.setString(1, pais);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                String p = rs.getString("provincia");
+                Ciudad c = new Ciudad();
+                c.setProvincia(p);
+                ciudad.add(c);
+            }
+        } catch (SQLException e) {
+        }
+        return ciudad;
     }
 
 }
