@@ -7,8 +7,13 @@ package AccesoaDatos;
 import java.sql.Connection;
 import modelo.*;
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -134,5 +139,125 @@ public class PaqueteData {
 
         return paquete;
     }
+    
+    public List<Paquete>listaPaquetesXciudad(int id){
+        
+        String sql = "SELECT *"
+                + "FROM paquete p "
+                + "INNER JOIN ciudad co ON  p.id_ciudadOrigen=co.id_ciudad "
+                + "INNER JOIN alojamiento a ON p.id_alojamiento = a.id_alojamiento "
+                + "INNER JOIN pasaje pa ON p.id_pasaje = pa.id_pasaje "
+                + "INNER JOIN ciudad cd ON p.id_ciudadDestino= cd.id_ciudad "
+                + "WHERE p.id_ciudadDestino = ? ";
+        
+        List<Paquete> paquete1 = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = red.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {                
+                Paquete p = new Paquete();
+                Alojamiento alojamientos = new Alojamiento();
+                AlojamientoData ad = new AlojamientoData();
+                PasajeData pd = new PasajeData();
+                Pasaje pasajes = new Pasaje();
+                Ciudad ciudadO = new Ciudad();
+                Ciudad ciudadD = new Ciudad();
+                
+                ciudadO.setId_ciudad(rs.getInt("id_ciudadOrigen"));
+                ciudadO.setNombre(rs.getString("co.nombre"));
+                ciudadO.setPais(rs.getString("co.pais"));
+                ciudadO.setProvincia(rs.getString("co.provincia"));
+                ciudadO.setEstado(rs.getBoolean("co.estado"));
+                
+                ciudadD.setId_ciudad(rs.getInt("id_ciudadDestino"));
+                ciudadD.setNombre(rs.getString("cd.nombre"));
+                ciudadD.setPais(rs.getString("cd.pais"));
+                ciudadD.setProvincia(rs.getString("cd.provincia"));
+                ciudadD.setEstado(rs.getBoolean("cd.estado"));
+                
+                alojamientos = ad.buscarAlojamiento(rs.getInt("id_alojamiento"));
+                
+                p.setAlojamiento(alojamientos);
+                p.setCiudadOrigen(ciudadO);
+                p.setCiudadDestino(ciudadD);
+                
+                pasajes = pd.buscarPasaje(rs.getInt("id_pasaje"));
+                p.setPasaje(pasajes);
+                
+                p.setId_paquete(rs.getInt("id_paquete"));
+                
+                paquete1.add(p);
+                
+                JOptionPane.showMessageDialog(null, "lista encontrada");
+            }
+                    
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "no se pudo acceder a la tabla paquete");
+        }
+        return paquete1;
+    }
+    
+     public List<Paquete> listarPaquetePorFechaSalida(LocalDate fechaActual) {
+        String sql = "SELECT * "
+                + "FROM paquete p "
+                + "INNER JOIN ciudad co ON p.id_ciudadOrigen = co.id_ciudad "
+                + "INNER JOIN alojamiento a ON p.id_alojamiento = a.id_alojamiento "
+                + "INNER JOIN pasaje pa ON p.id_pasaje = pa.id_pasaje "
+                + "INNER JOIN ciudad cd ON p.id_ciudadDestino = cd.id_ciudad "
+                + "WHERE a.fecha_fin < ? ";
+                
+
+        ArrayList<Paquete> paquete1 = new ArrayList<>();
+        try {
+            PreparedStatement ps = red.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(fechaActual));
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {                
+                Paquete p = new Paquete();
+                Alojamiento alojamientos = new Alojamiento();
+                AlojamientoData ad = new AlojamientoData();
+                PasajeData pd = new PasajeData();
+                Pasaje pasajes = new Pasaje();
+                Ciudad ciudadO = new Ciudad();
+                Ciudad ciudadD = new Ciudad();
+                
+                ciudadO.setId_ciudad(rs.getInt("id_ciudadOrigen"));
+                ciudadO.setNombre(rs.getString("co.nombre"));
+                ciudadO.setPais(rs.getString("co.pais"));
+                ciudadO.setProvincia(rs.getString("co.provincia"));
+                ciudadO.setEstado(rs.getBoolean("co.estado"));
+                
+                ciudadD.setId_ciudad(rs.getInt("id_ciudadDestino"));
+                ciudadD.setNombre(rs.getString("cd.nombre"));
+                ciudadD.setPais(rs.getString("cd.pais"));
+                ciudadD.setProvincia(rs.getString("cd.provincia"));
+                ciudadD.setEstado(rs.getBoolean("cd.estado"));
+                
+                alojamientos = ad.buscarAlojamiento(rs.getInt("id_alojamiento"));
+                
+                p.setAlojamiento(alojamientos);
+                p.setCiudadOrigen(ciudadO);
+                p.setCiudadDestino(ciudadD);
+                
+                pasajes = pd.buscarPasaje(rs.getInt("id_pasaje"));
+                p.setPasaje(pasajes);
+                
+                p.setId_paquete(rs.getInt("id_paquete"));
+                
+                paquete1.add(p);
+                
+                JOptionPane.showMessageDialog(null, "lista encontrada");
+            }
+                    
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "no se pudo acceder a la tabla paquete");
+        }
+        return paquete1;
+    }
+    
 }
   

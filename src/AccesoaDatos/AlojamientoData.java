@@ -8,8 +8,11 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.Alojamiento;
+import modelo.Ciudad;
 
 /**
  *
@@ -114,5 +117,75 @@ public class AlojamientoData {
            JOptionPane.showMessageDialog(null, "Error al dar de baja el alojamiento"); 
         }
     }
+    
+    public Alojamiento buscarAlojamiento(int id){
+        
+        String sql ="SELECT id_alojamiento,Fecha_inicio,fecha_fin,estado,servicio,importe_diario,id_ciudadDestino,tipo_lojamiento FROM alojamiento WHERE id_alojamiento = ?";
+        Alojamiento a = null;
+        
+        try {
+            
+            PreparedStatement ps = red.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                a = new Alojamiento();
+                CiudadData c = new CiudadData();
+                Ciudad ciudad = c.buscarCiudadporid(rs.getInt("id_ciudadDestino"));
+                a.setId_alojamiento(id);
+                a.setFechaInicio(rs.getDate("Fecha_incio").toLocalDate());
+                a.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+                a.setEstado(rs.getBoolean("estado"));
+                a.setServicio(rs.getString("servicio"));
+                a.setImporteDiario(rs.getDouble("importe_diario"));
+                a.setCiudadDestino(ciudad);
+                a.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
+                
+                JOptionPane.showMessageDialog(null,"alojamiento encontrado");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"error en acceder a la tabla alojamiento");
+        }
+        return a;
+    }
+    
+    public List<Alojamiento> listarAlojamiento(int ciudad, LocalDate fecha_inicio){
+        
+        String sql ="SELECT id_alojamiento,Fecha_inicio,fecha_fin,servicio,importe_diario,tipo_lojamiento FROM alojamiento WHERE Fecha_incio = ? AND id_ciudadDestino = ? AND estado = 1";
+        Alojamiento aloja = null;
+        
+        List<Alojamiento> listasdeAlojamiento = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = red.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(fecha_inicio));
+            ps.setInt(2, ciudad);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            CiudadData cd = new CiudadData();
+            
+            while (rs.next()) {
+               aloja = new Alojamiento();
+               Ciudad c = new Ciudad();
+               c = cd.buscarCiudadporid(ciudad);
+               aloja.setId_alojamiento(rs.getInt("id_alojamiento"));
+               aloja.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
+               aloja.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+               aloja.setEstado(true);
+               aloja.setServicio(rs.getString("servicio"));
+               aloja.setImporteDiario(rs.getDouble("importe_diario"));
+               aloja.setCiudadDestino(c);
+               aloja.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
+               listasdeAlojamiento.add(aloja);
+                
+            }
+        } catch (SQLException e) {
+        }
+        return listasdeAlojamiento;
+    }
+    
+    
     
 }
