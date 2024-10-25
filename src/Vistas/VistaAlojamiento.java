@@ -4,17 +4,30 @@
  */
 package Vistas;
 
+import AccesoaDatos.AlojamientoData;
+import AccesoaDatos.CiudadData;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+import javax.swing.JOptionPane;
+import modelo.Alojamiento;
+import modelo.Ciudad;
+
 /**
  *
  * @author carlo
  */
-public class Alojamiento extends javax.swing.JInternalFrame {
-
+public class VistaAlojamiento extends javax.swing.JInternalFrame {
+private CiudadData cd;
+private AlojamientoData ad;
     /**
      * Creates new form Alojamiento
      */
-    public Alojamiento() {
+    public VistaAlojamiento() {
         initComponents();
+        cd = new CiudadData();
+        ad = new AlojamientoData();
+        cargarComboPaises();
     }
 
     /**
@@ -35,24 +48,26 @@ public class Alojamiento extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jcbProvincias = new javax.swing.JComboBox<>();
+        jcbTipoAlojamiento = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        jcbPais = new javax.swing.JComboBox<>();
+        jcbServicio = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        jcbCiudades = new javax.swing.JComboBox<>();
+        jtImporte = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jButton2 = new javax.swing.JButton();
+        jrbInactivo = new javax.swing.JRadioButton();
+        jrbActivo = new javax.swing.JRadioButton();
+        jbBuscar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jdIngreso = new com.toedter.calendar.JDateChooser();
+        jdSalida = new com.toedter.calendar.JDateChooser();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -99,17 +114,22 @@ public class Alojamiento extends javax.swing.JInternalFrame {
         jLabel8.setText("Ciudad - Destino");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, -1, -1));
 
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 150, -1));
+        jPanel1.add(jcbProvincias, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 150, -1));
 
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 150, -1));
+        jPanel1.add(jcbTipoAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 150, -1));
 
         jButton1.setText("Salir");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 690, 110, -1));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 540, -1));
 
-        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 150, -1));
+        jcbPais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbPaisActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jcbPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 150, -1));
 
-        jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 150, -1));
+        jPanel1.add(jcbServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 150, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,8 +141,8 @@ public class Alojamiento extends javax.swing.JInternalFrame {
         jLabel9.setText("Importe Diario");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, -1, -1));
 
-        jPanel1.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 150, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 540, 150, -1));
+        jPanel1.add(jcbCiudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 150, -1));
+        jPanel1.add(jtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 540, 150, -1));
         jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 530, -1));
         jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 530, 10));
 
@@ -131,20 +151,32 @@ public class Alojamiento extends javax.swing.JInternalFrame {
         jLabel11.setText("Servicio");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, -1, -1));
 
-        jRadioButton1.setText("Inactivo");
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 630, -1, -1));
+        jrbInactivo.setText("Inactivo");
+        jPanel1.add(jrbInactivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 630, -1, -1));
 
-        jRadioButton2.setText("Activo");
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 630, -1, -1));
+        jrbActivo.setText("Activo");
+        jPanel1.add(jrbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 630, -1, -1));
 
-        jButton2.setText("BUSCAR");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, -1, -1));
+        jbBuscar.setText("BUSCAR");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, -1, -1));
 
         jButton3.setText("Nuevo");
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 690, 110, -1));
 
         jButton4.setText("Guardar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 690, 110, -1));
+        jPanel1.add(jdIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 140, -1));
+        jPanel1.add(jdSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,17 +192,55 @@ public class Alojamiento extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        try {
+            LocalDate fechaIng = jdIngreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaSalida = jdSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            boolean estado = jrbActivo.isSelected();
+            String tipoServicio = jcbServicio.getSelectedItem().toString();
+            Double importeDiario = Double.parseDouble(jtImporte.getText());
+            String ciudadDestino = jcbCiudades.getSelectedItem().toString();
+            Ciudad ciudad1 = cd.buscarCiudad(ciudadDestino);
+
+            //int idCiudadAgregar = ciudad1.getIdCiudad();
+            String tipoAlojamiento = jcbTipoAlojamiento.getSelectedItem().toString();
+
+            Alojamiento alojamiento2 = new Alojamiento(fechaIng, fechaSalida, estado, tipoServicio, importeDiario, ciudad1, tipoAlojamiento);
+            if(fechaSalida.isAfter(fechaIng)){
+                ad.guardarAlojamiento(alojamiento2);
+            }else JOptionPane.showMessageDialog(this, "Fecha de salida incorrecta");
+            
+        } catch (NullPointerException np) {
+            JOptionPane.showMessageDialog(this, "Campos vacios y/o Formato no valido");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jcbPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPaisActionPerformed
+
+        cargarComboProvincias();
+        jcbProvincias.setEnabled(true);
+    }//GEN-LAST:event_jcbPaisActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+
+        try {
+            String provincia = jcbProvincias.getSelectedItem().toString();
+            String pais = jcbPais.getSelectedItem().toString();
+            
+            cargarComboCiudades(pais, provincia);
+            jcbCiudades.setEnabled(true);
+            
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Combos Vacios");
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -183,13 +253,63 @@ public class Alojamiento extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jbBuscar;
+    private javax.swing.JComboBox<String> jcbCiudades;
+    private javax.swing.JComboBox<String> jcbPais;
+    private javax.swing.JComboBox<Ciudad> jcbProvincias;
+    private javax.swing.JComboBox<String> jcbServicio;
+    private javax.swing.JComboBox<String> jcbTipoAlojamiento;
+    private com.toedter.calendar.JDateChooser jdIngreso;
+    private com.toedter.calendar.JDateChooser jdSalida;
+    private javax.swing.JRadioButton jrbActivo;
+    private javax.swing.JRadioButton jrbInactivo;
+    private javax.swing.JTextField jtImporte;
     // End of variables declaration//GEN-END:variables
+
+    
+    private void cargarComboPaises() {
+
+        List<String> pais = cd.listarPaises();
+
+        jcbCiudades.setEnabled(false);
+        jcbCiudades.removeAllItems();
+
+        for (String pai : pais) {
+
+            jcbPais.addItem(pai);
+
+        }
+
+    }
+
+    private void cargarComboProvincias() {
+        String pai = (String) jcbPais.getSelectedItem();
+
+        List<Ciudad> ciudad = cd.listarProvinciasPorPaisCombo(pai);
+
+        jcbCiudades.setEnabled(false);
+        jcbProvincias.removeAllItems();
+        jcbCiudades.removeAllItems();
+
+        for (Ciudad ciudad1 : ciudad) {
+            jcbProvincias.addItem(ciudad1);
+        }
+    }
+
+    private void cargarComboCiudades(String pai, String prov) {
+
+        List<Ciudad> ciu = cd.listarPaisYProvincia(pai, prov);
+
+        for (Ciudad ciudad : ciu) {
+            String ciudadx = ciudad.getNombre();
+            jcbCiudades.addItem(ciudadx);
+
+        }
+
+    }
 }

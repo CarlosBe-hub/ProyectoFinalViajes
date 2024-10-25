@@ -4,6 +4,10 @@
  */
 package Vistas;
 
+import AccesoaDatos.CiudadData;
+import javax.swing.JOptionPane;
+import modelo.Ciudad;
+
 /**
  *
  * @author carlo
@@ -34,13 +38,10 @@ public class Ciudades extends javax.swing.JInternalFrame {
         jTprovincia = new javax.swing.JTextField();
         jTpais = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jrEstado = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jbNuevo = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -73,7 +74,7 @@ public class Ciudades extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Disponibilidad:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, -1, -1));
+        jPanel1.add(jrEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, -1, -1));
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -83,25 +84,21 @@ public class Ciudades extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 480, 70, -1));
 
-        jButton2.setText("Buscar");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, -1, -1));
-
-        jButton3.setText("Modificar");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 70, -1));
-
-        jButton4.setText("Nuevo");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jbNuevoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 480, 80, -1));
+        jPanel1.add(jbNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 80, -1));
 
-        jButton5.setText("Guardar");
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 80, -1));
-
-        jButton6.setText("Eliminar");
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 480, 70, -1));
+        jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 80, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,30 +119,51 @@ public class Ciudades extends javax.swing.JInternalFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         jTciudad.setText("");
         jTprovincia.setText("");
         jTpais.setText("");
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+        if(!jTpais.getText().isEmpty()  &&  !jTprovincia.getText().isEmpty()  && !jTciudad.getText().isEmpty()){
+           CiudadData cd = new CiudadData();
+           String pais = jTpais.getText();
+           String provincia = jTprovincia.getText();
+           String ciudad = jTciudad.getText();
+           boolean estado = jrEstado.isSelected();
+           Ciudad ciu = new Ciudad(ciudad,pais,estado,provincia);
+           cd.agregarCiudad(ciu);
+
+           limpiarCampos();
+       }else{
+           JOptionPane.showMessageDialog(null, "No deje campos vacios!");
+       }
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTciudad;
     private javax.swing.JTextField jTpais;
     private javax.swing.JTextField jTprovincia;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbNuevo;
+    private javax.swing.JRadioButton jrEstado;
     // End of variables declaration//GEN-END:variables
+
+private void limpiarCampos(){
+    jTpais.setText(""); 
+    jTprovincia.setText("");
+    jTciudad.setText("");
+    jrEstado.setEnabled(false);
+}
 }

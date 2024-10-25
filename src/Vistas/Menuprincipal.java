@@ -158,7 +158,7 @@ Ciudades a = new Ciudades();
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-Alojamiento a = new Alojamiento();
+VistaAlojamiento a = new VistaAlojamiento();
         a.setVisible(true);
         escritorio.add(a);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
