@@ -8,12 +8,12 @@ package Vistas;
  *
  * @author carlo
  */
-public class Pasaje extends javax.swing.JInternalFrame {
+public class VistaPasaje extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Pasaje
      */
-    public Pasaje() {
+    public VistaPasaje() {
         initComponents();
     }
 

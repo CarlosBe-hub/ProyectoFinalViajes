@@ -166,7 +166,7 @@ VistaAlojamiento a = new VistaAlojamiento();
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-Paquete a = new Paquete();
+VistaPaquete a = new VistaPaquete();
         a.setVisible(true);
         escritorio.add(a);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
@@ -174,7 +174,7 @@ Paquete a = new Paquete();
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-Pasaje a = new Pasaje();
+VistaPasaje a = new VistaPasaje();
         a.setVisible(true);
         escritorio.add(a);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
