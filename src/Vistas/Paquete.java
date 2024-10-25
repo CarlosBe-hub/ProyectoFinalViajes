@@ -36,7 +36,6 @@ public class Paquete extends javax.swing.JInternalFrame {
         jComboBox3 = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jSeparator3 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -47,6 +46,7 @@ public class Paquete extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         jButton2.setText("jButton2");
 
@@ -55,8 +55,8 @@ public class Paquete extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Consultar Paquete");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, -1, -1));
+        jLabel1.setText("Cargar Paquete");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 590, 10));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -85,7 +85,6 @@ public class Paquete extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Importe");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 600, -1, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 160, -1));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 580, -1));
 
         jButton1.setText("SALIR");
@@ -124,6 +123,7 @@ public class Paquete extends javax.swing.JInternalFrame {
 
         jButton4.setText("AGREGAR");
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 670, 130, -1));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 200, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

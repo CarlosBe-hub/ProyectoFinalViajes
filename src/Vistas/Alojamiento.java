@@ -41,8 +41,6 @@ public class Alojamiento extends javax.swing.JInternalFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jComboBox3 = new javax.swing.JComboBox<>();
         jComboBox4 = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jComboBox5 = new javax.swing.JComboBox<>();
@@ -112,8 +110,6 @@ public class Alojamiento extends javax.swing.JInternalFrame {
         jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 150, -1));
 
         jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 150, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 440, 140, -1));
-        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 400, 140, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,8 +171,6 @@ public class Alojamiento extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
