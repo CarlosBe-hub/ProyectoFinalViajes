@@ -61,7 +61,6 @@ private AlojamientoData ad;
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
-        jrbInactivo = new javax.swing.JRadioButton();
         jrbActivo = new javax.swing.JRadioButton();
         jbBuscar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -75,7 +74,7 @@ private AlojamientoData ad;
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Agregar Alojamiento");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 540, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
@@ -116,11 +115,17 @@ private AlojamientoData ad;
 
         jPanel1.add(jcbProvincias, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 150, -1));
 
+        jcbTipoAlojamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hotel", "Hostel", "Cabaña", "Departamento" }));
         jPanel1.add(jcbTipoAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 150, -1));
 
         jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 690, 110, -1));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 540, -1));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 550, -1));
 
         jcbPais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +134,8 @@ private AlojamientoData ad;
         });
         jPanel1.add(jcbPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 150, -1));
 
-        jPanel1.add(jcbServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 150, -1));
+        jcbServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desayuno", "Desayuno - Almuerzo", "Desayuno - Almuerzo - Cena" }));
+        jPanel1.add(jcbServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 230, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -150,12 +156,7 @@ private AlojamientoData ad;
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Servicio");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, -1, -1));
-
-        jrbInactivo.setText("Inactivo");
-        jPanel1.add(jrbInactivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 630, -1, -1));
-
-        jrbActivo.setText("Activo");
-        jPanel1.add(jrbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 630, -1, -1));
+        jPanel1.add(jrbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 630, -1, -1));
 
         jbBuscar.setText("BUSCAR");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -186,7 +187,7 @@ private AlojamientoData ad;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
         );
 
         pack();
@@ -236,6 +237,11 @@ private AlojamientoData ad;
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -267,7 +273,6 @@ private AlojamientoData ad;
     private com.toedter.calendar.JDateChooser jdIngreso;
     private com.toedter.calendar.JDateChooser jdSalida;
     private javax.swing.JRadioButton jrbActivo;
-    private javax.swing.JRadioButton jrbInactivo;
     private javax.swing.JTextField jtImporte;
     // End of variables declaration//GEN-END:variables
 

@@ -42,7 +42,7 @@ public class AlojamientoData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 alojamiento.setId_alojamiento(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Alojamiento Registrada");
+                JOptionPane.showMessageDialog(null, "Alojamiento Registrado");
             }
 
         } catch (SQLException e) {

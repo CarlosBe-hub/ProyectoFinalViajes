@@ -82,7 +82,7 @@ public class CiudadData {
             while (rs.next()) {
                 String a = rs.getString("pais");
                 pais.add(a);
-                JOptionPane.showMessageDialog(null, "lista de paises");
+//                JOptionPane.showMessageDialog(null, "lista de paises");
             }
 
         } catch (SQLException e) {
