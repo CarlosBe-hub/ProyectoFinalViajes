@@ -74,13 +74,13 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jPanel2.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 147, -1));
 
         jbBuscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jbBuscar.setText("buscar");
+        jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
             }
         });
-        jPanel2.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, -1));
+        jPanel2.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, 20));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,72 +95,77 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 118));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 118));
 
-        jbCargarDatosTabla.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jbCargarDatosTabla.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jbCargarDatosTabla.setText("Cargar");
         jbCargarDatosTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCargarDatosTablaActionPerformed(evt);
             }
         });
-        jPanel2.add(jbCargarDatosTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 352, 12));
+        jPanel2.add(jbCargarDatosTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 352, 12));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ID");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Fecha Inicio");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Fecha Fin");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, -1, -1));
-        jPanel2.add(jtfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 126, -1));
-        jPanel2.add(fechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 126, -1));
-        jPanel2.add(fechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 126, -1));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 352, 16));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
+        jPanel2.add(jtfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 126, -1));
+        jPanel2.add(fechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 126, -1));
+        jPanel2.add(fechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 126, -1));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 352, 16));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tipo de Alojamiento");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Servicio");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
 
-        jPanel2.add(jcTAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, 152, -1));
+        jcTAlojamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcTAlojamientoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jcTAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 152, -1));
 
-        jPanel2.add(jcServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 152, -1));
+        jPanel2.add(jcServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 152, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Actualizar Alojamiento");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, -1, -1));
-        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 510, 352, 14));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 352, 14));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Importe Diario");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 530, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Estado");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 570, -1, -1));
-        jPanel2.add(jtfImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 530, 158, -1));
-        jPanel2.add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 570, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, -1, -1));
+        jPanel2.add(jtfImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, 158, -1));
+        jPanel2.add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, -1, -1));
 
-        jbActualizar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jbActualizar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jbActualizar.setText("Actualizar");
-        jPanel2.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 610, -1, -1));
+        jPanel2.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, -1, -1));
         jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 390, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,7 +176,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -232,6 +237,10 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
           
          
     }//GEN-LAST:event_jbCargarDatosTablaActionPerformed
+
+    private void jcTAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTAlojamientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcTAlojamientoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
