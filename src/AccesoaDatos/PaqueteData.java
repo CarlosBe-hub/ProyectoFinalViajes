@@ -258,6 +258,25 @@ public class PaqueteData {
         }
         return paquete1;
     }
+//     public void AgregarPaqueteC(Paquete paquete) {
+//        String sql = "INSERT INTO paquete (id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje) VALUES(?,?,?,?)";
+//        try {
+//            PreparedStatement ps = red.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//            ps.setInt(1, paquete.getCiudadOrigen().getId_ciudad());
+//            ps.setInt(2, paquete.getCiudadDestino().getId_ciudad());
+//            ps.setInt(3, paquete.getAlojamiento().getId_alojamiento());
+//            ps.setInt(4, paquete.getPasaje().getId_pasaje());
+//            ps.executeUpdate();
+//            ResultSet rs = ps.getGeneratedKeys();
+//            if (rs.next()) {
+//                paquete.setId_paquete(rs.getInt(1));
+//                JOptionPane.showMessageDialog(null, "Paquete Registrado");
+//
+//            }
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "Error al acceder AgregarPaquete");
+//        }
+//    }
     
 }
   

@@ -26,6 +26,7 @@ public class Paquete {
         this.pasaje = pasaje;
         this.estado = estado;
     }
+    
 
     public Paquete(String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado) {
         this.nombrePaquete = nombrePaquete;
@@ -35,6 +36,15 @@ public class Paquete {
         this.pasaje = pasaje;
         this.estado = estado;
     }
+
+    public Paquete(Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado) {
+        this.ciudadOrigen = ciudadOrigen;
+        this.ciudadDestino = ciudadDestino;
+        this.alojamiento = alojamiento;
+        this.pasaje = pasaje;
+        this.estado = estado;
+    }
+    
 
     public Paquete() {
     }

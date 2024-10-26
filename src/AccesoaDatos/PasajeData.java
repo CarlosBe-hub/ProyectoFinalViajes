@@ -22,7 +22,7 @@ public class PasajeData {
 
     }
 
-    public void guardarPasaje(Pasaje pasaje) {
+    public Pasaje guardarPasaje(Pasaje pasaje) {
 
         String sql = "INSERT INTO Pasaje(tipo_Transporte, importe, id_ciudadOrigen, estado) VALUES (?,?,?,?)";
 
@@ -43,6 +43,7 @@ public class PasajeData {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pasaje");
         }
+        return pasaje;
 
     }
     public void eliminarPasaje(int id){

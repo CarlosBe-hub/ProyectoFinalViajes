@@ -6,11 +6,17 @@ package Vistas;
 
 import AccesoaDatos.AlojamientoData;
 import AccesoaDatos.CiudadData;
+import AccesoaDatos.PaqueteData;
+import AccesoaDatos.PasajeData;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.Ciudad;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import javax.swing.JOptionPane;
 import modelo.Alojamiento;
+import modelo.Paquete;
+import modelo.Pasaje;
 /**
  *
  * @author carlo
@@ -18,14 +24,21 @@ import modelo.Alojamiento;
 public class VistaPaquete extends javax.swing.JInternalFrame {
 
     private CiudadData cd;
+//    private PasajeData pd;
 
     /**
      * Creates new form Paquete
      */
     public VistaPaquete() {
         initComponents();
-        cd = new CiudadData();
+//        cd = new CiudadData();
+//        pd = new PasajeData();
         
+        cargarCombociudad();
+        armarCabecera();
+        cargarCombopaises();
+        cargarComboprovincias();
+//        cargarTabla();
     }
     private DefaultTableModel modelo = new DefaultTableModel();
 
@@ -88,10 +101,21 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel4.setText("Ciudades");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
+        jCprovincias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCprovinciasActionPerformed(evt);
+            }
+        });
         jPanel1.add(jCprovincias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 160, -1));
 
+        jCtransporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Avion", "Colectivo", "Tren" }));
         jPanel1.add(jCtransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, 160, -1));
 
+        jCciudades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCciudadesActionPerformed(evt);
+            }
+        });
         jPanel1.add(jCciudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 160, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 580, -1));
 
@@ -102,6 +126,11 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 580, -1));
 
         jButton1.setText("SALIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 670, 130, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -124,6 +153,11 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel6.setText("Provincias");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
+        jCpaises.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCpaisesActionPerformed(evt);
+            }
+        });
         jPanel1.add(jCpaises, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 160, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -133,9 +167,19 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jPanel1.add(jTimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 600, 160, -1));
 
         jBbuscar.setText("BUSCAR");
+        jBbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 130, -1));
 
         jBagregar.setText("AGREGAR");
+        jBagregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBagregarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 670, 130, -1));
         jPanel1.add(jDfechadeinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 200, -1));
 
@@ -152,6 +196,71 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCpaisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCpaisesActionPerformed
+        jCprovincias.setEnabled(true);
+        
+        cargarComboprovincias();
+    }//GEN-LAST:event_jCpaisesActionPerformed
+
+    private void jCciudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCciudadesActionPerformed
+//        jCciudades.setEnabled(true);
+//        
+//        cargarCombociudad();
+    }//GEN-LAST:event_jCciudadesActionPerformed
+
+    private void jCprovinciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCprovinciasActionPerformed
+        jCciudades.setEnabled(true);
+        
+        cargarCombociudad();
+    }//GEN-LAST:event_jCprovinciasActionPerformed
+
+    private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
+        
+        try {
+            CiudadData cd = new CiudadData();
+            Ciudad c = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
+            cargarTabla(c.getId_ciudad(),jDfechadeinicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Formato Incorrecto");
+        }
+    }//GEN-LAST:event_jBbuscarActionPerformed
+
+    private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
+        try {
+            Ciudad ciudadOrigen = new Ciudad();
+            Ciudad ciudadDestino = new Ciudad();
+            ciudadOrigen = cd.buscarCiudad("San Luis");
+            ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
+            System.out.println(ciudadDestino.getId_ciudad()+"Importe"+ Double.parseDouble(jTimporte.getText()));
+            
+            // Cargamos un pasaje para el paquete
+            Pasaje pasaje1 = new Pasaje(jCtransporte.getSelectedItem().toString(),Double.parseDouble(jTimporte.getText()),ciudadOrigen,true);
+            PasajeData pd = new PasajeData();
+            Pasaje pasaje2 = pd.guardarPasaje(pasaje1);
+            
+            //Obtenemos IdAlojamiento en la seleccion tabla
+            Alojamiento alojamiento = new Alojamiento();
+            AlojamientoData ad = new AlojamientoData();
+            int fila = jTable1.getSelectedRow();
+            Integer idAlojamiento = (Integer) jTable1.getValueAt(fila,0);
+            alojamiento = ad.buscarAlojamiento(idAlojamiento);
+            
+            
+            //Guardamos el paquete
+            Paquete paquete = new Paquete(ciudadOrigen,ciudadDestino,alojamiento,pasaje2,true);
+            PaqueteData pdd = new PaqueteData();
+            pdd.AgregarPaquete(paquete);
+           
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Formato Invalido");
+        }
+    }//GEN-LAST:event_jBagregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
