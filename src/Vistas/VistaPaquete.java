@@ -31,7 +31,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
      */
     public VistaPaquete() {
         initComponents();
-//        cd = new CiudadData();
+        cd = new CiudadData();
 //        pd = new PasajeData();
         
         cargarCombociudad();
@@ -203,9 +203,9 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCpaisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCpaisesActionPerformed
-        jCprovincias.setEnabled(true);
-        
-        cargarComboprovincias();
+//        jCprovincias.setEnabled(true);
+//        
+//        cargarComboprovincias();
     }//GEN-LAST:event_jCpaisesActionPerformed
 
     private void jCciudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCciudadesActionPerformed
