@@ -205,7 +205,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private void jCpaisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCpaisesActionPerformed
 //        jCprovincias.setEnabled(true);
 //        
-//        cargarComboprovincias();
+       cargarComboprovincias();
     }//GEN-LAST:event_jCpaisesActionPerformed
 
     private void jCciudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCciudadesActionPerformed
@@ -216,6 +216,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
     private void jCprovinciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCprovinciasActionPerformed
         jCciudades.setEnabled(true);
+        
         
         cargarCombociudad();
     }//GEN-LAST:event_jCprovinciasActionPerformed
@@ -290,6 +291,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void cargarCombopaises() {
+        jCpaises.removeAllItems();
         List<String> pais = cd.listarPaises();
         for (String pai : pais) {
             jCpaises.addItem(pai);
@@ -298,27 +300,44 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
     }
 
-    public void cargarComboprovincias() {
-        String pai = (String) jCpaises.getSelectedItem();
-        List<String> provincia = cd.listarProvinciasPorPaisC(pai);
-        jCprovincias.removeAllItems();
-        jCciudades.removeAllItems();
 
+    public void cargarComboprovincias() {
+    String pai = (String) jCpaises.getSelectedItem();
+
+    // Limpiamos el combo de provincias y de ciudades antes de cargar nuevos datos
+    jCprovincias.removeAllItems();
+    jCciudades.removeAllItems();
+
+    // Agregamos opciones para que aparezcan de primera en los combos
+    jCprovincias.addItem("Seleccione una provincia");
+    jCciudades.addItem("Seleccione una ciudad");
+
+    // Obtenemos las provincias del país seleccionado y las cargamos en el combo
+    if (pai != null) {
+        List<String> provincia = cd.listarProvinciasPorPaisC(pai);
         for (String Provincia : provincia) {
             jCprovincias.addItem(Provincia);
         }
     }
+}
 
-    private void cargarCombociudad() {
-        String pai = (String) jCpaises.getSelectedItem();
-        String provincia = (String) jCprovincias.getSelectedItem();
-        List< Ciudad> ciu = cd.listarPaisYProvincia(pai, provincia);
+private void cargarCombociudad() {
+    // Obtenemos el pais y la provincia seleccionada
+    String pai = (String) jCpaises.getSelectedItem();
+    String provincia = (String) jCprovincias.getSelectedItem();
+
+    // Limpiamos el combo de ciudades antes de agregar nuevos datos para evitar que se dupliquen
+    jCciudades.removeAllItems();
+    jCciudades.addItem("Seleccione una ciudad");
+
+    // Cargamos las ciudades solo si la provincia seleccionada no es nula o la opción predeterminada
+    if (provincia != null && !provincia.equals("Seleccione una provincia")) {
+        List<Ciudad> ciu = cd.listarPaisYProvincia(pai, provincia);
         for (Ciudad ciudad : ciu) {
-            String ciudadd = ciudad.getNombre();
-            jCciudades.addItem(ciudadd);
-
+            jCciudades.addItem(ciudad.getNombre());
         }
     }
+}
 
     private void armarCabecera() {
         modelo.addColumn("id");

@@ -92,7 +92,7 @@ public class CiudadData {
     }
 
     public List<Ciudad> listarPaisYProvincia(String pais, String provincia) {
-        String sql = "SELECT id_ciudad, nombre FROM ciudad WHERE provincia=? AND pais=?";
+        String sql = "SELECT id_ciudad , nombre FROM ciudad WHERE provincia=? AND pais=?";
         ArrayList<Ciudad> ciudad = new ArrayList<>();
 
         try {
