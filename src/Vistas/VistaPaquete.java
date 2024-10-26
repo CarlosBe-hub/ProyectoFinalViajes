@@ -253,7 +253,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
             
             
             //Guardamos el paquete
-            Paquete paquete = new Paquete(ciudadOrigen,ciudadDestino,alojamiento,pasaje2,true);
+            Paquete paquete = new Paquete("Paquete Viaje",ciudadOrigen,ciudadDestino,alojamiento,pasaje2,true);
             PaqueteData pdd = new PaqueteData();
             pdd.AgregarPaquete(paquete);
            

@@ -18,8 +18,10 @@ import modelo.Ciudad;
  * @author carlo
  */
 public class VistaAlojamiento extends javax.swing.JInternalFrame {
-private CiudadData cd;
-private AlojamientoData ad;
+
+    private CiudadData cd;
+    private AlojamientoData ad;
+
     /**
      * Creates new form Alojamiento
      */
@@ -134,7 +136,12 @@ private AlojamientoData ad;
         });
         jPanel1.add(jcbPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 150, -1));
 
-        jcbServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desayuno", "Desayuno - Almuerzo", "Desayuno - Almuerzo - Cena" }));
+        jcbServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desayuno", "Media Pensión", "Pensión Completa" }));
+        jcbServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbServicioActionPerformed(evt);
+            }
+        });
         jPanel1.add(jcbServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, 230, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
@@ -210,10 +217,12 @@ private AlojamientoData ad;
             String tipoAlojamiento = jcbTipoAlojamiento.getSelectedItem().toString();
 
             Alojamiento alojamiento2 = new Alojamiento(fechaIng, fechaSalida, estado, tipoServicio, importeDiario, ciudad1, tipoAlojamiento);
-            if(fechaSalida.isAfter(fechaIng)){
+            if (fechaSalida.isAfter(fechaIng)) {
                 ad.guardarAlojamiento(alojamiento2);
-            }else JOptionPane.showMessageDialog(this, "Fecha de salida incorrecta");
-            
+            } else {
+                JOptionPane.showMessageDialog(this, "Fecha de salida incorrecta");
+            }
+
         } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(this, "Campos vacios y/o Formato no valido");
         }
@@ -230,10 +239,10 @@ private AlojamientoData ad;
         try {
             String provincia = jcbProvincias.getSelectedItem().toString();
             String pais = jcbPais.getSelectedItem().toString();
-            
+
             cargarComboCiudades(pais, provincia);
             jcbCiudades.setEnabled(true);
-            
+
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Combos Vacios");
         }
@@ -243,6 +252,10 @@ private AlojamientoData ad;
         this.setVisible(false);
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jcbServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbServicioActionPerformed
+       calcularImportePorServicio();
+    }//GEN-LAST:event_jcbServicioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -278,7 +291,6 @@ private AlojamientoData ad;
     private javax.swing.JTextField jtImporte;
     // End of variables declaration//GEN-END:variables
 
-    
     private void cargarComboPaises() {
 
         List<String> pais = cd.listarPaises();
@@ -318,5 +330,38 @@ private AlojamientoData ad;
 
         }
 
+    }
+
+    private void calcularImportePorServicio() {
+
+        try {
+            double importeBase = Double.parseDouble(jtImporte.getText());
+
+            double ajusteServicio = 1.0;
+            String tipoServicio = jcbServicio.getSelectedItem().toString();
+            
+            switch (tipoServicio) {
+            case "Desayuno":
+                ajusteServicio = 1.02; 
+                break;
+            case "Media Pensión":
+                ajusteServicio = 1.05; 
+                break;
+            case "Pensión Completa":
+                ajusteServicio = 1.10; 
+                break;
+            default: // Sin pensión
+                ajusteServicio = 1.0;
+                break;
+        }
+            double importeTotal = (importeBase * ajusteServicio);
+            
+            jtImporte.setText(String.format("%.2f", importeTotal));
+          
+        
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(null, "Error en el formato");
+        }
     }
 }
