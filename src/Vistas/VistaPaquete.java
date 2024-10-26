@@ -342,7 +342,9 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
    private  void cargarTabla (int ciudad, LocalDate fechainicio){
        AlojamientoData ad = new AlojamientoData();
+
        List<Alojamiento> al = ad.listarAlojamiento(ciudad, fechainicio);
+       System.out.println("alojamiento encontrado :" +al.size());
        borrarfilas();
        for (Alojamiento alojamiento : al) {
            modelo.addRow(new Object[]{

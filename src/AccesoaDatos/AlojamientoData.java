@@ -152,7 +152,7 @@ public class AlojamientoData {
     
     public List<Alojamiento> listarAlojamiento(int ciudad, LocalDate fecha_inicio){
         
-        String sql ="SELECT id_alojamiento,Fecha_inicio,fecha_fin,servicio,importe_diario,tipo_lojamiento FROM alojamiento WHERE Fecha_incio = ? AND id_ciudadDestino = ? AND estado = 1";
+        String sql ="SELECT id_alojamiento,Fecha_inicio,fecha_fin,servicio,importe_diario,tipo_lojamiento FROM alojamiento WHERE Fecha_inicio >= ? AND id_ciudadDestino = ? AND estado = 1";
         Alojamiento aloja = null;
         
         List<Alojamiento> listasdeAlojamiento = new ArrayList<>();
