@@ -46,7 +46,7 @@ public class AlojamientoData {
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alojamiento");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alojamiento A");
         }
 
     }
@@ -71,7 +71,7 @@ public class AlojamientoData {
             }
             
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alojamiento");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alojamiento B");
         }
     }
     public void calculodeVacaciones(LocalDate fecha1, LocalDate fecha2) {
@@ -114,7 +114,7 @@ public class AlojamientoData {
                 JOptionPane.showMessageDialog(null, "El alojamiento se ha dado de baja");
             }
         } catch (SQLException e) {
-           JOptionPane.showMessageDialog(null, "Error al dar de baja el alojamiento"); 
+           JOptionPane.showMessageDialog(null, "Error al dar de baja el alojamiento C"); 
         }
     }
     
@@ -145,7 +145,7 @@ public class AlojamientoData {
                 JOptionPane.showMessageDialog(null,"alojamiento encontrado");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"error en acceder a la tabla alojamiento");
+            
         }
         return a;
     }

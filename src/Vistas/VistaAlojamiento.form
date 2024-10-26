@@ -276,7 +276,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="140" y="390" width="230" height="-1"/>
+              <AbsoluteConstraints x="170" y="430" width="230" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -308,7 +308,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="40" y="430" width="-1" height="-1"/>
+              <AbsoluteConstraints x="60" y="390" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -330,7 +330,7 @@
         <Component class="javax.swing.JTextField" name="jtImporte">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="160" y="430" width="160" height="-1"/>
+              <AbsoluteConstraints x="170" y="390" width="160" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -360,7 +360,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="60" y="390" width="-1" height="-1"/>
+              <AbsoluteConstraints x="100" y="430" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

@@ -142,7 +142,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                 jcbServicioActionPerformed(evt);
             }
         });
-        jPanel1.add(jcbServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, 230, -1));
+        jPanel1.add(jcbServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 230, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,17 +152,17 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Importe Diario");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
 
         jPanel1.add(jcbCiudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 150, -1));
-        jPanel1.add(jtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 160, -1));
+        jPanel1.add(jtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 160, -1));
         jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 382, 530, -1));
         jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 530, 10));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Servicio");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, -1, -1));
         jPanel1.add(jrbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, -1, -1));
 
         jbBuscar.setText("BUSCAR");
@@ -209,7 +209,8 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             LocalDate fechaSalida = jdSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             boolean estado = jrbActivo.isSelected();
             String tipoServicio = jcbServicio.getSelectedItem().toString();
-            Double importeDiario = Double.parseDouble(jtImporte.getText());
+            String importe =jtImporte.getText().replace(",", ".").trim();
+            Double importeDiario = Double.parseDouble(importe);
             String ciudadDestino = jcbCiudades.getSelectedItem().toString();
             Ciudad ciudad1 = cd.buscarCiudad(ciudadDestino);
 
