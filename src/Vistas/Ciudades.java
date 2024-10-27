@@ -39,9 +39,11 @@ public class Ciudades extends javax.swing.JInternalFrame {
         jTpais = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jrEstado = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        jBsalir = new javax.swing.JButton();
         jbNuevo = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
+        jBbuscar = new javax.swing.JButton();
+        jBeliminar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,7 +70,7 @@ public class Ciudades extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
         jPanel1.add(jTciudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 250, -1));
         jPanel1.add(jTprovincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 250, -1));
-        jPanel1.add(jTpais, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 260, -1));
+        jPanel1.add(jTpais, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 250, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -76,13 +78,13 @@ public class Ciudades extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
         jPanel1.add(jrEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, -1, -1));
 
-        jButton1.setText("Salir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBsalir.setText("Salir");
+        jBsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBsalirActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, 70, -1));
+        jPanel1.add(jBsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, 70, -1));
 
         jbNuevo.setText("Nuevo");
         jbNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +92,7 @@ public class Ciudades extends javax.swing.JInternalFrame {
                 jbNuevoActionPerformed(evt);
             }
         });
-        jPanel1.add(jbNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 80, -1));
+        jPanel1.add(jbNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 80, -1));
 
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +100,23 @@ public class Ciudades extends javax.swing.JInternalFrame {
                 jbGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 80, -1));
+        jPanel1.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, 80, -1));
+
+        jBbuscar.setText("Buscar");
+        jBbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 90, 40));
+
+        jBeliminar.setText("Eliminar");
+        jBeliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBeliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 80, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,10 +132,10 @@ public class Ciudades extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalirActionPerformed
         this.setVisible(false);
         System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBsalirActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         jTciudad.setText("");
@@ -142,9 +160,52 @@ public class Ciudades extends javax.swing.JInternalFrame {
        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
+    private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
+        String nombreCiudad = jTciudad.getText();
+    CiudadData cd = new CiudadData();
+    
+    Ciudad ciudad = cd.buscarCiudad(nombreCiudad);
+    if (ciudad != null) {
+        cd.eliminarCiudadPorNombre(ciudad.getNombre());
+        limpiarCampos();
+    } else {
+        JOptionPane.showMessageDialog(null, "La ciudad no existe o ya se elimino!.");
+    }
+
+ 
+    }//GEN-LAST:event_jBeliminarActionPerformed
+
+    private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
+         CiudadData cd = new CiudadData();
+    
+    Ciudad ciudad = cd.buscarCiudad(jTciudad.getText());
+    if (ciudad != null) {
+ 
+        jTprovincia.setText(ciudad.getProvincia());
+        jTpais.setText(ciudad.getPais());
+        jrEstado.setSelected(ciudad.isEstado()); 
+        
+      
+        jrEstado.setEnabled(true);
+        
+        
+        jrEstado.addActionListener(e -> {
+            ciudad.setEstado(jrEstado.isSelected()); 
+            cd.actualizarEstadoCiudad(ciudad); 
+        });
+    } else {
+        JOptionPane.showMessageDialog(this, "Ciudad No Encontrada!.");
+        limpiarCampos();
+    }
+
+
+    }//GEN-LAST:event_jBbuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBbuscar;
+    private javax.swing.JButton jBeliminar;
+    private javax.swing.JButton jBsalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

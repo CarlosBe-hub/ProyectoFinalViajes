@@ -46,7 +46,6 @@ public class CiudadData {
     }
 
     public Ciudad buscarCiudad(String ciudad) {
-
         String sql = " SELECT * FROM ciudad WHERE nombre=?";
         Ciudad c = null;
 
@@ -140,22 +139,22 @@ public class CiudadData {
         return ciudad;
     }
 
-    public void eliminarCiudad(int id) {
-        String sql = "UPDATE ciudad SET estado = 0 WHERE id_ciudad =?";
-        try {
-            PreparedStatement ps = red.prepareStatement(sql);
-            ps.setInt(1, id);
-            int i = ps.executeUpdate();
-            if (i == 1) {
-                JOptionPane.showMessageDialog(null, "Se ha dado de Baja la Ciudad");
-
-            }
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ciudad");
-
-        }
-    }
+//    public void eliminarCiudad(int id) {
+//        String sql = "UPDATE ciudad SET estado = 0 WHERE id_ciudad =?";
+//        try {
+//            PreparedStatement ps = red.prepareStatement(sql);
+//            ps.setInt(1, id);
+//            int i = ps.executeUpdate();
+//            if (i == 1) {
+//                JOptionPane.showMessageDialog(null, "Se ha dado de Baja la Ciudad");
+//
+//            }
+//
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ciudad");
+//
+//        }
+//    }
 
     public void modificarCiudad(Ciudad ciudad) {
         String sql = "UPDATE ciudad SET nombre = ?, pais = ?, provincia = ? WHERE id_ciudad = ?";
@@ -241,6 +240,41 @@ public class CiudadData {
         }
         return listaProvincias;
 }
-     
+    public void eliminarCiudadPorNombre(String nombreCiudad) {
+    String sql = "DELETE FROM ciudad WHERE nombre = ?";     
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setString(1, nombreCiudad);
+        int resultado = ps.executeUpdate();
+        
+       if (resultado > 0) {
+            JOptionPane.showMessageDialog(null, "Ciudad eliminada correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontro la ciudad con el nombre que inserto.");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al intentar eliminar la ciudad: " + e.getMessage());
+   }
+    }
+    
+
+    public void actualizarEstadoCiudad(Ciudad ciudad) {
+    String sql = "UPDATE ciudad SET estado = ? WHERE nombre = ?";
+    
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setBoolean(1, ciudad.isEstado()); 
+        ps.setString(2, ciudad.getNombre());
+        int filasAfectadas = ps.executeUpdate();
+        
+        if (filasAfectadas > 0) {
+            JOptionPane.showMessageDialog(null, "Estado de la ciudad actualizado exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar el estado de la ciudad.");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar el estado: " + e.getMessage());
+    }
+}
     
 }
