@@ -30,6 +30,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -51,6 +52,11 @@ public class Menuprincipal extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Administracion");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setText("ADM.Ciudades");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +81,9 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem4);
+
+        jMenuItem5.setText("ADM.Pasaje");
+        jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
 
@@ -193,6 +202,14 @@ VistaPaquete a = new VistaPaquete();
         escritorio.add(a);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+ PasajeVista a = new PasajeVista();
+        a.setVisible(true);
+        escritorio.add(a);
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -238,6 +255,7 @@ VistaPaquete a = new VistaPaquete();
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
