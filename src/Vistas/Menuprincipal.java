@@ -83,6 +83,11 @@ public class Menuprincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem4);
 
         jMenuItem5.setText("ADM.Pasaje");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
@@ -203,12 +208,16 @@ VistaPaquete a = new VistaPaquete();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
- PasajeVista a = new PasajeVista();
-        a.setVisible(true);
-        escritorio.add(a);
-    }//GEN-LAST:event_jMenu1ActionPerformed
+ PasajeVista p = new PasajeVista();
+        p.setVisible(true);
+        escritorio.add(p);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments

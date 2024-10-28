@@ -5,6 +5,8 @@
 package AccesoaDatos;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.Ciudad;
 import modelo.Pasaje;
@@ -35,7 +37,7 @@ public class PasajeData {
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
+            while(rs.next()) {
                 pasaje.setId_pasaje(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Pasaje Registrada");
             }
@@ -86,4 +88,38 @@ public class PasajeData {
         }
         return p;
     } 
+    
+    public List<Pasaje> buscarPasajePorTipoTransporte(String tipoTransporte) {
+    List<Pasaje> pasajes = new ArrayList<>();    
+    
+    
+    String sql = "SELECT p.id_pasaje, p.tipo_Transporte, p.importe, p.id_ciudadOrigen, p.estado " +
+                 "FROM pasaje p " +
+                 "WHERE p.tipo_Transporte = ?";
+
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setString(1, tipoTransporte);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Pasaje p = new Pasaje();
+            CiudadData cd = new CiudadData();
+            Ciudad cOrigen = cd.buscarCiudadporid(rs.getInt("id_ciudadOrigen"));
+            
+            p.setId_pasaje(rs.getInt("id_pasaje"));
+            p.setCiudadOrigen(cOrigen);
+            p.setImporte(rs.getDouble("importe"));
+            p.setTipoTransporte(rs.getString("tipo_Transporte"));
+            p.setEstado(rs.getBoolean("estado"));
+            
+            pasajes.add(p);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al buscar Pasaje por tipo de transporte.");
+    }
+
+    return pasajes;
+}
 }
