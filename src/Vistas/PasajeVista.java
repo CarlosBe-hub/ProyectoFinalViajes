@@ -59,8 +59,8 @@ public class PasajeVista extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Ciudad:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
+        jLabel2.setText("Tranporte:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
         jPanel1.add(jTciudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 270, 30));
 
         jBbuscar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
@@ -107,6 +107,11 @@ public class PasajeVista extends javax.swing.JInternalFrame {
 
         jBeliminar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jBeliminar.setText("Eliminar");
+        jBeliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBeliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,7 +129,17 @@ public class PasajeVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
-        // TODO add your handling code here:
+        int filaSeleccionada = jTpasaje.getSelectedRow();
+    if (filaSeleccionada != -1) {
+        int idPasaje = (int) modelo.getValueAt(filaSeleccionada, 0);
+        boolean estadoActual = (boolean) modelo.getValueAt(filaSeleccionada, 4);
+        boolean nuevoEstado = !estadoActual; 
+        pd.cambiarEstadoPasaje(idPasaje, nuevoEstado);
+        modelo.setValueAt(nuevoEstado, filaSeleccionada, 4); 
+    } else {
+        JOptionPane.showMessageDialog(null, "Seleccione un pasaje para modificar.");
+    }
+
     }//GEN-LAST:event_jBmodificarActionPerformed
 
     private void jBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalirActionPerformed
@@ -160,6 +175,24 @@ public class PasajeVista extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Por favor ingrese el nombre de la ciudad!");
             }
     }//GEN-LAST:event_jBbuscarActionPerformed
+
+    private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
+
+    int filaSeleccionada = jTpasaje.getSelectedRow();
+    if (filaSeleccionada != -1) {
+        int idPasaje = (int) modelo.getValueAt(filaSeleccionada, 0); 
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar este pasaje?", "Confirme Por favor!", JOptionPane.YES_NO_OPTION);
+        
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            pd.eliminarPasaje(idPasaje); 
+            modelo.removeRow(filaSeleccionada); 
+            JOptionPane.showMessageDialog(null, "El Pasaje se elimino con exito.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Seleccione un pasaje para eliminar.");
+    }
+
+    }//GEN-LAST:event_jBeliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

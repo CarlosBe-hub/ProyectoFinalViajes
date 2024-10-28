@@ -122,4 +122,19 @@ public class PasajeData {
 
     return pasajes;
 }
+    public void cambiarEstadoPasaje(int id, boolean estado) {
+    String sql = "UPDATE pasaje SET estado = ? WHERE id_pasaje = ?";
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setBoolean(1, estado);
+        ps.setInt(2, id);
+        int i = ps.executeUpdate();
+        if (i == 1) {
+            String mensaje = estado ? "El Pasaje se activo exitosamente!" : "El Pasaje se desactivo correctamente";
+            JOptionPane.showMessageDialog(null, mensaje);
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al cambiar el estado del pasaje.");
+    }
+}
 }
