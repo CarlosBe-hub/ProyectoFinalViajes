@@ -65,7 +65,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jrbActivo = new javax.swing.JRadioButton();
         jbBuscar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbNuevo = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jdIngreso = new com.toedter.calendar.JDateChooser();
         jdSalida = new com.toedter.calendar.JDateChooser();
@@ -173,8 +173,13 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, -1));
 
-        jButton3.setText("Nuevo");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 110, -1));
+        jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 110, -1));
 
         jButton4.setText("Guardar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -258,10 +263,20 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
        calcularImportePorServicio();
     }//GEN-LAST:event_jcbServicioActionPerformed
 
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        // TODO add your handling code here:
+
+    jcbCiudades.removeAllItems();
+    jcbTipoAlojamiento.setSelectedIndex(0);
+    jtImporte.setText("");
+    jdIngreso.setDate(null);
+    jdSalida.setDate(null);
+    jrbActivo.setSelected(false);
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -281,6 +296,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbNuevo;
     private javax.swing.JComboBox<String> jcbCiudades;
     private javax.swing.JComboBox<String> jcbPais;
     private javax.swing.JComboBox<Ciudad> jcbProvincias;

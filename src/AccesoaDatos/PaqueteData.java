@@ -29,7 +29,7 @@ public class PaqueteData {
     }
 
     public void AgregarPaquete(Paquete paquete) {
-        String sql = "INSERT INTO paquete (nombre_paquete,id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO paquete (nombre_paquete,id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje, estado) VALUES(?,?,?,?,?,?)";
         try {
             PreparedStatement ps = red.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, paquete.getNombrePaquete());
@@ -37,6 +37,7 @@ public class PaqueteData {
             ps.setInt(3, paquete.getCiudadDestino().getId_ciudad());
             ps.setInt(4, paquete.getAlojamiento().getId_alojamiento());
             ps.setInt(5, paquete.getPasaje().getId_pasaje());
+            ps.setBoolean(6, true);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {

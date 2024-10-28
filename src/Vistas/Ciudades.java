@@ -141,6 +141,7 @@ public class Ciudades extends javax.swing.JInternalFrame {
         jTciudad.setText("");
         jTprovincia.setText("");
         jTpais.setText("");
+        jrEstado.setSelected(false);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -154,7 +155,7 @@ public class Ciudades extends javax.swing.JInternalFrame {
            Ciudad ciu = new Ciudad(ciudad,pais,estado,provincia);
            cd.agregarCiudad(ciu);
 
-           limpiarCampos();
+
        }else{
            JOptionPane.showMessageDialog(null, "No deje campos vacios!");
        }
@@ -195,7 +196,6 @@ public class Ciudades extends javax.swing.JInternalFrame {
         });
     } else {
         JOptionPane.showMessageDialog(this, "Ciudad No Encontrada!.");
-        limpiarCampos();
     }
 
 
@@ -225,6 +225,6 @@ private void limpiarCampos(){
     jTpais.setText(""); 
     jTprovincia.setText("");
     jTciudad.setText("");
-    jrEstado.setEnabled(false);
+    jrEstado.setSelected(false);
 }
 }

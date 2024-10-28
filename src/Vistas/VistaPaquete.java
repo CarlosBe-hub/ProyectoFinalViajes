@@ -74,6 +74,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jBbuscar = new javax.swing.JButton();
         jBagregar = new javax.swing.JButton();
         jDfechadeinicio = new com.toedter.calendar.JDateChooser();
+        jrbEstado = new javax.swing.JRadioButton();
 
         jButton2.setText("jButton2");
 
@@ -182,6 +183,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 130, -1));
         jPanel1.add(jDfechadeinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 200, -1));
+        jPanel1.add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 470, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -252,7 +254,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
             Integer idAlojamiento = (Integer) jTable1.getValueAt(fila,0);
             alojamiento = ad.buscarAlojamiento(idAlojamiento);
             
-            
+         
             //Guardamos el paquete
             Paquete paquete = new Paquete("Paquete Viaje",ciudadOrigen,ciudadDestino,alojamiento,pasaje2,true);
             PaqueteData pdd = new PaqueteData();
@@ -288,6 +290,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTimporte;
+    private javax.swing.JRadioButton jrbEstado;
     // End of variables declaration//GEN-END:variables
 
     public void cargarCombopaises() {

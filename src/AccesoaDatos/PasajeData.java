@@ -88,7 +88,7 @@ public class PasajeData {
         }
         return p;
     } 
-    
+   
     public List<Pasaje> buscarPasajePorTipoTransporte(String tipoTransporte) {
     List<Pasaje> pasajes = new ArrayList<>();    
     
@@ -122,6 +122,8 @@ public class PasajeData {
 
     return pasajes;
 }
+
+    
     public void cambiarEstadoPasaje(int id, boolean estado) {
     String sql = "UPDATE pasaje SET estado = ? WHERE id_pasaje = ?";
     try {
