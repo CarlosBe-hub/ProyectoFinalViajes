@@ -241,7 +241,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
             System.out.println(ciudadDestino.getId_ciudad()+"Importe"+ Double.parseDouble(jTimporte.getText()));
             
             // Cargamos un pasaje para el paquete
-            Pasaje pasaje1 = new Pasaje(jCtransporte.getSelectedItem().toString(),Double.parseDouble(jTimporte.getText()),ciudadOrigen,true);
+            Pasaje pasaje1 = new Pasaje(jCtransporte.getSelectedItem().toString(),Double.parseDouble(jTimporte.getText()),ciudadOrigen,ciudadDestino,true);
             PasajeData pd = new PasajeData();
             Pasaje pasaje2 = pd.guardarPasaje(pasaje1);
             

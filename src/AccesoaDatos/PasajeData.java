@@ -93,7 +93,7 @@ public class PasajeData {
     List<Pasaje> pasajes = new ArrayList<>();    
     
     
-    String sql = "SELECT p.id_pasaje, p.tipo_Transporte, p.importe, p.id_ciudadOrigen, p.estado " +
+    String sql = "SELECT p.id_pasaje, p.tipo_Transporte, p.importe, p.id_ciudadOrigen, p.id_ciudadDestino ,p.estado " +
                  "FROM pasaje p " +
                  "WHERE p.tipo_Transporte = ?";
 
@@ -106,9 +106,11 @@ public class PasajeData {
             Pasaje p = new Pasaje();
             CiudadData cd = new CiudadData();
             Ciudad cOrigen = cd.buscarCiudadporid(rs.getInt("id_ciudadOrigen"));
+            Ciudad cDestino = cd.buscarCiudadporid(rs.getInt("id_ciudadDestino"));
             
             p.setId_pasaje(rs.getInt("id_pasaje"));
             p.setCiudadOrigen(cOrigen);
+            p.setCiudadDestino(cDestino);
             p.setImporte(rs.getDouble("importe"));
             p.setTipoTransporte(rs.getString("tipo_Transporte"));
             p.setEstado(rs.getBoolean("estado"));

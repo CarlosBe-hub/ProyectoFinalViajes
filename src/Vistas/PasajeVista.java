@@ -175,12 +175,13 @@ public class PasajeVista extends javax.swing.JInternalFrame {
 
             if (!pasajes.isEmpty()) {
                 for (Pasaje p : pasajes) {
-                    Object[] fila = new Object[5];
+                    Object[] fila = new Object[6];
                     fila[0] = p.getId_pasaje();
                     fila[1] = p.getCiudadOrigen().getNombre();
-                    fila[2] = p.getImporte();
-                    fila[3] = p.getTipoTransporte();
-                    fila[4] = p.isEstado();
+                    fila[2] = p.getCiudadDestino().getNombre();
+                    fila[3] = p.getImporte();
+                    fila[4] = p.getTipoTransporte();
+                    fila[5] = p.isEstado();
 
                     modelo.addRow(fila);
                 }
@@ -212,6 +213,7 @@ public class PasajeVista extends javax.swing.JInternalFrame {
 
         modelo.addColumn("id");
         modelo.addColumn("Ciudad origen");
+        modelo.addColumn("Ciudad Destino");
         modelo.addColumn("importe");
         modelo.addColumn("T.Transporte");
         modelo.addColumn("estado");

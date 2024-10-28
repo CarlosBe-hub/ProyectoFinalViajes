@@ -13,20 +13,23 @@ public class Pasaje {
     private String tipoTransporte;
     private double importe;
     private Ciudad ciudadOrigen;
+    private Ciudad ciudadDestino;
     private boolean estado;
 
-    public Pasaje(int id_pasaje, String tipoTransporte, double importe, Ciudad ciudadOrigen, boolean estado) {
+    public Pasaje(int id_pasaje, String tipoTransporte, double importe, Ciudad ciudadOrigen, Ciudad ciudadDestino, boolean estado) {
         this.id_pasaje = id_pasaje;
         this.tipoTransporte = tipoTransporte;
         this.importe = importe;
         this.ciudadOrigen = ciudadOrigen;
+        this.ciudadDestino = ciudadDestino;
         this.estado = estado;
     }
 
-    public Pasaje(String tipoTransporte, double importe, Ciudad ciudadOrigen, boolean estado) {
+    public Pasaje(String tipoTransporte, double importe, Ciudad ciudadOrigen, Ciudad ciudadDestino, boolean estado) {
         this.tipoTransporte = tipoTransporte;
         this.importe = importe;
         this.ciudadOrigen = ciudadOrigen;
+        this.ciudadDestino = ciudadDestino;
         this.estado = estado;
     }
 
@@ -65,6 +68,14 @@ public class Pasaje {
         this.ciudadOrigen = ciudadOrigen;
     }
 
+    public Ciudad getCiudadDestino() {
+        return ciudadDestino;
+    }
+
+    public void setCiudadDestino(Ciudad ciudadDestino) {
+        this.ciudadDestino = ciudadDestino;
+    }
+
     public boolean isEstado() {
         return estado;
     }
@@ -75,8 +86,8 @@ public class Pasaje {
 
     @Override
     public String toString() {
-        return "Pasaje{" + "id_pasaje=" + id_pasaje + ", tipoTransporte=" + tipoTransporte + ", importe=" + importe + ", ciudadOrigen=" + ciudadOrigen + ", estado=" + estado + '}';
+        return "Pasaje{" + "id_pasaje=" + id_pasaje + ", tipoTransporte=" + tipoTransporte + ", importe=" + importe + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", estado=" + estado + '}';
     }
-    
-    
+
+   
 }
