@@ -102,6 +102,8 @@ public class AlojamientoData {
         
         return(int) diferenciadeDias;
     }
+    
+    
     public void eliminarAlojamiento(int id) {
         String sql = "UPDATE alojamiento SET estado=0 WHERE id_alojamiento=?";
         
