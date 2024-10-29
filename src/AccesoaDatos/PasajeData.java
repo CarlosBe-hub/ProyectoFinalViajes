@@ -26,14 +26,15 @@ public class PasajeData {
 
     public Pasaje guardarPasaje(Pasaje pasaje) {
 
-        String sql = "INSERT INTO Pasaje(tipo_Transporte, importe, id_ciudadOrigen, estado) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Pasaje(tipo_Transporte, importe, id_ciudadOrigen,id_ciudadDestino, estado) VALUES (?,?,?,?,?)";
 
         try {
             PreparedStatement ps = red.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pasaje.getTipoTransporte());
             ps.setDouble(2, pasaje.getImporte());
             ps.setInt(3, pasaje.getCiudadOrigen().getId_ciudad());
-            ps.setBoolean(4, pasaje.isEstado());
+            ps.setInt(4, pasaje.getCiudadDestino().getId_ciudad());
+            ps.setBoolean(5, pasaje.isEstado());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
