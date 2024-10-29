@@ -127,16 +127,25 @@ public class PasajeVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
-        int filaSeleccionada = jTpasaje.getSelectedRow();
-        if (filaSeleccionada != -1) {
-            int idPasaje = (int) modelo.getValueAt(filaSeleccionada, 0);
-            boolean estadoActual = (boolean) modelo.getValueAt(filaSeleccionada, 4);
-            boolean nuevoEstado = !estadoActual;
-            pd.cambiarEstadoPasaje(idPasaje, nuevoEstado);
-            modelo.setValueAt(nuevoEstado, filaSeleccionada, 4);
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un pasaje para modificar.");
-        }
+       int filaSeleccionada = jTpasaje.getSelectedRow();
+    if (filaSeleccionada != -1) {
+        int idPasaje = (int) modelo.getValueAt(filaSeleccionada, 0);
+        
+        
+        boolean estadoActual = (boolean) modelo.getValueAt(filaSeleccionada, 5);
+        
+        boolean nuevoEstado = !estadoActual;
+        
+       
+        pd.cambiarEstadoPasaje(idPasaje, nuevoEstado);
+        
+        
+        modelo.setValueAt(nuevoEstado, filaSeleccionada, 5);
+    } else {
+        JOptionPane.showMessageDialog(null, "Seleccione un pasaje para modificar.");
+    }
+
+
 
     }//GEN-LAST:event_jBmodificarActionPerformed
 
