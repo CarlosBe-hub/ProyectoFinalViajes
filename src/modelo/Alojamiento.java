@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -16,11 +17,11 @@ public class Alojamiento {
     private LocalDate fechaFin;
     private boolean estado;
     private String servicio;
-    private double importeDiario;
+    private BigDecimal importeDiario;
     private Ciudad ciudadDestino;
     private String tipoAlojamiento;
 
-    public Alojamiento(int id_alojamiento, LocalDate fechaInicio, LocalDate fechaFin, boolean estado, String servicio, double importeDiario, Ciudad ciudadDestino, String tipoAlojamiento) {
+    public Alojamiento(int id_alojamiento, LocalDate fechaInicio, LocalDate fechaFin, boolean estado, String servicio, BigDecimal importeDiario, Ciudad ciudadDestino, String tipoAlojamiento) {
         this.id_alojamiento = id_alojamiento;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -31,7 +32,7 @@ public class Alojamiento {
         this.tipoAlojamiento = tipoAlojamiento;
     }
 
-    public Alojamiento(LocalDate fechaInicio, LocalDate fechaFin, boolean estado, String servicio, double importeDiario, Ciudad ciudadDestino, String tipoAlojamiento) {
+    public Alojamiento(LocalDate fechaInicio, LocalDate fechaFin, boolean estado, String servicio, BigDecimal importeDiario, Ciudad ciudadDestino, String tipoAlojamiento) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.estado = estado;
@@ -84,11 +85,11 @@ public class Alojamiento {
         this.servicio = servicio;
     }
 
-    public double getImporteDiario() {
+    public BigDecimal getImporteDiario() {
         return importeDiario;
     }
 
-    public void setImporteDiario(double importeDiario) {
+    public void setImporteDiario(BigDecimal importeDiario) {
         this.importeDiario = importeDiario;
     }
 
@@ -112,6 +113,6 @@ public class Alojamiento {
     public String toString() {
         return "Alojamiento{" + "id_alojamiento=" + id_alojamiento + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", estado=" + estado + ", servicio=" + servicio + ", importeDiario=" + importeDiario + ", ciudadDestino=" + ciudadDestino + ", tipoAlojamiento=" + tipoAlojamiento + '}';
     }
-    
-    
+
+
 }

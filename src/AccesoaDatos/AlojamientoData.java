@@ -35,7 +35,7 @@ public class AlojamientoData {
             ps.setDate(2, Date.valueOf(alojamiento.getFechaFin()));
             ps.setBoolean(3, alojamiento.isEstado());
             ps.setString(4, alojamiento.getServicio());
-            ps.setDouble(5, alojamiento.getImporteDiario());
+            ps.setBigDecimal(5, alojamiento.getImporteDiario());
             ps.setInt(6, alojamiento.getCiudadDestino().getId_ciudad());
             ps.setString(7, alojamiento.getTipoAlojamiento());
             ps.executeUpdate();
@@ -59,7 +59,7 @@ public class AlojamientoData {
             ps.setDate(2, Date.valueOf(alojamiento.getFechaFin()));
             ps.setBoolean(3, alojamiento.isEstado());
             ps.setString(3, alojamiento.getServicio());
-            ps.setDouble(4, alojamiento.getImporteDiario());
+            ps.setBigDecimal(4, alojamiento.getImporteDiario());
             ps.setInt(5, alojamiento.getCiudadDestino().getId_ciudad());
             ps.setString(6, alojamiento.getTipoAlojamiento());
             ps.setInt(7, alojamiento.getId_alojamiento());
@@ -140,7 +140,7 @@ public class AlojamientoData {
                 a.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
                 a.setEstado(rs.getBoolean("estado"));
                 a.setServicio(rs.getString("servicio"));
-                a.setImporteDiario(rs.getDouble("importe_diario"));
+                a.setImporteDiario(rs.getBigDecimal("importe_diario"));
                 a.setCiudadDestino(ciudad);
                 a.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
                 
@@ -177,7 +177,7 @@ public class AlojamientoData {
                aloja.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
                aloja.setEstado(true);
                aloja.setServicio(rs.getString("servicio"));
-               aloja.setImporteDiario(rs.getDouble("importe_diario"));
+               aloja.setImporteDiario(rs.getBigDecimal("importe_diario"));
                aloja.setCiudadDestino(c);
                aloja.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
                listasdeAlojamiento.add(aloja);

@@ -6,6 +6,8 @@ package Vistas;
 
 import AccesoaDatos.AlojamientoData;
 import AccesoaDatos.CiudadData;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -217,7 +219,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             boolean estado = jrbActivo.isSelected();
             String tipoServicio = jcbServicio.getSelectedItem().toString();
             String importe = jtImporte.getText().replace(",", ".").trim();
-            Double importeDiario = Double.parseDouble(importe);
+            BigDecimal importeDiario = new BigDecimal(importe);
             String ciudadDestino = jcbCiudades.getSelectedItem().toString();
             Ciudad ciudad1 = cd.buscarCiudad(ciudadDestino);
 
@@ -366,44 +368,44 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                 return;
             }
 
-            double importeBase = Double.parseDouble(jtImporte.getText());
-            double ajusteServicio = 1.0;
+            BigDecimal importeBase = new BigDecimal(jtImporte.getText()); 
+            BigDecimal ajusteServicio = BigDecimal.ONE; // 1.0
             String tipoServicio = jcbServicio.getSelectedItem().toString();
 
             // Ajuste por tipo de servicio
-            switch (tipoServicio) {
-                case "Desayuno":
-                    ajusteServicio = 1.02;
-                    break;
-                case "Media Pensión":
-                    ajusteServicio = 1.05;
-                    break;
-                case "Pensión Completa":
-                    ajusteServicio = 1.10;
-                    break;
-                default:
-                    ajusteServicio = 1.0;
-                    break;
-            }
+           switch (tipoServicio) {
+           case "Desayuno":
+              ajusteServicio = new BigDecimal("1.02");
+            break;
+           case "Media Pensión":
+                ajusteServicio = new BigDecimal("1.05");
+                break;
+            case "Pensión Completa":
+                ajusteServicio = new BigDecimal("1.10");
+                break;
+            default:
+                ajusteServicio = BigDecimal.ONE;
+                break;
+        }
 
             // Ajuste por temporada
             String temporada = ad.calculodeTemporada(fechaIngreso);
-            double ajusteTemporada = 1.0;
+            BigDecimal ajusteTemporada = BigDecimal.ONE;
 
             if ("temporada Alta".equals(temporada)) {
-                ajusteTemporada = 0.30; // 30% adicional en temporada alta
+                ajusteTemporada = new BigDecimal("1.30"); 
 
             } else if ("temporada Media".equals(temporada)) {
 
-                ajusteTemporada = 0.15; // 15% adicional en temporada media
+                ajusteTemporada = new BigDecimal ("1.15"); 
             } else {
 
-                ajusteTemporada = 1.0; // Sin ajuste en temporada baja
+                ajusteTemporada = BigDecimal.ONE;
             }
 
-            double importeTotal = importeBase * ajusteServicio * ajusteTemporada;
+            BigDecimal importeTotal = importeBase.multiply(ajusteServicio).multiply(ajusteTemporada);
 
-            jtImporte.setText(String.format("%.2f", importeTotal));
+            jtImporte.setText(importeTotal.setScale(2,RoundingMode.HALF_UP).toString());
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error en el formato del importe base");
