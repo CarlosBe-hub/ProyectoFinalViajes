@@ -9,6 +9,7 @@ import AccesoaDatos.PaqueteData;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Alojamiento;
 import modelo.Paquete;
@@ -71,7 +72,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 147, -1));
+        jPanel2.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 147, -1));
 
         jbBuscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jbBuscar.setText("Buscar");
@@ -80,7 +81,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
                 jbBuscarActionPerformed(evt);
             }
         });
-        jPanel2.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, 20));
+        jPanel2.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, 20));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,7 +96,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 118));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 720, 118));
 
         jbCargarDatosTabla.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jbCargarDatosTabla.setText("Cargar");
@@ -104,75 +105,82 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
                 jbCargarDatosTablaActionPerformed(evt);
             }
         });
-        jPanel2.add(jbCargarDatosTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 352, 12));
+        jPanel2.add(jbCargarDatosTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, -1, -1));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 352, 12));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ID");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Fecha Inicio");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Fecha Fin");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
-        jPanel2.add(jtfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 126, -1));
-        jPanel2.add(fechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 126, -1));
-        jPanel2.add(fechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 126, -1));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 352, 16));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, -1, -1));
+        jPanel2.add(jtfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 126, -1));
+        jPanel2.add(fechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, 126, -1));
+        jPanel2.add(fechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 126, -1));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 352, 16));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tipo de Alojamiento");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Servicio");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 440, -1, -1));
 
+        jcTAlojamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hotel", "Hostel", "Cabaña", "Departamento" }));
         jcTAlojamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcTAlojamientoActionPerformed(evt);
             }
         });
-        jPanel2.add(jcTAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 152, -1));
+        jPanel2.add(jcTAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 360, 152, -1));
 
-        jPanel2.add(jcServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, 152, -1));
+        jcServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desayuno", "Media Pensión", "Pensión Completa" }));
+        jPanel2.add(jcServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, 152, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Actualizar Alojamiento");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, -1, -1));
-        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 352, 14));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, -1, -1));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 352, 14));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Importe Diario");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Estado");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, -1, -1));
-        jPanel2.add(jtfImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 158, -1));
-        jPanel2.add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, -1, -1));
+        jPanel2.add(jtfImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 158, -1));
+        jPanel2.add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, -1, -1));
 
         jbActualizar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jbActualizar.setText("Actualizar");
-        jPanel2.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, -1, -1));
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 390, -1));
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 520, -1, -1));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 390, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,64 +191,134 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // TODO add your handling code here:
+
         LocalDate fecha_ingreso = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        List<Paquete>paquetes = pd.listarPaquetePorFechaSalida(fecha_ingreso);
-        
+        List<Alojamiento> alojamientos = ad.listarAlojamientoPorFechas(fecha_ingreso);
         borrarFilas();
-        for (Paquete paquete : paquetes) {
+
+        for (Alojamiento alojamiento : alojamientos) {
             modelo.addRow(new Object[]{
-                paquete.getId_paquete(),
-                paquete.getCiudadDestino().getNombre(),
-                paquete.getAlojamiento().getId_alojamiento(),
-                paquete.getPasaje().getId_pasaje()
+                alojamiento.getId_alojamiento(),
+                alojamiento.getFechaInicio(),
+                alojamiento.getFechaFin(),
+                alojamiento.getServicio(),
+                alojamiento.getImporteDiario(),
+                alojamiento.getTipoAlojamiento(),
+                alojamiento.isEstado()
             });
         }
+
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbCargarDatosTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarDatosTablaActionPerformed
-        // TODO add your handling code here:
-        int f = jTable1.getSelectedRow();
-        Integer id = (Integer) jTable1.getValueAt(f, 2);
-        
-        Alojamiento alojamientos = new Alojamiento();
-        alojamientos = ad.buscarAlojamiento(id);
-        
-        jcServicio.setSelectedIndex(0);
-        
-        fechaInicio.setDate(java.sql.Date.valueOf(alojamientos.getFechaInicio()));
-        fechaFin.setDate(java.sql.Date.valueOf(alojamientos.getFechaFin()));
-        
-         if (alojamientos.getServicio().toLowerCase().equalsIgnoreCase("Desayuno".toLowerCase())) {
+
+    int f = jTable1.getSelectedRow();
+
+
+    if (f == -1) {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione un alojamiento de la tabla.");
+        return;
+    }
+
+
+    Integer id = (Integer) jTable1.getValueAt(f, 0);
+
+
+    Alojamiento alojamiento = ad.buscarAlojamiento(id);
+
+
+    if (alojamiento != null) {
+
+        jtfID.setText(String.valueOf(alojamiento.getId_alojamiento()));
+        fechaInicio.setDate(java.sql.Date.valueOf(alojamiento.getFechaInicio()));
+        fechaFin.setDate(java.sql.Date.valueOf(alojamiento.getFechaFin()));
+
+    
+        String servicio = alojamiento.getServicio();
+        if (servicio != null) {
+            if (servicio.equalsIgnoreCase("Desayuno")) {
                 jcServicio.setSelectedIndex(0);
-            } else if (alojamientos.getServicio().toLowerCase().equalsIgnoreCase("Desayuno - Almuerzo".toLowerCase())) {
+            } else if (servicio.equalsIgnoreCase("Media Pensión")) {
                 jcServicio.setSelectedIndex(1);
-            } else if (alojamientos.getServicio().toLowerCase().equalsIgnoreCase("Desayuno - Almuerzo - Cena".toLowerCase())) {
+            } else if (servicio.equalsIgnoreCase("Pensión Completa")) {
                 jcServicio.setSelectedIndex(2);
-            }
-        
-          if (alojamientos.getTipoAlojamiento().equalsIgnoreCase("Hotel")) {
-                jcTAlojamiento.setSelectedIndex(0);
-            } else if (alojamientos.getTipoAlojamiento().equalsIgnoreCase("Hostel")) {
-                jcTAlojamiento.setSelectedIndex(1);
             } else {
-                jcTAlojamiento.setSelectedIndex(2);
+
+                jcServicio.setSelectedIndex(-1); 
             }
-          
-          jtfID.setText("" + alojamientos.getId_alojamiento());
-            jtfImporte.setText("" + alojamientos.getImporteDiario());
-            jrbEstado.setSelected(alojamientos.isEstado());
-            
-            jcTAlojamiento.setSelectedItem(alojamientos.getTipoAlojamiento());
-            jcServicio.setSelectedItem(alojamientos.getServicio());
-            
-          
-         
+        }
+
+        String tipoAlojamiento = alojamiento.getTipoAlojamiento();
+        if (tipoAlojamiento != null) {
+            if (tipoAlojamiento.equalsIgnoreCase("Hotel")) {
+                jcTAlojamiento.setSelectedIndex(0);
+            } else if (tipoAlojamiento.equalsIgnoreCase("Hostel")) {
+                jcTAlojamiento.setSelectedIndex(1);
+            } else if (tipoAlojamiento.equalsIgnoreCase("Cabaña")) {
+                jcTAlojamiento.setSelectedIndex(2);
+            } else {
+                jcTAlojamiento.setSelectedIndex(3);
+            }
+        }
+
+        jtfImporte.setText(alojamiento.getImporteDiario().toString());
+        jrbEstado.setSelected(alojamiento.isEstado());
+    } else {
+        JOptionPane.showMessageDialog(this, "Alojamiento no encontrado.");
+    }
     }//GEN-LAST:event_jbCargarDatosTablaActionPerformed
 
     private void jcTAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTAlojamientoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcTAlojamientoActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+                                         
+    if (jtfID.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.");
+        return;
+    }
+
+    int id = Integer.parseInt(jtfID.getText());
+
+    boolean estadoActual = ad.estadoAlojamiento(id);
+
+
+    if (estadoActual) {
+        ad.darDeBaja(id);
+    } else {
+
+        ad.darDeAlta(id);
+    }
+
+
+    jtfID.setText("");
+    fechaInicio.setDate(null);
+    fechaFin.setDate(null);
+    jcServicio.setSelectedIndex(-1);
+    jcTAlojamiento.setSelectedIndex(-1);
+    jtfImporte.setText("");
+    jrbEstado.setSelected(false);
+
+
+    LocalDate fecha_ingreso = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    List<Alojamiento> alojamientos = ad.listarAlojamientoPorFechas(fecha_ingreso);
+    borrarFilas();
+
+    for (Alojamiento alojamiento : alojamientos) {
+        modelo.addRow(new Object[]{
+            alojamiento.getId_alojamiento(),
+            alojamiento.getFechaInicio(),
+            alojamiento.getFechaFin(),
+            alojamiento.getServicio(),
+            alojamiento.getImporteDiario(),
+            alojamiento.getTipoAlojamiento(),
+            alojamiento.isEstado()
+        });
+    }
+
+  
+    }//GEN-LAST:event_jbActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -273,10 +351,13 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void armarCabezera() {
-        modelo.addColumn("idPaquete");
-        modelo.addColumn("Ciudad Destino");
-        modelo.addColumn("idAlojamiento");
-        modelo.addColumn("idPasaje");
+        modelo.addColumn("ID Alojamiento");
+        modelo.addColumn("Fecha de Inicio");
+        modelo.addColumn("Fecha de Fin");
+        modelo.addColumn("Servicio");
+        modelo.addColumn("Importe Diario");
+        modelo.addColumn("Tipo Alojamineto");
+        modelo.addColumn("estado");
         jTable1.setModel(modelo);
     }
 

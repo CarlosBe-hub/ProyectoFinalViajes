@@ -50,144 +50,230 @@ public class AlojamientoData {
         }
 
     }
-    public void modificarAlojamiento(Alojamiento alojamiento){
-        String sql = "UPDATE alojamiento SET Fecha_inicio =?, fecha_fin=?, estado=?; servicio=?, importe_diario=?, id_ciudadDestino=?,tipo_lojamiento=? WHERE id_alojamiento=?";
-        
+
+    public void modificarAlojamiento(Alojamiento alojamiento) {
+        String sql = "UPDATE alojamiento SET Fecha_inicio =?, fecha_fin=?, estado=?; servicio=?, importe_diario=?,tipo_lojamiento=?, estado=? WHERE id_alojamiento=?";
+
         try {
-            PreparedStatement ps = red.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = red.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setDate(1, Date.valueOf(alojamiento.getFechaInicio()));
             ps.setDate(2, Date.valueOf(alojamiento.getFechaFin()));
             ps.setBoolean(3, alojamiento.isEstado());
-            ps.setString(3, alojamiento.getServicio());
-            ps.setBigDecimal(4, alojamiento.getImporteDiario());
-            ps.setInt(5, alojamiento.getCiudadDestino().getId_ciudad());
+            ps.setString(4, alojamiento.getServicio());
+            ps.setBigDecimal(5, alojamiento.getImporteDiario());
             ps.setString(6, alojamiento.getTipoAlojamiento());
-            ps.setInt(7, alojamiento.getId_alojamiento());
-            
+            ps.setBoolean(7, alojamiento.isEstado());
+            ps.setInt(8, alojamiento.getId_alojamiento());
+
             int i = ps.executeUpdate();
-            
-            if(i == 1){
+
+            if (i == 1) {
                 JOptionPane.showMessageDialog(null, "El alojamiento se modifico con exito");
             }
-            
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alojamiento B");
         }
     }
-    public void calculodeVacaciones(LocalDate fecha1, LocalDate fecha2) {
-        String temporada = calculodeTemporada(fecha1);
-        int diasVacaciones = calculardiasVacaciones(fecha1 , fecha2);
-        
-        System.out.println("Temporada"+ temporada);
-        System.out.println("Dias de Vacaciones"+ diasVacaciones);
-        
-        
-    }
-    
-    public String calculodeTemporada(LocalDate fechaInicio){
-        Month mesInicio = fechaInicio.getMonth();
-        
-        if(mesInicio == Month.DECEMBER || mesInicio == Month.FEBRUARY){
-         return "temporada Alta";  
-        } else if (mesInicio == Month.JULY){
-            return "temporada Media";
-        }else{
-            return "temporada Baja";
-        }
-    }
-    
-    public int calculardiasVacaciones(LocalDate fechaInicio, LocalDate fechaFin) {
-        
-        long diferenciadeDias = fechaInicio.until(fechaFin, ChronoUnit.DAYS);
-        
-        return(int) diferenciadeDias;
-    }
-    
-    
-    public void eliminarAlojamiento(int id) {
-        String sql = "UPDATE alojamiento SET estado=0 WHERE id_alojamiento=?";
-        
+
+    public void darDeBaja(int id) {
+        String sql = "UPDATE alojamiento SET estado = 0 WHERE id_alojamiento = ?";
+
         try {
             PreparedStatement ps = red.prepareStatement(sql);
             ps.setInt(1, id);
             int i = ps.executeUpdate();
-            
-            if(i == 1){
+
+            if (i == 1) {
+                JOptionPane.showMessageDialog(null, "El alojamiento dado de baja");
+            }
+
+        } catch (SQLException e) {
+        }
+
+    }
+    
+    public void darDeAlta(int id) {
+    String sql = "UPDATE alojamiento SET estado = 1 WHERE id_alojamiento = ?";
+
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setInt(1, id);
+        int i = ps.executeUpdate();
+
+        if (i == 1) {
+            JOptionPane.showMessageDialog(null, "El alojamiento dedo de alta");
+        }
+
+    } catch (SQLException e) {
+    }
+}
+    
+    public boolean estadoAlojamiento(int id) {
+    String sql = "SELECT estado FROM alojamiento WHERE id_alojamiento = ?";
+    boolean estado = false;
+
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            estado = rs.getBoolean("estado");
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return estado;
+}
+
+    public void calculodeVacaciones(LocalDate fecha1, LocalDate fecha2) {
+        String temporada = calculodeTemporada(fecha1);
+        int diasVacaciones = calculardiasVacaciones(fecha1, fecha2);
+
+        System.out.println("Temporada" + temporada);
+        System.out.println("Dias de Vacaciones" + diasVacaciones);
+
+    }
+
+    public String calculodeTemporada(LocalDate fechaInicio) {
+        Month mesInicio = fechaInicio.getMonth();
+
+        if (mesInicio == Month.DECEMBER || mesInicio == Month.FEBRUARY) {
+            return "temporada Alta";
+        } else if (mesInicio == Month.JULY) {
+            return "temporada Media";
+        } else {
+            return "temporada Baja";
+        }
+    }
+
+    public int calculardiasVacaciones(LocalDate fechaInicio, LocalDate fechaFin) {
+
+        long diferenciadeDias = fechaInicio.until(fechaFin, ChronoUnit.DAYS);
+
+        return (int) diferenciadeDias;
+    }
+
+    public void eliminarAlojamiento(int id) {
+        String sql = "UPDATE alojamiento SET estado=0 WHERE id_alojamiento=?";
+
+        try {
+            PreparedStatement ps = red.prepareStatement(sql);
+            ps.setInt(1, id);
+            int i = ps.executeUpdate();
+
+            if (i == 1) {
                 JOptionPane.showMessageDialog(null, "El alojamiento se ha dado de baja");
             }
         } catch (SQLException e) {
-           JOptionPane.showMessageDialog(null, "Error al dar de baja el alojamiento C"); 
+            JOptionPane.showMessageDialog(null, "Error al dar de baja el alojamiento C");
         }
     }
-    
-    public Alojamiento buscarAlojamiento(int id){
-        
-        String sql ="SELECT id_alojamiento,Fecha_inicio,fecha_fin,estado,servicio,importe_diario,id_ciudadDestino,tipo_lojamiento FROM alojamiento WHERE id_alojamiento = ?";
+
+    public Alojamiento buscarAlojamiento(int id) {
+        String sql = "SELECT id_alojamiento, Fecha_inicio, fecha_fin, estado, servicio, importe_diario, id_ciudadDestino, tipo_lojamiento FROM alojamiento WHERE id_alojamiento = ?";
         Alojamiento a = null;
-        
+
         try {
-            
             PreparedStatement ps = red.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 a = new Alojamiento();
                 CiudadData c = new CiudadData();
                 Ciudad ciudad = c.buscarCiudadporid(rs.getInt("id_ciudadDestino"));
+
                 a.setId_alojamiento(id);
-                a.setFechaInicio(rs.getDate("Fecha_incio").toLocalDate());
-                a.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+
+                if (rs.getDate("Fecha_inicio") != null) {
+                    a.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
+                } else {
+                    a.setFechaInicio(null);
+                }
+
+                if (rs.getDate("fecha_fin") != null) {
+                    a.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+                } else {
+                    a.setFechaFin(null);
+                }
+
                 a.setEstado(rs.getBoolean("estado"));
                 a.setServicio(rs.getString("servicio"));
                 a.setImporteDiario(rs.getBigDecimal("importe_diario"));
                 a.setCiudadDestino(ciudad);
                 a.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
-                
-                JOptionPane.showMessageDialog(null,"alojamiento encontrado");
+
+                JOptionPane.showMessageDialog(null, "Alojamiento encontrado");
             }
         } catch (SQLException e) {
-            
+
         }
         return a;
     }
-    
-    public List<Alojamiento> listarAlojamiento(int ciudad, LocalDate fecha_inicio){
-        
-        String sql ="SELECT id_alojamiento,Fecha_inicio,fecha_fin,servicio,importe_diario,tipo_lojamiento FROM alojamiento WHERE Fecha_inicio >= ? AND id_ciudadDestino = ? AND estado = 1";
+
+    public List<Alojamiento> listarAlojamiento(int ciudad, LocalDate fecha_inicio) {
+
+        String sql = "SELECT id_alojamiento,Fecha_inicio,fecha_fin,servicio,importe_diario,tipo_lojamiento FROM alojamiento WHERE Fecha_inicio >= ? AND id_ciudadDestino = ? AND estado = 1";
         Alojamiento aloja = null;
-        
+
         List<Alojamiento> listasdeAlojamiento = new ArrayList<>();
-        
+
         try {
             PreparedStatement ps = red.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(fecha_inicio));
             ps.setInt(2, ciudad);
-            
+
             ResultSet rs = ps.executeQuery();
-            
+
             CiudadData cd = new CiudadData();
-            
+
             while (rs.next()) {
-               aloja = new Alojamiento();
-               Ciudad c = new Ciudad();
-               c = cd.buscarCiudadporid(ciudad);
-               aloja.setId_alojamiento(rs.getInt("id_alojamiento"));
-               aloja.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
-               aloja.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
-               aloja.setEstado(true);
-               aloja.setServicio(rs.getString("servicio"));
-               aloja.setImporteDiario(rs.getBigDecimal("importe_diario"));
-               aloja.setCiudadDestino(c);
-               aloja.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
-               listasdeAlojamiento.add(aloja);
-                
+                aloja = new Alojamiento();
+                Ciudad c = new Ciudad();
+                c = cd.buscarCiudadporid(ciudad);
+                aloja.setId_alojamiento(rs.getInt("id_alojamiento"));
+                aloja.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
+                aloja.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+                aloja.setEstado(true);
+                aloja.setServicio(rs.getString("servicio"));
+                aloja.setImporteDiario(rs.getBigDecimal("importe_diario"));
+                aloja.setCiudadDestino(c);
+                aloja.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
+                listasdeAlojamiento.add(aloja);
+
             }
         } catch (SQLException e) {
         }
         return listasdeAlojamiento;
     }
-    
-    
-    
+
+    public List<Alojamiento> listarAlojamientoPorFechas(LocalDate fechaInicio) {
+    String sql = "SELECT id_alojamiento, Fecha_inicio, fecha_fin, servicio, importe_diario, tipo_lojamiento, estado FROM alojamiento WHERE Fecha_inicio >= ?";
+    List<Alojamiento> listasdeAlojamiento = new ArrayList<>();
+
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setDate(1, java.sql.Date.valueOf(fechaInicio));
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Alojamiento aloja = new Alojamiento();
+            aloja.setId_alojamiento(rs.getInt("id_alojamiento"));
+            aloja.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
+            aloja.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+            aloja.setEstado(rs.getBoolean("estado")); // Leer el estado de la base de datos
+            aloja.setServicio(rs.getString("servicio"));
+            aloja.setImporteDiario(rs.getBigDecimal("importe_diario"));
+            aloja.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
+            listasdeAlojamiento.add(aloja);
+        }
+    } catch (SQLException e) {
+    }
+    return listasdeAlojamiento;
+}
 }

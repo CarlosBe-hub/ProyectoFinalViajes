@@ -369,7 +369,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             }
 
             BigDecimal importeBase = new BigDecimal(jtImporte.getText()); 
-            BigDecimal ajusteServicio = BigDecimal.ONE; // 1.0
+            BigDecimal ajusteServicio = BigDecimal.ONE;
             String tipoServicio = jcbServicio.getSelectedItem().toString();
 
             // Ajuste por tipo de servicio
