@@ -274,17 +274,17 @@ public class PasajeVista extends javax.swing.JInternalFrame {
             return;
         }
         
-        // Crear el objeto Pasaje con los nuevos datos
+        
         Pasaje pasaje = new Pasaje();
         pasaje.setId_pasaje(idPasaje);
         pasaje.setImporte(importe);
         pasaje.setTipoTransporte(tipoTransporte);
         
-        // Actualizar en la base de datos
+        
         if (pd.modificarPasaje(idPasaje, pasaje)) { 
             JOptionPane.showMessageDialog(null, "El pasaje se modificó con éxito.");
             
-            // Actualizar los datos en la tabla
+            
             modelo.setValueAt(importe, filaSeleccionada, 3);
             modelo.setValueAt(tipoTransporte, filaSeleccionada, 4);
         } else {

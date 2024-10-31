@@ -240,12 +240,12 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
             ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
             System.out.println(ciudadDestino.getId_ciudad()+"Importe"+ Double.parseDouble(jTimporte.getText()));
             
-            // Cargamos un pasaje para el paquete
+            
             Pasaje pasaje1 = new Pasaje(jCtransporte.getSelectedItem().toString(),Double.parseDouble(jTimporte.getText()),ciudadOrigen,ciudadDestino,true);
             PasajeData pd = new PasajeData();
             Pasaje pasaje2 = pd.guardarPasaje(pasaje1);
             
-            //Obtenemos IdAlojamiento en la seleccion tabla
+            
             Alojamiento alojamiento = new Alojamiento();
             AlojamientoData ad = new AlojamientoData();
             int fila = jTable1.getSelectedRow();
@@ -253,7 +253,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
             alojamiento = ad.buscarAlojamiento(idAlojamiento);
             
          
-            //Guardamos el paquete
+            
             Paquete paquete = new Paquete("Paquete Viaje",ciudadOrigen,ciudadDestino,alojamiento,pasaje2,true);
             PaqueteData pdd = new PaqueteData();
             pdd.AgregarPaquete(paquete);
@@ -304,15 +304,15 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     public void cargarComboprovincias() {
     String pai = (String) jCpaises.getSelectedItem();
 
-    // Limpiamos el combo de provincias y de ciudades antes de cargar nuevos datos
+    
     jCprovincias.removeAllItems();
     jCciudades.removeAllItems();
 
-    // Agregamos opciones para que aparezcan de primera en los combos
+    
     jCprovincias.addItem("Seleccione una provincia");
     jCciudades.addItem("Seleccione una ciudad");
 
-    // Obtenemos las provincias del país seleccionado y las cargamos en el combo
+    
     if (pai != null) {
         List<String> provincia = cd.listarProvinciasPorPaisC(pai);
         for (String Provincia : provincia) {
@@ -322,15 +322,15 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 }
 
 private void cargarCombociudad() {
-    // Obtenemos el pais y la provincia seleccionada
+    
     String pai = (String) jCpaises.getSelectedItem();
     String provincia = (String) jCprovincias.getSelectedItem();
 
-    // Limpiamos el combo de ciudades antes de agregar nuevos datos para evitar que se dupliquen
+    
     jCciudades.removeAllItems();
     jCciudades.addItem("Seleccione una ciudad");
 
-    // Cargamos las ciudades solo si la provincia seleccionada no es nula o la opción predeterminada
+    
     if (provincia != null && !provincia.equals("Seleccione una provincia")) {
         List<Ciudad> ciu = cd.listarPaisYProvincia(pai, provincia);
         for (Ciudad ciudad : ciu) {
