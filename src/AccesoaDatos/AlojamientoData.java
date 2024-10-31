@@ -52,7 +52,7 @@ public class AlojamientoData {
     }
 
     public void modificarAlojamiento(Alojamiento alojamiento) {
-        String sql = "UPDATE alojamiento SET Fecha_inicio =?, fecha_fin=?, estado=?; servicio=?, importe_diario=?,tipo_lojamiento=?, estado=? WHERE id_alojamiento=?";
+        String sql = "UPDATE alojamiento SET Fecha_inicio =?, fecha_fin=?, estado=?, servicio=?, importe_diario=?,tipo_lojamiento=? WHERE id_alojamiento=?";
 
         try {
             PreparedStatement ps = red.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -62,8 +62,7 @@ public class AlojamientoData {
             ps.setString(4, alojamiento.getServicio());
             ps.setBigDecimal(5, alojamiento.getImporteDiario());
             ps.setString(6, alojamiento.getTipoAlojamiento());
-            ps.setBoolean(7, alojamiento.isEstado());
-            ps.setInt(8, alojamiento.getId_alojamiento());
+            ps.setInt(7, alojamiento.getId_alojamiento());
 
             int i = ps.executeUpdate();
 
@@ -158,7 +157,7 @@ public class AlojamientoData {
     }
 
     public void eliminarAlojamiento(int id) {
-        String sql = "UPDATE alojamiento SET estado=0 WHERE id_alojamiento=?";
+        String sql = "DELETE FROM alojamiento WHERE id_alojamiento=?";
 
         try {
             PreparedStatement ps = red.prepareStatement(sql);
@@ -166,10 +165,10 @@ public class AlojamientoData {
             int i = ps.executeUpdate();
 
             if (i == 1) {
-                JOptionPane.showMessageDialog(null, "El alojamiento se ha dado de baja");
+                JOptionPane.showMessageDialog(null, "El alojamiento se ha eliminado");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al dar de baja el alojamiento C");
+            JOptionPane.showMessageDialog(null, "Error al eliminar C");
         }
     }
 
@@ -266,7 +265,7 @@ public class AlojamientoData {
             aloja.setId_alojamiento(rs.getInt("id_alojamiento"));
             aloja.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
             aloja.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
-            aloja.setEstado(rs.getBoolean("estado")); // Leer el estado de la base de datos
+            aloja.setEstado(rs.getBoolean("estado")); 
             aloja.setServicio(rs.getString("servicio"));
             aloja.setImporteDiario(rs.getBigDecimal("importe_diario"));
             aloja.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
@@ -275,5 +274,30 @@ public class AlojamientoData {
     } catch (SQLException e) {
     }
     return listasdeAlojamiento;
+}
+    
+    public void modificarAlojamientoPorId(int id, Alojamiento alojamiento) {
+    String sql = "UPDATE alojamiento SET Fecha_inicio = ?, fecha_fin = ?, estado = ?, servicio = ?, importe_diario = ?, tipo_lojamiento = ? WHERE id_alojamiento = ?";
+
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setDate(1, Date.valueOf(alojamiento.getFechaInicio()));
+        ps.setDate(2, Date.valueOf(alojamiento.getFechaFin()));
+        ps.setBoolean(3, alojamiento.isEstado());
+        ps.setString(4, alojamiento.getServicio());
+        ps.setBigDecimal(5, alojamiento.getImporteDiario());
+        ps.setString(6, alojamiento.getTipoAlojamiento());
+        ps.setInt(7, id);
+
+        int resultado = ps.executeUpdate();
+
+        if (resultado == 1) {
+            JOptionPane.showMessageDialog(null, "Alojamiento modificado con éxito.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró un alojamiento con el ID especificado.");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al modificar el alojamiento: ");
+    }
 }
 }

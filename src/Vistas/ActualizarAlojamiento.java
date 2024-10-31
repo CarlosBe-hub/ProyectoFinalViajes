@@ -6,6 +6,7 @@ package Vistas;
 
 import AccesoaDatos.AlojamientoData;
 import AccesoaDatos.PaqueteData;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -67,8 +68,9 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jtfImporte = new javax.swing.JTextField();
         jrbEstado = new javax.swing.JRadioButton();
-        jbActualizar = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
+        jbEliminar = new javax.swing.JButton();
+        jbActualizar2 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -165,16 +167,25 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, -1, -1));
         jPanel2.add(jtfImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 158, -1));
         jPanel2.add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, -1, -1));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 390, -1));
 
-        jbActualizar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jbActualizar.setText("Actualizar");
-        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+        jbEliminar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jbEliminar.setText("ELIMINAR");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbActualizarActionPerformed(evt);
+                jbEliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 520, -1, -1));
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 390, -1));
+        jPanel2.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 520, -1, -1));
+
+        jbActualizar2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jbActualizar2.setText("Actualizar");
+        jbActualizar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizar2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jbActualizar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 520, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -272,53 +283,60 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcTAlojamientoActionPerformed
 
-    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-                                         
-    if (jtfID.getText().isEmpty()) {
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // TODO add your handling code here:
+        int filaSeleccionada = jTable1.getSelectedRow();
+        if(filaSeleccionada != -1){
+            int idAlojamiento = (int) modelo.getValueAt(filaSeleccionada, 0);
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar este Alojamiento?", "Confirme Por favor!", JOptionPane.YES_NO_OPTION);
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                ad.eliminarAlojamiento(idAlojamiento);
+                modelo.removeRow(filaSeleccionada);
+                JOptionPane.showMessageDialog(null, "El Alojamiento se elimino con exito.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un Alojamiento para eliminar.");
+        
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbActualizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizar2ActionPerformed
+       if (jtfID.getText().isEmpty()) {
         JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.");
         return;
     }
 
     int id = Integer.parseInt(jtfID.getText());
 
-    boolean estadoActual = ad.estadoAlojamiento(id);
+    
+    Alojamiento alojamiento = new Alojamiento();
+    alojamiento.setId_alojamiento(id); 
+    alojamiento.setFechaInicio(fechaInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+    alojamiento.setFechaFin(fechaFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+    alojamiento.setTipoAlojamiento((String) jcTAlojamiento.getSelectedItem());
+    alojamiento.setServicio((String) jcServicio.getSelectedItem());
+    alojamiento.setImporteDiario(new BigDecimal(jtfImporte.getText()));
+    alojamiento.setEstado(jrbEstado.isSelected());
 
+   
+    ad.modificarAlojamientoPorId(id, alojamiento);
 
-    if (estadoActual) {
-        ad.darDeBaja(id);
-    } else {
-
-        ad.darDeAlta(id);
+    
+    int filaSeleccionada = jTable1.getSelectedRow();
+    if (filaSeleccionada != -1) {
+        modelo.setValueAt(alojamiento.getFechaInicio(), filaSeleccionada, 1);
+        modelo.setValueAt(alojamiento.getFechaFin(), filaSeleccionada, 2);
+        modelo.setValueAt(alojamiento.getServicio(), filaSeleccionada, 3);
+        modelo.setValueAt(alojamiento.getImporteDiario(), filaSeleccionada, 4);
+        modelo.setValueAt(alojamiento.getTipoAlojamiento(), filaSeleccionada, 5);
+        modelo.setValueAt(alojamiento.isEstado(), filaSeleccionada, 6);
     }
 
+    
+    JOptionPane.showMessageDialog(this, "El alojamiento se actualizó correctamente.");
 
-    jtfID.setText("");
-    fechaInicio.setDate(null);
-    fechaFin.setDate(null);
-    jcServicio.setSelectedIndex(-1);
-    jcTAlojamiento.setSelectedIndex(-1);
-    jtfImporte.setText("");
-    jrbEstado.setSelected(false);
-
-
-    LocalDate fecha_ingreso = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    List<Alojamiento> alojamientos = ad.listarAlojamientoPorFechas(fecha_ingreso);
-    borrarFilas();
-
-    for (Alojamiento alojamiento : alojamientos) {
-        modelo.addRow(new Object[]{
-            alojamiento.getId_alojamiento(),
-            alojamiento.getFechaInicio(),
-            alojamiento.getFechaFin(),
-            alojamiento.getServicio(),
-            alojamiento.getImporteDiario(),
-            alojamiento.getTipoAlojamiento(),
-            alojamiento.isEstado()
-        });
-    }
-
-  
-    }//GEN-LAST:event_jbActualizarActionPerformed
+    }//GEN-LAST:event_jbActualizar2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -339,9 +357,10 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton jbActualizar;
+    private javax.swing.JButton jbActualizar2;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbCargarDatosTabla;
+    private javax.swing.JButton jbEliminar;
     private javax.swing.JComboBox<String> jcServicio;
     private javax.swing.JComboBox<String> jcTAlojamiento;
     private com.toedter.calendar.JDateChooser jdFecha;

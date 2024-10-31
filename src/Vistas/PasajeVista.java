@@ -26,6 +26,7 @@ public class PasajeVista extends javax.swing.JInternalFrame {
         pd = new PasajeData();
         armarCabecera();
         jTpasaje.setModel(modelo);
+        llenarComboTransportes();
     }
     private DefaultTableModel modelo = new DefaultTableModel();
 
@@ -45,9 +46,17 @@ public class PasajeVista extends javax.swing.JInternalFrame {
         jTciudad = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTpasaje = new javax.swing.JTable();
-        jBmodificar = new javax.swing.JButton();
+        jBcargar = new javax.swing.JButton();
         jBsalir = new javax.swing.JButton();
         jBeliminar = new javax.swing.JButton();
+        jBmodificar1 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jTimporte = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTidpasaje = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jCtransportes = new javax.swing.JComboBox<>();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -56,7 +65,7 @@ public class PasajeVista extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Administrar Pasaje");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 470, 10));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 470, 10));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -85,14 +94,14 @@ public class PasajeVista extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, 170));
 
-        jBmodificar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jBmodificar.setText("Modificar");
-        jBmodificar.addActionListener(new java.awt.event.ActionListener() {
+        jBcargar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jBcargar.setText("Cargar");
+        jBcargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBmodificarActionPerformed(evt);
+                jBcargarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBmodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, -1, -1));
+        jPanel1.add(jBcargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, -1, -1));
 
         jBsalir.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jBsalir.setText("Salir");
@@ -101,7 +110,7 @@ public class PasajeVista extends javax.swing.JInternalFrame {
                 jBsalirActionPerformed(evt);
             }
         });
-        jPanel1.add(jBsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 60, -1));
+        jPanel1.add(jBsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 600, 60, -1));
 
         jBeliminar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jBeliminar.setText("Eliminar");
@@ -110,7 +119,36 @@ public class PasajeVista extends javax.swing.JInternalFrame {
                 jBeliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, -1, -1));
+        jPanel1.add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 590, -1, -1));
+
+        jBmodificar1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jBmodificar1.setText("Modificar");
+        jBmodificar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBmodificar1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBmodificar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 590, -1, -1));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 470, 10));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Importe");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 60, -1));
+        jPanel1.add(jTimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 130, -1));
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Tipo de Transporte");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 160, -1));
+        jPanel1.add(jTidpasaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 130, -1));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Número de pasaje");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 160, -1));
+
+        jPanel1.add(jCtransportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, 130, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,34 +158,46 @@ public class PasajeVista extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
+    private void jBcargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcargarActionPerformed
        int filaSeleccionada = jTpasaje.getSelectedRow();
-    if (filaSeleccionada != -1) {
-        int idPasaje = (int) modelo.getValueAt(filaSeleccionada, 0);
-        
-        
-        boolean estadoActual = (boolean) modelo.getValueAt(filaSeleccionada, 5);
-        
-        boolean nuevoEstado = !estadoActual;
-        
        
-        pd.cambiarEstadoPasaje(idPasaje, nuevoEstado);
-        
-        
-        modelo.setValueAt(nuevoEstado, filaSeleccionada, 5);
-    } else {
-        JOptionPane.showMessageDialog(null, "Seleccione un pasaje para modificar.");
+       if( filaSeleccionada == -1){
+           JOptionPane.showMessageDialog(null, "Seleccione un pasaje de la tabla!");
+           return;
+       }
+       
+       Integer id = (Integer) jTpasaje.getValueAt(filaSeleccionada, 0);
+       
+       Pasaje pasaje = pd.buscarPasaje(id);
+       
+       if(pasaje != null){
+           jTidpasaje.setText(String.valueOf(pasaje.getId_pasaje()));
+           jTimporte.setText(String.valueOf(pasaje.getImporte()));
+           
+           String tipoTransporte = pasaje.getTipoTransporte();
+           if (tipoTransporte != null) {
+               
+            if (tipoTransporte.equalsIgnoreCase("Avion")) {
+                jCtransportes.setSelectedIndex(1);
+            } else if (tipoTransporte.equalsIgnoreCase("Colectivo")) {
+                jCtransportes.setSelectedIndex(2);
+            } else if (tipoTransporte.equalsIgnoreCase("Tren")) {
+                jCtransportes.setSelectedIndex(3);
+            } else {
+                jCtransportes.setSelectedIndex(0); 
+            }
+        } else {
+            jCtransportes.setSelectedIndex(0); 
+        }
     }
 
-
-
-    }//GEN-LAST:event_jBmodificarActionPerformed
+    }//GEN-LAST:event_jBcargarActionPerformed
 
     private void jBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalirActionPerformed
         this.setVisible(false);
@@ -204,17 +254,29 @@ public class PasajeVista extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jTciudadKeyReleased
 
+    private void jBmodificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBmodificar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBcargar;
     private javax.swing.JButton jBeliminar;
-    private javax.swing.JButton jBmodificar;
+    private javax.swing.JButton jBmodificar1;
     private javax.swing.JButton jBsalir;
+    private javax.swing.JComboBox<String> jCtransportes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTciudad;
+    private javax.swing.JTextField jTidpasaje;
+    private javax.swing.JTextField jTimporte;
     private javax.swing.JTable jTpasaje;
     // End of variables declaration//GEN-END:variables
 
@@ -228,5 +290,10 @@ public class PasajeVista extends javax.swing.JInternalFrame {
         modelo.addColumn("estado");
 
     }
-
+private void llenarComboTransportes() {
+    jCtransportes.addItem("---Seleccionar---"); 
+    jCtransportes.addItem("Avion");
+    jCtransportes.addItem("Colectivo");
+    jCtransportes.addItem("Tren");
+}
 }

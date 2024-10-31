@@ -142,4 +142,28 @@ public class PasajeData {
         JOptionPane.showMessageDialog(null, "Error al cambiar el estado del pasaje.");
     }
 }
+    
+  public void modificarPasaje(int id, Pasaje pasaje) {
+    String sql = "UPDATE pasaje SET tipo_Transporte = ?, importe = ?, estado = ? WHERE id_pasaje = ?";
+    
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setString(1, pasaje.getTipoTransporte());
+        ps.setDouble(2, pasaje.getImporte());
+        ps.setBoolean(3, pasaje.isEstado());
+        ps.setInt(4, id);
+        
+        int i = ps.executeUpdate();
+        
+        if (i == 1) {
+            JOptionPane.showMessageDialog(null, "El pasaje se modificó con éxito");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el pasaje con el ID especificado");
+        }
+        
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al modificar el pasaje!");
+    }
+}
+  
 }
