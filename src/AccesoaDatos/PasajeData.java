@@ -40,7 +40,7 @@ public class PasajeData {
             ResultSet rs = ps.getGeneratedKeys();
             while(rs.next()) {
                 pasaje.setId_pasaje(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Pasaje Registrada");
+                JOptionPane.showMessageDialog(null, "Pasaje Registrado");
             }
 
         } catch (SQLException e) {
@@ -143,7 +143,7 @@ public class PasajeData {
     }
 }
     
-  public void modificarPasaje(int id, Pasaje pasaje) {
+  public boolean modificarPasaje(int id, Pasaje pasaje) {
     String sql = "UPDATE pasaje SET tipo_Transporte = ?, importe = ?, estado = ? WHERE id_pasaje = ?";
     
     try {
@@ -156,14 +156,18 @@ public class PasajeData {
         int i = ps.executeUpdate();
         
         if (i == 1) {
-            JOptionPane.showMessageDialog(null, "El pasaje se modificó con éxito");
+            JOptionPane.showMessageDialog(null, "El pasaje se modifico con exito");
+            return true;
         } else {
             JOptionPane.showMessageDialog(null, "No se encontró el pasaje con el ID especificado");
+            return false;
         }
         
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Error al modificar el pasaje!");
+        return false;
     }
 }
+
   
 }

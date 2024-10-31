@@ -216,66 +216,41 @@ public class AlojamientoData {
 
     public List<Alojamiento> listarAlojamiento(int ciudad, LocalDate fecha_inicio) {
 
-        String sql = "SELECT id_alojamiento,Fecha_inicio,fecha_fin,servicio,importe_diario,tipo_lojamiento FROM alojamiento WHERE Fecha_inicio >= ? AND id_ciudadDestino = ? AND estado = 1";
-        Alojamiento aloja = null;
-
-        List<Alojamiento> listasdeAlojamiento = new ArrayList<>();
-
-        try {
-            PreparedStatement ps = red.prepareStatement(sql);
-            ps.setDate(1, Date.valueOf(fecha_inicio));
-            ps.setInt(2, ciudad);
-
-            ResultSet rs = ps.executeQuery();
-
-            CiudadData cd = new CiudadData();
-
-            while (rs.next()) {
-                aloja = new Alojamiento();
-                Ciudad c = new Ciudad();
-                c = cd.buscarCiudadporid(ciudad);
-                aloja.setId_alojamiento(rs.getInt("id_alojamiento"));
-                aloja.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
-                aloja.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
-                aloja.setEstado(true);
-                aloja.setServicio(rs.getString("servicio"));
-                aloja.setImporteDiario(rs.getBigDecimal("importe_diario"));
-                aloja.setCiudadDestino(c);
-                aloja.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
-                listasdeAlojamiento.add(aloja);
-
-            }
-        } catch (SQLException e) {
-        }
-        return listasdeAlojamiento;
-    }
-
-    public List<Alojamiento> listarAlojamientoPorFechas(LocalDate fechaInicio) {
-    String sql = "SELECT id_alojamiento, Fecha_inicio, fecha_fin, servicio, importe_diario, tipo_lojamiento, estado FROM alojamiento WHERE Fecha_inicio >= ?";
+    String sql = "SELECT id_alojamiento, Fecha_inicio, fecha_fin, servicio, importe_diario, tipo_lojamiento FROM alojamiento WHERE Fecha_inicio >= ? AND id_ciudadDestino = ? AND estado = 1";
     List<Alojamiento> listasdeAlojamiento = new ArrayList<>();
 
-    try {
-        PreparedStatement ps = red.prepareStatement(sql);
-        ps.setDate(1, java.sql.Date.valueOf(fechaInicio));
+    try (PreparedStatement ps = red.prepareStatement(sql)) {
+        
+        ps.setDate(1, Date.valueOf(fecha_inicio));
+        ps.setInt(2, ciudad);
 
+        
         ResultSet rs = ps.executeQuery();
+        CiudadData cd = new CiudadData();
 
+        
         while (rs.next()) {
             Alojamiento aloja = new Alojamiento();
+            Ciudad c = cd.buscarCiudadporid(ciudad);
+
             aloja.setId_alojamiento(rs.getInt("id_alojamiento"));
             aloja.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
             aloja.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
-            aloja.setEstado(rs.getBoolean("estado")); 
+            aloja.setEstado(true);  // Esto siempre es true según el filtro de la consulta
             aloja.setServicio(rs.getString("servicio"));
             aloja.setImporteDiario(rs.getBigDecimal("importe_diario"));
+            aloja.setCiudadDestino(c);
             aloja.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
+
             listasdeAlojamiento.add(aloja);
         }
     } catch (SQLException e) {
+        e.printStackTrace(); 
     }
+
     return listasdeAlojamiento;
 }
-    
+  
     public void modificarAlojamientoPorId(int id, Alojamiento alojamiento) {
     String sql = "UPDATE alojamiento SET Fecha_inicio = ?, fecha_fin = ?, estado = ?, servicio = ?, importe_diario = ?, tipo_lojamiento = ? WHERE id_alojamiento = ?";
 
@@ -300,4 +275,32 @@ public class AlojamientoData {
         JOptionPane.showMessageDialog(null, "Error al modificar el alojamiento: ");
     }
 }
+ public List<Alojamiento> listarAlojamientoPorFechas(LocalDate fecha_inicio) {
+    String sql = "SELECT id_alojamiento, Fecha_inicio, fecha_fin, servicio, importe_diario, tipo_lojamiento " +
+                 "FROM alojamiento WHERE Fecha_inicio = ? AND estado = 1";
+    List<Alojamiento> listasdeAlojamiento = new ArrayList<>();
+
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setDate(1, Date.valueOf(fecha_inicio));
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Alojamiento aloja = new Alojamiento();
+            aloja.setId_alojamiento(rs.getInt("id_alojamiento"));
+            aloja.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
+            aloja.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+            aloja.setServicio(rs.getString("servicio"));
+            aloja.setImporteDiario(rs.getBigDecimal("importe_diario"));
+            aloja.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
+            aloja.setEstado(true);
+            listasdeAlojamiento.add(aloja);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return listasdeAlojamiento;
+}   
 }
+

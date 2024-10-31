@@ -145,20 +145,29 @@ public class Ciudades extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
-        if(!jTpais.getText().isEmpty()  &&  !jTprovincia.getText().isEmpty()  && !jTciudad.getText().isEmpty()){
-           CiudadData cd = new CiudadData();
-           String pais = jTpais.getText();
-           String provincia = jTprovincia.getText();
-           String ciudad = jTciudad.getText();
-           boolean estado = jrEstado.isSelected();
-           Ciudad ciu = new Ciudad(ciudad,pais,estado,provincia);
-           cd.agregarCiudad(ciu);
+        
+    if (!jTpais.getText().isEmpty() && !jTprovincia.getText().isEmpty() && !jTciudad.getText().isEmpty()) {
+        CiudadData cd = new CiudadData();
+        String pais = jTpais.getText();
+        String provincia = jTprovincia.getText();
+        String ciudad = jTciudad.getText();
+        boolean estado = jrEstado.isSelected();
 
+        
+        if (cd.buscarCiudad(ciudad) != null) {
+            JOptionPane.showMessageDialog(this, "La ciudad ya existe en la base de datos.");
+        } else {
+            
+            Ciudad nuevaCiudad = new Ciudad(ciudad, pais, estado, provincia);
+            cd.agregarCiudad(nuevaCiudad);
+            JOptionPane.showMessageDialog(this, "Ciudad guardada exitosamente.");
+            limpiarCampos();
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "No deje campos vacios!");
+    }
 
-       }else{
-           JOptionPane.showMessageDialog(null, "No deje campos vacios!");
-       }
+        
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
@@ -167,13 +176,17 @@ public class Ciudades extends javax.swing.JInternalFrame {
     
     Ciudad ciudad = cd.buscarCiudad(nombreCiudad);
     if (ciudad != null) {
-        cd.eliminarCiudadPorNombre(ciudad.getNombre());
-        limpiarCampos();
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar la ciudad seleccionada?", "Confirme Por favor!", JOptionPane.YES_NO_OPTION);
+        
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            cd.eliminarCiudadPorNombre(ciudad.getNombre());
+            limpiarCampos();
+            
+        }
     } else {
-        JOptionPane.showMessageDialog(null, "La ciudad no existe o ya se elimino!.");
-    }
+        JOptionPane.showMessageDialog(null, "Busque la ciudad que desea eliminar!");
+    }  
 
- 
     }//GEN-LAST:event_jBeliminarActionPerformed
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed

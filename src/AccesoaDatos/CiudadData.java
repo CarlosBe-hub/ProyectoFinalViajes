@@ -37,7 +37,7 @@ public class CiudadData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 ciudad.setId_ciudad(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Ciudad Registrada");
+                
             }
 
         } catch (SQLException e) {
@@ -62,7 +62,7 @@ public class CiudadData {
                 c.setEstado(rs.getBoolean("estado"));
                 c.setProvincia(rs.getString("provincia"));
 
-                JOptionPane.showMessageDialog(null, "Se ha encontrado la ciudad");
+                
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla ciudad!");

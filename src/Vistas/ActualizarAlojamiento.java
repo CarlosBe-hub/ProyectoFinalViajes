@@ -83,7 +83,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
                 jbBuscarActionPerformed(evt);
             }
         });
-        jPanel2.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, 20));
+        jPanel2.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, -1, 20));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,16 +167,16 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, -1, -1));
         jPanel2.add(jtfImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 158, -1));
         jPanel2.add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, -1, -1));
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 390, -1));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 22, 390, 10));
 
         jbEliminar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jbEliminar.setText("ELIMINAR");
+        jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 520, -1, -1));
+        jPanel2.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 520, -1, -1));
 
         jbActualizar2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jbActualizar2.setText("Actualizar");
@@ -185,7 +185,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
                 jbActualizar2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jbActualizar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 520, -1, -1));
+        jPanel2.add(jbActualizar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 520, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -202,12 +202,12 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-
-        LocalDate fecha_ingreso = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        List<Alojamiento> alojamientos = ad.listarAlojamientoPorFechas(fecha_ingreso);
+      try {
+        LocalDate fechaIngreso = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        List<Alojamiento> alojamientos = ad.listarAlojamientoPorFechas(fechaIngreso);
         borrarFilas();
-
         for (Alojamiento alojamiento : alojamientos) {
+            String estadoTexto = alojamiento.isEstado() ? "Activo" : "Inactivo";
             modelo.addRow(new Object[]{
                 alojamiento.getId_alojamiento(),
                 alojamiento.getFechaInicio(),
@@ -215,9 +215,12 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
                 alojamiento.getServicio(),
                 alojamiento.getImporteDiario(),
                 alojamiento.getTipoAlojamiento(),
-                alojamiento.isEstado()
+                estadoTexto
             });
         }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar alojamientos: " + e.getMessage());
+    }
 
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -303,7 +306,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
 
     private void jbActualizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizar2ActionPerformed
        if (jtfID.getText().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.");
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID valido.");
         return;
     }
 
@@ -376,7 +379,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         modelo.addColumn("Servicio");
         modelo.addColumn("Importe Diario");
         modelo.addColumn("Tipo Alojamineto");
-        modelo.addColumn("estado");
+        modelo.addColumn("Estado");
         jTable1.setModel(modelo);
     }
 
