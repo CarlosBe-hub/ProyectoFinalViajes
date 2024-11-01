@@ -50,20 +50,20 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         cargarCombopaises();
         cargarComboprovincias();
 
-        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-
-                if (!e.getValueIsAdjusting()) {
-                    int filaSeleccionada = jTable1.getSelectedRow();
-                    if (filaSeleccionada != -1) {
-
-                       double importe = (double) jTable1.getValueAt(filaSeleccionada, 5);
-                        jtAlojamiento.setText(String.valueOf(importe));
-                    }
-                }
-            }
-        });
+//        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+//            @Override
+//            public void valueChanged(ListSelectionEvent e) {
+//
+//                if (!e.getValueIsAdjusting()) {
+//                    int filaSeleccionada = jTable1.getSelectedRow();
+//                    if (filaSeleccionada != -1) {
+//
+//                       double importe = (double) jTable1.getValueAt(filaSeleccionada, 5);
+//                        jtAlojamiento.setText(String.valueOf(importe));
+//                    }
+//                }
+//            }
+//        });
 
 //        cargarTabla();
     }
@@ -103,6 +103,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jTimporteTransporte = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         ImporteTotalPaquete = new javax.swing.JTextField();
+        jBcargarimporte = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
@@ -143,7 +144,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jCtransporteActionPerformed(evt);
             }
         });
-        jPanel1.add(jCtransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 470, 160, -1));
+        jPanel1.add(jCtransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 510, 160, -1));
 
         jCciudades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,7 +157,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Importe");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, -1, -1));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 242, 580, 0));
 
         jButton1.setText("SALIR");
@@ -165,7 +166,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 620, 130, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 650, 130, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,8 +198,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Tipo de Transporte");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, -1, -1));
-        jPanel1.add(jtAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, 160, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, -1, -1));
+        jPanel1.add(jtAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 470, 160, -1));
 
         jBbuscar.setText("BUSCAR");
         jBbuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -214,20 +215,29 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jBagregarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, 130, -1));
+        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 650, 130, -1));
         jPanel1.add(jDfechadeinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 200, -1));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Importe de Transporte");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, -1, -1));
-        jPanel1.add(jTimporteTransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 510, 150, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 550, -1, -1));
+        jPanel1.add(jTimporteTransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 550, 160, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Importe del Paquete");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 560, 170, -1));
-        jPanel1.add(ImporteTotalPaquete, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 560, 150, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 590, 170, -1));
+        jPanel1.add(ImporteTotalPaquete, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 590, 160, -1));
+
+        jBcargarimporte.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jBcargarimporte.setText("Cargar");
+        jBcargarimporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcargarimporteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBcargarimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -237,7 +247,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
 
         pack();
@@ -339,11 +349,27 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         calcularImporteTotal();
     }//GEN-LAST:event_jCtransporteActionPerformed
 
+    private void jBcargarimporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcargarimporteActionPerformed
+        
+    if (jTable1.getRowCount() > 0) {
+        
+        
+        double importe = (double) jTable1.getValueAt(0, 5);  
+        
+        // Muestra el importe en el campo de texto
+        jtAlojamiento.setText(String.valueOf(importe));
+    } else {
+        JOptionPane.showMessageDialog(this, "La tabla está vacía. No hay datos de importe para cargar.");
+    }
+
+    }//GEN-LAST:event_jBcargarimporteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ImporteTotalPaquete;
     private javax.swing.JButton jBagregar;
     private javax.swing.JButton jBbuscar;
+    private javax.swing.JButton jBcargarimporte;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jCciudades;
