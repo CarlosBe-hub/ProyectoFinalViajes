@@ -148,7 +148,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 650, 130, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 630, 130, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,7 +197,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jBagregarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 650, 130, -1));
+        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 630, 130, -1));
         jPanel1.add(jDfechadeinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 200, -1));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -229,7 +229,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -271,72 +271,45 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
     private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
 
-         try {
-        Ciudad ciudadOrigen = cd.buscarCiudad(jCpaises.getSelectedItem().toString());
-        Ciudad ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
+                                        
+    try {
+        Ciudad ciudadOrigen = new Ciudad();
+        Ciudad ciudadDestino = new Ciudad();
+        ciudadOrigen = cd.buscarCiudad("San Luis");
+        ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
+        
+        if (ciudadOrigen == null || ciudadDestino == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione ciudades válidas.");
+            System.out.println("oriege: "+ciudadOrigen+", destino: "+ciudadDestino);
+            return;
+        }
+
+
+        double importeTransporte = Double.parseDouble(jTimporteTransporte.getText());
+        Pasaje pasaje = new Pasaje(jCtransporte.getSelectedItem().toString(), importeTransporte, ciudadOrigen,ciudadDestino, true);
+        pasaje = ps.guardarPasaje(pasaje);
 
         Alojamiento alojamiento = ad.buscarAlojamientoPorImporte(Double.parseDouble(jtAlojamiento.getText()));
-
-        String tipoTransporte = jCtransporte.getSelectedItem().toString();
-        Pasaje pasaje = ps.buscarPasajePorTipoString(tipoTransporte);
-
-      
-        if (pasaje == null) {
-            pasaje = new Pasaje();
-            pasaje.setTipoTransporte(tipoTransporte);
-            pasaje.setImporte(Double.parseDouble(jTimporteTransporte.getText())); 
-            pasaje.setCiudadOrigen(ciudadOrigen);
-            pasaje.setCiudadDestino(ciudadDestino);
-            pasaje.setEstado(true);
-
-            
-            pasaje = ps.guardarPasaje(pasaje);
+        if (alojamiento == null) {
+            JOptionPane.showMessageDialog(this, "Alojamiento no encontrado.");
+            return;
         }
 
 
-            System.out.println("Ciudad Origen: " + ciudadOrigen);
-            System.out.println("Ciudad Destino: " + ciudadDestino);
-            System.out.println("Alojamiento: " + alojamiento);
-            System.out.println("Pasaje: " + pasaje);
-            
-            
+        double importePaquete = Double.parseDouble(ImporteTotalPaquete.getText());
+        Paquete paquete = new Paquete("Paquete Turistico",ciudadOrigen, ciudadDestino, alojamiento, pasaje, true,importePaquete);
+        paquete.setImportePaquete(importePaquete);
+        pd.AgregarPaquete(paquete);
 
-            if (ciudadOrigen == null || ciudadDestino == null || alojamiento == null || pasaje == null) {
-                JOptionPane.showMessageDialog(null, "Por favor, asegúrate de que todos los datos sean válidos.");
-                return;
-            }
+        JOptionPane.showMessageDialog(this, "Paquete agregado exitosamente.");
 
-            String importeTexto = ImporteTotalPaquete.getText().trim();
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Formato no válido: " + e.getMessage());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage());
+    }
 
-            if (importeTexto.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "El importe total del paquete no puede estar vacío.");
-                return;
-            }
-
-            double importePaquete;
-            try {
-                importePaquete = Double.parseDouble(importeTexto);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "El importe total del paquete debe ser un número válido: " + e.getMessage());
-                return;
-            }
-
-            Paquete paquete = new Paquete();
-            paquete.setNombrePaquete("Paquete");
-            paquete.setCiudadOrigen(ciudadOrigen);
-            paquete.setCiudadDestino(ciudadDestino);
-            paquete.setAlojamiento(alojamiento);
-            paquete.setPasaje(pasaje);
-            paquete.setImportePaquete(importePaquete);
-
-            pd.AgregarPaquete(paquete);
-            JOptionPane.showMessageDialog(null, "Paquete agregado exitosamente.");
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "El importe del alojamiento debe ser un número válido.");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocurrió un error: " + e.getMessage());
-        }
+               
 
 
     }//GEN-LAST:event_jBagregarActionPerformed
