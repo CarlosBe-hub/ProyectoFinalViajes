@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author carlo
@@ -16,8 +18,9 @@ public class Paquete {
   private Alojamiento alojamiento;
   private Pasaje pasaje;
   private boolean estado;
+  private BigDecimal importePaquete;
 
-    public Paquete(int id_paquete, String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado) {
+    public Paquete(int id_paquete, String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, BigDecimal importePaquete) {
         this.id_paquete = id_paquete;
         this.nombrePaquete = nombrePaquete;
         this.ciudadOrigen = ciudadOrigen;
@@ -25,26 +28,18 @@ public class Paquete {
         this.alojamiento = alojamiento;
         this.pasaje = pasaje;
         this.estado = estado;
+        this.importePaquete = importePaquete;
     }
-    
 
-    public Paquete(String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado) {
+    public Paquete(String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, BigDecimal importePaquete) {
         this.nombrePaquete = nombrePaquete;
         this.ciudadOrigen = ciudadOrigen;
         this.ciudadDestino = ciudadDestino;
         this.alojamiento = alojamiento;
         this.pasaje = pasaje;
         this.estado = estado;
+        this.importePaquete = importePaquete;
     }
-
-    public Paquete(Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado) {
-        this.ciudadOrigen = ciudadOrigen;
-        this.ciudadDestino = ciudadDestino;
-        this.alojamiento = alojamiento;
-        this.pasaje = pasaje;
-        this.estado = estado;
-    }
-    
 
     public Paquete() {
     }
@@ -105,9 +100,17 @@ public class Paquete {
         this.estado = estado;
     }
 
+    public BigDecimal getImportePaquete() {
+        return importePaquete;
+    }
+
+    public void setImportePaquete(BigDecimal importePaquete) {
+        this.importePaquete = importePaquete;
+    }
+
     @Override
     public String toString() {
-        return  id_paquete + ", " + nombrePaquete;
+        return "Paquete{" + "id_paquete=" + id_paquete + ", nombrePaquete=" + nombrePaquete + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", alojamiento=" + alojamiento + ", pasaje=" + pasaje + ", estado=" + estado + ", importePaquete=" + importePaquete + '}';
     }
 
     

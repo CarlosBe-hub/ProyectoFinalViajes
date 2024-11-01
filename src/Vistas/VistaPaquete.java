@@ -26,12 +26,16 @@ import modelo.Pasaje;
  */
 public class VistaPaquete extends javax.swing.JInternalFrame {
 
+
     private CiudadData cd;
+    private PaqueteData pd;
+    private PasajeData ps;
+    private AlojamientoData ad;
     
 
-private static final BigDecimal PRECIO_AVION = new BigDecimal("100.00");
-private static final BigDecimal PRECIO_COLECTIVO = new BigDecimal("50.00");
-private static final BigDecimal PRECIO_TREN = new BigDecimal("75.00");
+private static final BigDecimal PRECIO_AVION = new BigDecimal("100000.65");
+private static final BigDecimal PRECIO_COLECTIVO = new BigDecimal("55000.36");
+private static final BigDecimal PRECIO_TREN = new BigDecimal("75000.00");
 //    private PasajeData pd;
 
     /**
@@ -99,7 +103,9 @@ private static final BigDecimal PRECIO_TREN = new BigDecimal("75.00");
         jBagregar = new javax.swing.JButton();
         jDfechadeinicio = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
-        jTimporteTotal = new javax.swing.JTextField();
+        jTimporteTransporte = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        ImporteTotalPaquete = new javax.swing.JTextField();
 
         jButton2.setText("jButton2");
 
@@ -162,7 +168,7 @@ private static final BigDecimal PRECIO_TREN = new BigDecimal("75.00");
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 580, 130, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 620, 130, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -211,14 +217,20 @@ private static final BigDecimal PRECIO_TREN = new BigDecimal("75.00");
                 jBagregarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, 130, -1));
+        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, 130, -1));
         jPanel1.add(jDfechadeinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 200, -1));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Importe de Transporte");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, -1, -1));
-        jPanel1.add(jTimporteTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 510, 150, -1));
+        jPanel1.add(jTimporteTransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 510, 150, -1));
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Importe del Paquete");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 560, 170, -1));
+        jPanel1.add(ImporteTotalPaquete, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 560, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -228,7 +240,7 @@ private static final BigDecimal PRECIO_TREN = new BigDecimal("75.00");
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
         );
 
         pack();
@@ -270,35 +282,44 @@ private static final BigDecimal PRECIO_TREN = new BigDecimal("75.00");
     }//GEN-LAST:event_jBbuscarActionPerformed
 
     private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
-        try {
-            Ciudad ciudadOrigen = new Ciudad();
-            Ciudad ciudadDestino = new Ciudad();
-            ciudadOrigen = cd.buscarCiudad("San Luis");
-            ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
-            
-            BigDecimal importe = new BigDecimal(jTimporteTotal.getText());
-            System.out.println(ciudadDestino.getId_ciudad() + " Importe: " + importe);
-            
-            Pasaje pasaje1 = new Pasaje(jCtransporte.getSelectedItem().toString(),importe,ciudadOrigen,ciudadDestino,true);
-            PasajeData pd = new PasajeData();
-            Pasaje pasaje2 = pd.guardarPasaje(pasaje1);
-            
-            
-            Alojamiento alojamiento = new Alojamiento();
-            AlojamientoData ad = new AlojamientoData();
-            int fila = jTable1.getSelectedRow();
-            Integer idAlojamiento = (Integer) jTable1.getValueAt(fila,0);
-            alojamiento = ad.buscarAlojamiento(idAlojamiento);
-            
-         
-            
-            Paquete paquete = new Paquete("Paquete Viaje",ciudadOrigen,ciudadDestino,alojamiento,pasaje2,true);
-            PaqueteData pdd = new PaqueteData();
-            pdd.AgregarPaquete(paquete);
-           
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Formato Invalido");
+                                                                                    
+    try {
+
+        Ciudad ciudadOrigen = cd.buscarCiudad(jCpaises.getSelectedItem().toString());
+        Ciudad ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
+
+
+        Alojamiento alojamiento = ad.buscarAlojamiento(Integer.parseInt(jtAlojamiento.getText()));
+
+
+        String tipoTransporte = jCtransporte.getSelectedItem().toString();
+        Pasaje pasaje = ps.buscarPasajePorTipoString(tipoTransporte);
+
+
+        if (ciudadOrigen == null || ciudadDestino == null || alojamiento == null || pasaje == null) {
+            JOptionPane.showMessageDialog(null, "Por favor, asegúrate de que todos los datos sean válidos.");
+            return;
         }
+
+        Paquete paquete = new Paquete();
+        paquete.setNombrePaquete("Paquete");
+        paquete.setCiudadOrigen(ciudadOrigen);
+        paquete.setCiudadDestino(ciudadDestino);
+        paquete.setAlojamiento(alojamiento);
+        paquete.setPasaje(pasaje);
+        paquete.setImportePaquete(new BigDecimal(ImporteTotalPaquete.getText()));
+
+
+        pd.AgregarPaquete(paquete);
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El importe del alojamiento debe ser un número válido.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Ocurrió un error ");
+    }
+
+
+
     }//GEN-LAST:event_jBagregarActionPerformed
 
     private void jCtransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtransporteActionPerformed
@@ -308,6 +329,7 @@ private static final BigDecimal PRECIO_TREN = new BigDecimal("75.00");
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ImporteTotalPaquete;
     private javax.swing.JButton jBagregar;
     private javax.swing.JButton jBbuscar;
     private javax.swing.JButton jButton1;
@@ -325,13 +347,14 @@ private static final BigDecimal PRECIO_TREN = new BigDecimal("75.00");
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTimporteTotal;
+    private javax.swing.JTextField jTimporteTransporte;
     private javax.swing.JTextField jtAlojamiento;
     // End of variables declaration//GEN-END:variables
 
@@ -434,19 +457,22 @@ private void cargarCombociudad() {
         
         if ("Avion".equals(tipoTransporte)) {
             precioTransporte = PRECIO_AVION;
+            jTimporteTransporte.setText(precioTransporte.toString());
         } else if ("Colectivo".equals(tipoTransporte)) {
             precioTransporte = PRECIO_COLECTIVO;
+            jTimporteTransporte.setText(precioTransporte.toString());
         } else if ("Tren".equals(tipoTransporte)) {
             precioTransporte = PRECIO_TREN;
+            jTimporteTransporte.setText(precioTransporte.toString());
         }
 
        
         BigDecimal total = importeAlojamiento.add(precioTransporte);
-        jTimporteTotal.setText(total.toString());
+        ImporteTotalPaquete.setText(total.toString());
     } catch (NumberFormatException e) {
-        jTimporteTotal.setText("0");
+        ImporteTotalPaquete.setText("0");
     }
-    }
+    }   
        
            
            

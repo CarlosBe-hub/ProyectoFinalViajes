@@ -90,6 +90,29 @@ public class PasajeData {
         return p;
     } 
    
+    
+    public Pasaje buscarPasajePorTipoString(String tipoTransporte) {
+    Pasaje p = null;
+    String sql = "SELECT * FROM pasaje WHERE tipo_Transporte = ? AND estado = 1"; 
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setString(1, tipoTransporte);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            p = new Pasaje();
+            CiudadData cd = new CiudadData();
+            Ciudad c = cd.buscarCiudadporid(rs.getInt("id_ciudadOrigen"));
+            p.setId_pasaje(rs.getInt("id_pasaje"));
+            p.setCiudadOrigen(c);
+            p.setImporte(rs.getBigDecimal("importe"));
+            p.setTipoTransporte(rs.getString("tipo_Transporte"));
+            p.setEstado(rs.getBoolean("estado"));
+        }
+    } catch (SQLException e) {
+        // Manejo de excepciones
+    }
+    return p;
+}
     public List<Pasaje> buscarPasajePorTipoTransporte(String tipoTransporte) {
     List<Pasaje> pasajes = new ArrayList<>();    
     

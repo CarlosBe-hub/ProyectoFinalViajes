@@ -27,7 +27,7 @@ public class PaqueteData {
     public PaqueteData() {
         red = conexion.getConexion();
     }
-
+/*
     public void AgregarPaquete(Paquete paquete) {
         String sql = "INSERT INTO paquete (nombre_paquete,id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje, estado) VALUES(?,?,?,?,?,?)";
         try {
@@ -38,6 +38,29 @@ public class PaqueteData {
             ps.setInt(4, paquete.getAlojamiento().getId_alojamiento());
             ps.setInt(5, paquete.getPasaje().getId_pasaje());
             ps.setBoolean(6, true);
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                paquete.setId_paquete(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Paquete Registrado");
+
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder AgregarPaquete");
+        }
+    }
+*/
+    public void AgregarPaquete(Paquete paquete) {
+        String sql = "INSERT INTO paquete (nombre_paquete,id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje, estado, importePaquete) VALUES(?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = red.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, paquete.getNombrePaquete());
+            ps.setInt(2, paquete.getCiudadOrigen().getId_ciudad());
+            ps.setInt(3, paquete.getCiudadDestino().getId_ciudad());
+            ps.setInt(4, paquete.getAlojamiento().getId_alojamiento());
+            ps.setInt(5, paquete.getPasaje().getId_pasaje());
+            ps.setBoolean(6, true);
+            ps.setBigDecimal(7, paquete.getImportePaquete());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
