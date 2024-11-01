@@ -8,15 +8,12 @@ import AccesoaDatos.AlojamientoData;
 import AccesoaDatos.CiudadData;
 import AccesoaDatos.PaqueteData;
 import AccesoaDatos.PasajeData;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.Ciudad;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import modelo.Alojamiento;
 import modelo.Paquete;
 import modelo.Pasaje;
@@ -36,36 +33,21 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private static final double PRECIO_COLECTIVO = 55000.36;
     private static final double PRECIO_TREN = 75000.00;
 
-//    private PasajeData pd;
     /**
      * Creates new form Paquete
      */
     public VistaPaquete() {
         initComponents();
         cd = new CiudadData();
-//        pd = new PasajeData();
+        ad = new AlojamientoData();
+        ps = new PasajeData();
+        pd = new PaqueteData();
 
         cargarCombociudad();
         armarCabecera();
         cargarCombopaises();
         cargarComboprovincias();
 
-//        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//            @Override
-//            public void valueChanged(ListSelectionEvent e) {
-//
-//                if (!e.getValueIsAdjusting()) {
-//                    int filaSeleccionada = jTable1.getSelectedRow();
-//                    if (filaSeleccionada != -1) {
-//
-//                       double importe = (double) jTable1.getValueAt(filaSeleccionada, 5);
-//                        jtAlojamiento.setText(String.valueOf(importe));
-//                    }
-//                }
-//            }
-//        });
-
-//        cargarTabla();
     }
     private DefaultTableModel modelo = new DefaultTableModel();
 
@@ -289,26 +271,43 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
     private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
 
-        try {
-         
-            Ciudad ciudadOrigen = cd.buscarCiudad(jCpaises.getSelectedItem().toString());
-            Ciudad ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
+         try {
+        Ciudad ciudadOrigen = cd.buscarCiudad(jCpaises.getSelectedItem().toString());
+        Ciudad ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
 
-            Alojamiento alojamiento = ad.buscarAlojamiento(Integer.parseInt(jtAlojamiento.getText()));
+        Alojamiento alojamiento = ad.buscarAlojamientoPorImporte(Double.parseDouble(jtAlojamiento.getText()));
 
-            String tipoTransporte = jCtransporte.getSelectedItem().toString();
-            Pasaje pasaje = ps.buscarPasajePorTipoString(tipoTransporte);
+        String tipoTransporte = jCtransporte.getSelectedItem().toString();
+        Pasaje pasaje = ps.buscarPasajePorTipoString(tipoTransporte);
+
+      
+        if (pasaje == null) {
+            pasaje = new Pasaje();
+            pasaje.setTipoTransporte(tipoTransporte);
+            pasaje.setImporte(Double.parseDouble(jTimporteTransporte.getText())); 
+            pasaje.setCiudadOrigen(ciudadOrigen);
+            pasaje.setCiudadDestino(ciudadDestino);
+            pasaje.setEstado(true);
 
             
+            pasaje = ps.guardarPasaje(pasaje);
+        }
+
+
+            System.out.println("Ciudad Origen: " + ciudadOrigen);
+            System.out.println("Ciudad Destino: " + ciudadDestino);
+            System.out.println("Alojamiento: " + alojamiento);
+            System.out.println("Pasaje: " + pasaje);
+            
+            
+
             if (ciudadOrigen == null || ciudadDestino == null || alojamiento == null || pasaje == null) {
                 JOptionPane.showMessageDialog(null, "Por favor, asegúrate de que todos los datos sean válidos.");
                 return;
             }
 
-           
             String importeTexto = ImporteTotalPaquete.getText().trim();
 
-            
             if (importeTexto.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "El importe total del paquete no puede estar vacío.");
                 return;
@@ -322,7 +321,6 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 return;
             }
 
-         
             Paquete paquete = new Paquete();
             paquete.setNombrePaquete("Paquete");
             paquete.setCiudadOrigen(ciudadOrigen);
@@ -331,7 +329,6 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
             paquete.setPasaje(pasaje);
             paquete.setImportePaquete(importePaquete);
 
-      
             pd.AgregarPaquete(paquete);
             JOptionPane.showMessageDialog(null, "Paquete agregado exitosamente.");
 
@@ -340,27 +337,27 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrió un error: " + e.getMessage());
         }
-    
+
 
     }//GEN-LAST:event_jBagregarActionPerformed
 
     private void jCtransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtransporteActionPerformed
         // TODO add your handling code here:
+        cargarImporteTransporte();
         calcularImporteTotal();
     }//GEN-LAST:event_jCtransporteActionPerformed
 
     private void jBcargarimporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcargarimporteActionPerformed
-        
-    if (jTable1.getRowCount() > 0) {
-        
-        
-        double importe = (double) jTable1.getValueAt(0, 5);  
-        
-        // Muestra el importe en el campo de texto
-        jtAlojamiento.setText(String.valueOf(importe));
-    } else {
-        JOptionPane.showMessageDialog(this, "La tabla está vacía. No hay datos de importe para cargar.");
-    }
+
+        if (jTable1.getRowCount() > 0) {
+
+            double importe = (double) jTable1.getValueAt(0, 5);
+
+            // Muestra el importe en el campo de texto
+            jtAlojamiento.setText(String.valueOf(importe));
+        } else {
+            JOptionPane.showMessageDialog(this, "La tabla está vacía. No hay datos de importe para cargar.");
+        }
 
     }//GEN-LAST:event_jBcargarimporteActionPerformed
 
@@ -478,11 +475,12 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
     }
 
-    private void calcularImporteTotal() {
-      double precioTransporte;
+    private void cargarImporteTransporte() {
+        double precioTransporte;
         String tipoTransporte = (String) jCtransporte.getSelectedItem();
+
         switch (tipoTransporte) {
-            case "Avión":
+            case "Avion":
                 precioTransporte = PRECIO_AVION;
                 break;
             case "Colectivo":
@@ -496,9 +494,20 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 break;
         }
 
+        jTimporteTransporte.setText(String.valueOf(precioTransporte));
+    }
+
+    private void calcularImporteTotal() {
+        double precioTransporte;
         double importeAlojamiento = 0.0;
 
-       
+        try {
+            precioTransporte = Double.parseDouble(jTimporteTransporte.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El importe del transporte no es un número válido.");
+            return;
+        }
+
         String alojamientoText = jtAlojamiento.getText();
         if (!alojamientoText.isEmpty()) {
             try {
@@ -511,6 +520,6 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
         double importeTotal = precioTransporte + importeAlojamiento;
         ImporteTotalPaquete.setText(String.valueOf(importeTotal));
-    }
 
+    }
 }

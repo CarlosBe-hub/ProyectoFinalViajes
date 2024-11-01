@@ -302,5 +302,52 @@ public class AlojamientoData {
     }
     return listasdeAlojamiento;
 }   
+ 
+ public Alojamiento buscarAlojamientoPorImporte(double importeDiario) {
+    String sql = "SELECT id_alojamiento, Fecha_inicio, fecha_fin, estado, servicio, importe_diario, id_ciudadDestino, tipo_lojamiento FROM alojamiento WHERE importe_diario = ?";
+    Alojamiento a = null;
+
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setDouble(1, importeDiario);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            a = new Alojamiento();
+
+           
+            CiudadData ciudadData = new CiudadData();
+            Ciudad ciudadDestino = ciudadData.buscarCiudadporid(rs.getInt("id_ciudadDestino"));
+
+            
+            a.setId_alojamiento(rs.getInt("id_alojamiento"));
+            
+            if (rs.getDate("Fecha_inicio") != null) {
+                a.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
+            } else {
+                a.setFechaInicio(null);
+            }
+
+            if (rs.getDate("fecha_fin") != null) {
+                a.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+            } else {
+                a.setFechaFin(null);
+            }
+
+            a.setEstado(rs.getBoolean("estado"));
+            a.setServicio(rs.getString("servicio"));
+            a.setImporteDiario(rs.getDouble("importe_diario"));
+            a.setCiudadDestino(ciudadDestino);
+            a.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
+            
+            JOptionPane.showMessageDialog(null, "Alojamiento encontrado con el importe especificado.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró ningún alojamiento con el importe especificado.");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al buscar alojamiento: " + e.getMessage());
+    }
+    return a;
+}
 }
 
