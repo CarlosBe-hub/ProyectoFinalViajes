@@ -35,7 +35,7 @@ public class AlojamientoData {
             ps.setDate(2, Date.valueOf(alojamiento.getFechaFin()));
             ps.setBoolean(3, alojamiento.isEstado());
             ps.setString(4, alojamiento.getServicio());
-            ps.setBigDecimal(5, alojamiento.getImporteDiario());
+            ps.setDouble(5, alojamiento.getImporteDiario());
             ps.setInt(6, alojamiento.getCiudadDestino().getId_ciudad());
             ps.setString(7, alojamiento.getTipoAlojamiento());
             ps.executeUpdate();
@@ -60,7 +60,7 @@ public class AlojamientoData {
             ps.setDate(2, Date.valueOf(alojamiento.getFechaFin()));
             ps.setBoolean(3, alojamiento.isEstado());
             ps.setString(4, alojamiento.getServicio());
-            ps.setBigDecimal(5, alojamiento.getImporteDiario());
+            ps.setDouble(5, alojamiento.getImporteDiario());
             ps.setString(6, alojamiento.getTipoAlojamiento());
             ps.setInt(7, alojamiento.getId_alojamiento());
 
@@ -202,7 +202,7 @@ public class AlojamientoData {
 
                 a.setEstado(rs.getBoolean("estado"));
                 a.setServicio(rs.getString("servicio"));
-                a.setImporteDiario(rs.getBigDecimal("importe_diario"));
+                a.setImporteDiario(rs.getDouble("importe_diario"));
                 a.setCiudadDestino(ciudad);
                 a.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
 
@@ -238,7 +238,7 @@ public class AlojamientoData {
             aloja.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
             aloja.setEstado(true);  // Esto siempre es true según el filtro de la consulta
             aloja.setServicio(rs.getString("servicio"));
-            aloja.setImporteDiario(rs.getBigDecimal("importe_diario"));
+            aloja.setImporteDiario(rs.getDouble("importe_diario"));
             aloja.setCiudadDestino(c);
             aloja.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
 
@@ -260,7 +260,7 @@ public class AlojamientoData {
         ps.setDate(2, Date.valueOf(alojamiento.getFechaFin()));
         ps.setBoolean(3, alojamiento.isEstado());
         ps.setString(4, alojamiento.getServicio());
-        ps.setBigDecimal(5, alojamiento.getImporteDiario());
+        ps.setDouble(5, alojamiento.getImporteDiario());
         ps.setString(6, alojamiento.getTipoAlojamiento());
         ps.setInt(7, id);
 
@@ -292,7 +292,7 @@ public class AlojamientoData {
             aloja.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
             aloja.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
             aloja.setServicio(rs.getString("servicio"));
-            aloja.setImporteDiario(rs.getBigDecimal("importe_diario"));
+            aloja.setImporteDiario(rs.getDouble("importe_diario"));
             aloja.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
             aloja.setEstado(true);
             listasdeAlojamiento.add(aloja);

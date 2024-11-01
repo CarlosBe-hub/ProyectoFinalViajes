@@ -213,22 +213,19 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
-        try {
+         try {
             LocalDate fechaIng = jdIngreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate fechaSalida = jdSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             boolean estado = jrbActivo.isSelected();
             String tipoServicio = jcbServicio.getSelectedItem().toString();
             String importe = jtImporte.getText().replace(",", ".").trim();
-            BigDecimal importeDiario = new BigDecimal(importe);
+            double importeDiario = Double.parseDouble(importe);
             String ciudadDestino = jcbCiudades.getSelectedItem().toString();
             Ciudad ciudad1 = cd.buscarCiudad(ciudadDestino);
-
             String tipoAlojamiento = jcbTipoAlojamiento.getSelectedItem().toString();
 
             if (fechaSalida.isAfter(fechaIng)) {
-
                 ad.calculodeVacaciones(fechaIng, fechaSalida);
-
                 Alojamiento alojamiento2 = new Alojamiento(fechaIng, fechaSalida, estado, tipoServicio, importeDiario, ciudad1, tipoAlojamiento);
                 ad.guardarAlojamiento(alojamiento2);
             } else {
@@ -237,8 +234,61 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
         } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(this, "Campos vacios y/o Formato no valido");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error en el formato del importe diario");
         }
+    }                                         
 
+    private void calcularImportePorServicio() {
+        try {
+            LocalDate fechaIngreso = jdIngreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaSalida = jdSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            if (fechaSalida.isBefore(fechaIngreso)) {
+                JOptionPane.showMessageDialog(this, "Fecha de salida incorrecta");
+                return;
+            }
+
+            double importeBase = Double.parseDouble(jtImporte.getText()); 
+            double ajusteServicio = 1.0;
+            String tipoServicio = jcbServicio.getSelectedItem().toString();
+
+            // Ajuste por tipo de servicio
+            switch (tipoServicio) {
+                case "Desayuno":
+                    ajusteServicio = 1.02;
+                    break;
+                case "Media Pensión":
+                    ajusteServicio = 1.05;
+                    break;
+                case "Pensión Completa":
+                    ajusteServicio = 1.10;
+                    break;
+                default:
+                    ajusteServicio = 1.0;
+                    break;
+            }
+
+            // Ajuste por temporada
+            String temporada = ad.calculodeTemporada(fechaIngreso);
+            double ajusteTemporada = 1.0;
+
+            if ("temporada Alta".equals(temporada)) {
+                ajusteTemporada = 1.30;
+            } else if ("temporada Media".equals(temporada)) {
+                ajusteTemporada = 1.15;
+            } 
+
+            double importeTotal = importeBase * ajusteServicio * ajusteTemporada;
+
+            jtImporte.setText(String.format("%.2f", importeTotal));
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error en el formato del importe base");
+        } catch (NullPointerException np) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese las fechas de ingreso y salida");
+        }
+    
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -357,60 +407,5 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
     }
 
-    private void calcularImportePorServicio() {
 
-        try {
-            LocalDate fechaIngreso = jdIngreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate fechaSalida = jdSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-            if (fechaSalida.isBefore(fechaIngreso)) {
-                JOptionPane.showMessageDialog(this, "Fecha de salida incorrecta");
-                return;
-            }
-
-            BigDecimal importeBase = new BigDecimal(jtImporte.getText()); 
-            BigDecimal ajusteServicio = BigDecimal.ONE;
-            String tipoServicio = jcbServicio.getSelectedItem().toString();
-
-            // Ajuste por tipo de servicio
-           switch (tipoServicio) {
-           case "Desayuno":
-              ajusteServicio = new BigDecimal("1.02");
-            break;
-           case "Media Pensión":
-                ajusteServicio = new BigDecimal("1.05");
-                break;
-            case "Pensión Completa":
-                ajusteServicio = new BigDecimal("1.10");
-                break;
-            default:
-                ajusteServicio = BigDecimal.ONE;
-                break;
-        }
-
-            // Ajuste por temporada
-            String temporada = ad.calculodeTemporada(fechaIngreso);
-            BigDecimal ajusteTemporada = BigDecimal.ONE;
-
-            if ("temporada Alta".equals(temporada)) {
-                ajusteTemporada = new BigDecimal("1.30"); 
-
-            } else if ("temporada Media".equals(temporada)) {
-
-                ajusteTemporada = new BigDecimal ("1.15"); 
-            } else {
-
-                ajusteTemporada = BigDecimal.ONE;
-            }
-
-            BigDecimal importeTotal = importeBase.multiply(ajusteServicio).multiply(ajusteTemporada);
-
-            jtImporte.setText(importeTotal.setScale(2,RoundingMode.HALF_UP).toString());
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error en el formato del importe base");
-        } catch (NullPointerException np) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese las fechas de ingreso y salida");
-        }
-    }
 }

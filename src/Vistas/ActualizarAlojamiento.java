@@ -6,14 +6,13 @@ package Vistas;
 
 import AccesoaDatos.AlojamientoData;
 import AccesoaDatos.PaqueteData;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Alojamiento;
-import modelo.Paquete;
+
 
 /**
  *
@@ -275,7 +274,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
             }
         }
 
-        jtfImporte.setText(alojamiento.getImporteDiario().toString());
+        jtfImporte.setText(String .valueOf(alojamiento.getImporteDiario()));
         jrbEstado.setSelected(alojamiento.isEstado());
     } else {
         JOptionPane.showMessageDialog(this, "Alojamiento no encontrado.");
@@ -319,7 +318,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     alojamiento.setFechaFin(fechaFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     alojamiento.setTipoAlojamiento((String) jcTAlojamiento.getSelectedItem());
     alojamiento.setServicio((String) jcServicio.getSelectedItem());
-    alojamiento.setImporteDiario(new BigDecimal(jtfImporte.getText()));
+    alojamiento.setImporteDiario(Double.parseDouble(jtfImporte.getText()));
     alojamiento.setEstado(jrbEstado.isSelected());
 
    

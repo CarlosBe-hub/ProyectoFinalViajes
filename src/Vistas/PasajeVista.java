@@ -259,42 +259,38 @@ public class PasajeVista extends javax.swing.JInternalFrame {
 
     private void jBmodificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificar1ActionPerformed
       int filaSeleccionada = jTpasaje.getSelectedRow();
+
+if (filaSeleccionada == -1) {
+    JOptionPane.showMessageDialog(null, "Seleccione un pasaje para modificar.");
+    return;
+}
+
+try {
+    int idPasaje = Integer.parseInt(jTidpasaje.getText());
+    double importe = Double.parseDouble(jTimporte.getText());
+    String tipoTransporte = jCtransportes.getSelectedItem().toString();
     
-    if (filaSeleccionada == -1) {
-        JOptionPane.showMessageDialog(null, "Seleccione un pasaje para modificar.");
+    if (tipoTransporte.equals("---Seleccionar---")) {
+        JOptionPane.showMessageDialog(null, "Seleccione un tipo de transporte válido.");
         return;
     }
     
-    try {
-        int idPasaje = Integer.parseInt(jTidpasaje.getText());
-        BigDecimal importe = new BigDecimal(jTimporte.getText());
-        String tipoTransporte = jCtransportes.getSelectedItem().toString();
+    Pasaje pasaje = new Pasaje();
+    pasaje.setId_pasaje(idPasaje);
+    pasaje.setImporte(importe);
+    pasaje.setTipoTransporte(tipoTransporte);
+    
+    if (pd.modificarPasaje(idPasaje, pasaje)) { 
+        JOptionPane.showMessageDialog(null, "El pasaje se modificó con éxito.");
         
-        if (tipoTransporte.equals("---Seleccionar---")) {
-            JOptionPane.showMessageDialog(null, "Seleccione un tipo de transporte válido.");
-            return;
-        }
-        
-        
-        Pasaje pasaje = new Pasaje();
-        pasaje.setId_pasaje(idPasaje);
-        pasaje.setImporte(importe);
-        pasaje.setTipoTransporte(tipoTransporte);
-        
-        
-        if (pd.modificarPasaje(idPasaje, pasaje)) { 
-            JOptionPane.showMessageDialog(null, "El pasaje se modificó con éxito.");
-            
-            
-            modelo.setValueAt(importe, filaSeleccionada, 3);
-            modelo.setValueAt(tipoTransporte, filaSeleccionada, 4);
-        } else {
-            JOptionPane.showMessageDialog(null, "No se pudo modificar el pasaje.");
-        }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Por favor, ingrese valores numéricos válidos para el ID y el importe.");
+        modelo.setValueAt(importe, filaSeleccionada, 3);
+        modelo.setValueAt(tipoTransporte, filaSeleccionada, 4);
+    } else {
+        JOptionPane.showMessageDialog(null, "No se pudo modificar el pasaje.");
     }
-
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(null, "Por favor, ingrese valores numéricos válidos para el ID y el importe.");
+}
     }//GEN-LAST:event_jBmodificar1ActionPerformed
 
 

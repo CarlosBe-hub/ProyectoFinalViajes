@@ -18,9 +18,9 @@ public class Paquete {
   private Alojamiento alojamiento;
   private Pasaje pasaje;
   private boolean estado;
-  private BigDecimal importePaquete;
+  private double importePaquete;
 
-    public Paquete(int id_paquete, String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, BigDecimal importePaquete) {
+    public Paquete(int id_paquete, String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, double importePaquete) {
         this.id_paquete = id_paquete;
         this.nombrePaquete = nombrePaquete;
         this.ciudadOrigen = ciudadOrigen;
@@ -31,7 +31,7 @@ public class Paquete {
         this.importePaquete = importePaquete;
     }
 
-    public Paquete(String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, BigDecimal importePaquete) {
+    public Paquete(String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, double importePaquete) {
         this.nombrePaquete = nombrePaquete;
         this.ciudadOrigen = ciudadOrigen;
         this.ciudadDestino = ciudadDestino;
@@ -100,11 +100,11 @@ public class Paquete {
         this.estado = estado;
     }
 
-    public BigDecimal getImportePaquete() {
+    public double getImportePaquete() {
         return importePaquete;
     }
 
-    public void setImportePaquete(BigDecimal importePaquete) {
+    public void setImportePaquete(double importePaquete) {
         this.importePaquete = importePaquete;
     }
 
@@ -112,6 +112,8 @@ public class Paquete {
     public String toString() {
         return "Paquete{" + "id_paquete=" + id_paquete + ", nombrePaquete=" + nombrePaquete + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", alojamiento=" + alojamiento + ", pasaje=" + pasaje + ", estado=" + estado + ", importePaquete=" + importePaquete + '}';
     }
+
+   
 
     
   

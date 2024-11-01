@@ -13,12 +13,12 @@ import java.math.BigDecimal;
 public class Pasaje {
     private int id_pasaje;
     private String tipoTransporte;
-    private BigDecimal importe;
+    private double importe;
     private Ciudad ciudadOrigen;
     private Ciudad ciudadDestino;
     private boolean estado;
 
-    public Pasaje(int id_pasaje, String tipoTransporte, BigDecimal importe, Ciudad ciudadOrigen, Ciudad ciudadDestino, boolean estado) {
+    public Pasaje(int id_pasaje, String tipoTransporte, double importe, Ciudad ciudadOrigen, Ciudad ciudadDestino, boolean estado) {
         this.id_pasaje = id_pasaje;
         this.tipoTransporte = tipoTransporte;
         this.importe = importe;
@@ -27,7 +27,7 @@ public class Pasaje {
         this.estado = estado;
     }
 
-    public Pasaje(String tipoTransporte, BigDecimal importe, Ciudad ciudadOrigen, Ciudad ciudadDestino, boolean estado) {
+    public Pasaje(String tipoTransporte, double importe, Ciudad ciudadOrigen, Ciudad ciudadDestino, boolean estado) {
         this.tipoTransporte = tipoTransporte;
         this.importe = importe;
         this.ciudadOrigen = ciudadOrigen;
@@ -54,11 +54,11 @@ public class Pasaje {
         this.tipoTransporte = tipoTransporte;
     }
 
-    public BigDecimal getImporte() {
+    public double getImporte() {
         return importe;
     }
 
-    public void setImporte(BigDecimal importe) {
+    public void setImporte(double importe) {
         this.importe = importe;
     }
 
@@ -91,5 +91,6 @@ public class Pasaje {
         return "Pasaje{" + "id_pasaje=" + id_pasaje + ", tipoTransporte=" + tipoTransporte + ", importe=" + importe + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", estado=" + estado + '}';
     }
 
+   
     
 }
