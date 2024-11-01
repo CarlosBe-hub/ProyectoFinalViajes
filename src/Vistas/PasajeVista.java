@@ -5,6 +5,7 @@
 package Vistas;
 
 import AccesoaDatos.PasajeData;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -266,7 +267,7 @@ public class PasajeVista extends javax.swing.JInternalFrame {
     
     try {
         int idPasaje = Integer.parseInt(jTidpasaje.getText());
-        double importe = Double.parseDouble(jTimporte.getText());
+        BigDecimal importe = new BigDecimal(jTimporte.getText());
         String tipoTransporte = jCtransportes.getSelectedItem().toString();
         
         if (tipoTransporte.equals("---Seleccionar---")) {

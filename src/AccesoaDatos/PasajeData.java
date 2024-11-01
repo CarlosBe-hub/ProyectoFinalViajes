@@ -31,7 +31,7 @@ public class PasajeData {
         try {
             PreparedStatement ps = red.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pasaje.getTipoTransporte());
-            ps.setDouble(2, pasaje.getImporte());
+            ps.setBigDecimal(2, pasaje.getImporte());
             ps.setInt(3, pasaje.getCiudadOrigen().getId_ciudad());
             ps.setInt(4, pasaje.getCiudadDestino().getId_ciudad());
             ps.setBoolean(5, pasaje.isEstado());
@@ -79,7 +79,7 @@ public class PasajeData {
               p.setId_pasaje(id);
               
               p.setCiudadOrigen(c);
-              p.setImporte(rs.getDouble("importe"));
+              p.setImporte(rs.getBigDecimal("importe"));
               p.setTipoTransporte(rs.getString("tipo_Transporte"));
               p.setEstado(rs.getBoolean("estado"));
               
@@ -112,7 +112,7 @@ public class PasajeData {
             p.setId_pasaje(rs.getInt("id_pasaje"));
             p.setCiudadOrigen(cOrigen);
             p.setCiudadDestino(cDestino);
-            p.setImporte(rs.getDouble("importe"));
+            p.setImporte(rs.getBigDecimal("importe"));
             p.setTipoTransporte(rs.getString("tipo_Transporte"));
             p.setEstado(rs.getBoolean("estado"));
             
@@ -149,7 +149,7 @@ public class PasajeData {
     try {
         PreparedStatement ps = red.prepareStatement(sql);
         ps.setString(1, pasaje.getTipoTransporte());
-        ps.setDouble(2, pasaje.getImporte());
+        ps.setBigDecimal(2, pasaje.getImporte());
         ps.setBoolean(3, pasaje.isEstado());
         ps.setInt(4, id);
         

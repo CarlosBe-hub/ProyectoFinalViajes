@@ -8,12 +8,15 @@ import AccesoaDatos.AlojamientoData;
 import AccesoaDatos.CiudadData;
 import AccesoaDatos.PaqueteData;
 import AccesoaDatos.PasajeData;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.Ciudad;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import modelo.Alojamiento;
 import modelo.Paquete;
 import modelo.Pasaje;
@@ -24,6 +27,11 @@ import modelo.Pasaje;
 public class VistaPaquete extends javax.swing.JInternalFrame {
 
     private CiudadData cd;
+    
+
+private static final BigDecimal PRECIO_AVION = new BigDecimal("100.00");
+private static final BigDecimal PRECIO_COLECTIVO = new BigDecimal("50.00");
+private static final BigDecimal PRECIO_TREN = new BigDecimal("75.00");
 //    private PasajeData pd;
 
     /**
@@ -38,6 +46,22 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         armarCabecera();
         cargarCombopaises();
         cargarComboprovincias();
+        
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+
+                if (!e.getValueIsAdjusting()) {
+                    int filaSeleccionada = jTable1.getSelectedRow();
+                    if (filaSeleccionada != -1) {
+
+                        BigDecimal importe = (BigDecimal) jTable1.getValueAt(filaSeleccionada, 5);
+                        jtAlojamiento.setText(importe.toString());
+                    }
+                }
+            }
+        });
+
 //        cargarTabla();
     }
     private DefaultTableModel modelo = new DefaultTableModel();
@@ -70,10 +94,12 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jCpaises = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jTimporte = new javax.swing.JTextField();
+        jtAlojamiento = new javax.swing.JTextField();
         jBbuscar = new javax.swing.JButton();
         jBagregar = new javax.swing.JButton();
         jDfechadeinicio = new com.toedter.calendar.JDateChooser();
+        jLabel8 = new javax.swing.JLabel();
+        jTimporteTotal = new javax.swing.JTextField();
 
         jButton2.setText("jButton2");
 
@@ -109,7 +135,12 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jPanel1.add(jCprovincias, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 160, -1));
 
         jCtransporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Avion", "Colectivo", "Tren" }));
-        jPanel1.add(jCtransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 480, 160, -1));
+        jCtransporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCtransporteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jCtransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 470, 160, -1));
 
         jCciudades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +153,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Importe");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, -1, -1));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 242, 580, 0));
 
         jButton1.setText("SALIR");
@@ -131,7 +162,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 530, 130, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 580, 130, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,8 +194,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Tipo de Transporte");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
-        jPanel1.add(jTimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 160, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, -1, -1));
+        jPanel1.add(jtAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, 160, -1));
 
         jBbuscar.setText("BUSCAR");
         jBbuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -180,8 +211,14 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jBagregarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 130, -1));
+        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, 130, -1));
         jPanel1.add(jDfechadeinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 200, -1));
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Importe de Transporte");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, -1, -1));
+        jPanel1.add(jTimporteTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 510, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,7 +228,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
         );
 
         pack();
@@ -238,10 +275,11 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
             Ciudad ciudadDestino = new Ciudad();
             ciudadOrigen = cd.buscarCiudad("San Luis");
             ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
-            System.out.println(ciudadDestino.getId_ciudad()+"Importe"+ Double.parseDouble(jTimporte.getText()));
             
+            BigDecimal importe = new BigDecimal(jTimporteTotal.getText());
+            System.out.println(ciudadDestino.getId_ciudad() + " Importe: " + importe);
             
-            Pasaje pasaje1 = new Pasaje(jCtransporte.getSelectedItem().toString(),Double.parseDouble(jTimporte.getText()),ciudadOrigen,ciudadDestino,true);
+            Pasaje pasaje1 = new Pasaje(jCtransporte.getSelectedItem().toString(),importe,ciudadOrigen,ciudadDestino,true);
             PasajeData pd = new PasajeData();
             Pasaje pasaje2 = pd.guardarPasaje(pasaje1);
             
@@ -263,6 +301,11 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBagregarActionPerformed
 
+    private void jCtransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtransporteActionPerformed
+        // TODO add your handling code here:
+        calcularImporteTotal();
+    }//GEN-LAST:event_jCtransporteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBagregar;
@@ -281,13 +324,15 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTimporte;
+    private javax.swing.JTextField jTimporteTotal;
+    private javax.swing.JTextField jtAlojamiento;
     // End of variables declaration//GEN-END:variables
 
     public void cargarCombopaises() {
@@ -379,7 +424,30 @@ private void cargarCombociudad() {
    }
 
            
-           
+    private void calcularImporteTotal() {
+    try {
+
+        BigDecimal importeAlojamiento = new BigDecimal(jtAlojamiento.getText().isEmpty() ? "0" : jtAlojamiento.getText());
+        
+        BigDecimal precioTransporte = BigDecimal.ZERO;
+        String tipoTransporte = (String) jCtransporte.getSelectedItem();
+        
+        if ("Avion".equals(tipoTransporte)) {
+            precioTransporte = PRECIO_AVION;
+        } else if ("Colectivo".equals(tipoTransporte)) {
+            precioTransporte = PRECIO_COLECTIVO;
+        } else if ("Tren".equals(tipoTransporte)) {
+            precioTransporte = PRECIO_TREN;
+        }
+
+       
+        BigDecimal total = importeAlojamiento.add(precioTransporte);
+        jTimporteTotal.setText(total.toString());
+    } catch (NumberFormatException e) {
+        jTimporteTotal.setText("0");
+    }
+    }
+       
            
            
              
