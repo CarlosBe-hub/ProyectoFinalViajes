@@ -225,62 +225,62 @@
         }
 
          public List<Paquete> listarPaquetePorFechaSalida(LocalDate fechaActual) {
-            String sql = "SELECT * "
-                    + "FROM paquete p "
-                    + "INNER JOIN ciudad co ON p.id_ciudadOrigen = co.id_ciudad "
-                    + "INNER JOIN alojamiento a ON p.id_alojamiento = a.id_alojamiento "
-                    + "INNER JOIN pasaje pa ON p.id_pasaje = pa.id_pasaje "
-                    + "INNER JOIN ciudad cd ON p.id_ciudadDestino = cd.id_ciudad "
-                    + "WHERE a.fecha_fin < ? ";
+    String sql = "SELECT * "
+            + "FROM paquete p "
+            + "INNER JOIN ciudad co ON p.id_ciudadOrigen = co.id_ciudad "
+            + "INNER JOIN alojamiento a ON p.id_alojamiento = a.id_alojamiento "
+            + "INNER JOIN pasaje pa ON p.id_pasaje = pa.id_pasaje "
+            + "INNER JOIN ciudad cd ON p.id_ciudadDestino = cd.id_ciudad "
+            + "WHERE a.fecha_inicio = ?";
 
+    List<Paquete> paquetes = new ArrayList<>();
 
-            ArrayList<Paquete> paquete1 = new ArrayList<>();
-            try {
-                PreparedStatement ps = red.prepareStatement(sql);
-                ps.setDate(1, Date.valueOf(fechaActual));
-                ResultSet rs = ps.executeQuery();
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setDate(1, Date.valueOf(fechaActual));
+        ResultSet rs = ps.executeQuery();
 
-                while (rs.next()) {                
-                    Paquete p = new Paquete();
-                    Alojamiento alojamientos = new Alojamiento();
-                    AlojamientoData ad = new AlojamientoData();
-                    PasajeData pd = new PasajeData();
-                    Pasaje pasajes = new Pasaje();
-                    Ciudad ciudadO = new Ciudad();
-                    Ciudad ciudadD = new Ciudad();
+        while (rs.next()) {
+            Paquete p = new Paquete();
+            Alojamiento alojamiento = new Alojamiento();
+            AlojamientoData ad = new AlojamientoData();
+            PasajeData pd = new PasajeData();
+            Pasaje pasaje = new Pasaje();
+            Ciudad ciudadO = new Ciudad();
+            Ciudad ciudadD = new Ciudad();
 
-                    ciudadO.setId_ciudad(rs.getInt("id_ciudadOrigen"));
-                    ciudadO.setNombre(rs.getString("co.nombre"));
-                    ciudadO.setPais(rs.getString("co.pais"));
-                    ciudadO.setProvincia(rs.getString("co.provincia"));
-                    ciudadO.setEstado(rs.getBoolean("co.estado"));
+            ciudadO.setId_ciudad(rs.getInt("id_ciudadOrigen"));
+            ciudadO.setNombre(rs.getString("co.nombre"));
+            ciudadO.setPais(rs.getString("co.pais"));
+            ciudadO.setProvincia(rs.getString("co.provincia"));
+            ciudadO.setEstado(rs.getBoolean("co.estado"));
 
-                    ciudadD.setId_ciudad(rs.getInt("id_ciudadDestino"));
-                    ciudadD.setNombre(rs.getString("cd.nombre"));
-                    ciudadD.setPais(rs.getString("cd.pais"));
-                    ciudadD.setProvincia(rs.getString("cd.provincia"));
-                    ciudadD.setEstado(rs.getBoolean("cd.estado"));
+            ciudadD.setId_ciudad(rs.getInt("id_ciudadDestino"));
+            ciudadD.setNombre(rs.getString("cd.nombre"));
+            ciudadD.setPais(rs.getString("cd.pais"));
+            ciudadD.setProvincia(rs.getString("cd.provincia"));
+            ciudadD.setEstado(rs.getBoolean("cd.estado"));
 
-                    alojamientos = ad.buscarAlojamiento(rs.getInt("id_alojamiento"));
+            alojamiento = ad.buscarAlojamiento(rs.getInt("id_alojamiento"));
+            p.setAlojamiento(alojamiento);
+            p.setCiudadOrigen(ciudadO);
+            p.setCiudadDestino(ciudadD);
 
-                    p.setAlojamiento(alojamientos);
-                    p.setCiudadOrigen(ciudadO);
-                    p.setCiudadDestino(ciudadD);
+            pasaje = pd.buscarPasaje(rs.getInt("id_pasaje"));
+            p.setPasaje(pasaje);
 
-                    pasajes = pd.buscarPasaje(rs.getInt("id_pasaje"));
-                    p.setPasaje(pasajes);
+            p.setId_paquete(rs.getInt("id_paquete"));
 
-                    p.setId_paquete(rs.getInt("id_paquete"));
+            paquetes.add(p);
+        }
 
-                    paquete1.add(p);
+        JOptionPane.showMessageDialog(null, "Lista encontrada con " + paquetes.size() + " paquetes.");
 
-                    JOptionPane.showMessageDialog(null, "lista encontrada");
-                }
-
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "no se pudo acceder a la tabla paquete");
-            }
-            return paquete1;
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla paquete.");
+    }
+    return paquetes;
+}
         }
     //     public void AgregarPaqueteC(Paquete paquete) {
     //        String sql = "INSERT INTO paquete (id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje) VALUES(?,?,?,?)";
@@ -302,4 +302,4 @@
     //        }
     //    }
 
-    }
+    
