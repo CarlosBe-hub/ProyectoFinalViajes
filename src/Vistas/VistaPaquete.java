@@ -322,16 +322,16 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
     private void jBcargarimporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcargarimporteActionPerformed
 
-        if (jTable1.getRowCount() > 0) {
+   int filaSeleccionada = jTable1.getSelectedRow();
 
-            double importe = (double) jTable1.getValueAt(0, 5);
+    if (filaSeleccionada != -1) { // Verifica si hay una fila seleccionada
+        double importe = (double) jTable1.getValueAt(filaSeleccionada, 5);
 
-            // Muestra el importe en el campo de texto
-            jtAlojamiento.setText(String.valueOf(importe));
-        } else {
-            JOptionPane.showMessageDialog(this, "La tabla está vacía. No hay datos de importe para cargar.");
-        }
-
+        // Muestra el importe en el campo de texto
+        jtAlojamiento.setText(String.valueOf(importe));
+    } else {
+        JOptionPane.showMessageDialog(this, "Seleccione una fila para cargar el importe.");
+    }
     }//GEN-LAST:event_jBcargarimporteActionPerformed
 
 
