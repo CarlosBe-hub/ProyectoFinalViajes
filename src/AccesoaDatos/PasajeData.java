@@ -40,7 +40,7 @@ public class PasajeData {
             ResultSet rs = ps.getGeneratedKeys();
             while(rs.next()) {
                 pasaje.setId_pasaje(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Pasaje Registrado");
+                //JOptionPane.showMessageDialog(null, "Pasaje Registrado");
             }
 
         } catch (SQLException e) {
@@ -57,7 +57,7 @@ public class PasajeData {
             int i = ps.executeUpdate();
             if (i == 1) {
                 
-                 JOptionPane.showMessageDialog(null, "El Pasaje ha sido Eliminado");
+                 //JOptionPane.showMessageDialog(null, "El Pasaje ha sido Eliminado");
             }
             
         } catch (SQLException e) {

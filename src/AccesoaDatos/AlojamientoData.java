@@ -42,7 +42,7 @@ public class AlojamientoData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 alojamiento.setId_alojamiento(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Alojamiento Registrado");
+                //JOptionPane.showMessageDialog(null, "Alojamiento Registrado");
             }
 
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ public class AlojamientoData {
             int i = ps.executeUpdate();
 
             if (i == 1) {
-                JOptionPane.showMessageDialog(null, "El alojamiento se modifico con exito");
+                //JOptionPane.showMessageDialog(null, "El alojamiento se modifico con exito");
             }
 
         } catch (SQLException e) {
@@ -84,7 +84,7 @@ public class AlojamientoData {
             int i = ps.executeUpdate();
 
             if (i == 1) {
-                JOptionPane.showMessageDialog(null, "El alojamiento dado de baja");
+                //JOptionPane.showMessageDialog(null, "El alojamiento dado de baja");
             }
 
         } catch (SQLException e) {
@@ -101,7 +101,7 @@ public class AlojamientoData {
         int i = ps.executeUpdate();
 
         if (i == 1) {
-            JOptionPane.showMessageDialog(null, "El alojamiento dedo de alta");
+            //JOptionPane.showMessageDialog(null, "El alojamiento dedo de alta");
         }
 
     } catch (SQLException e) {
@@ -165,7 +165,7 @@ public class AlojamientoData {
             int i = ps.executeUpdate();
 
             if (i == 1) {
-                JOptionPane.showMessageDialog(null, "El alojamiento se ha eliminado");
+                //JOptionPane.showMessageDialog(null, "El alojamiento se ha eliminado");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar C");
@@ -206,7 +206,7 @@ public class AlojamientoData {
                 a.setCiudadDestino(ciudad);
                 a.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
 
-                JOptionPane.showMessageDialog(null, "Alojamiento encontrado");
+                //JOptionPane.showMessageDialog(null, "Alojamiento encontrado");
             }
         } catch (SQLException e) {
 
@@ -267,7 +267,7 @@ public class AlojamientoData {
         int resultado = ps.executeUpdate();
 
         if (resultado == 1) {
-            JOptionPane.showMessageDialog(null, "Alojamiento modificado con éxito.");
+            //JOptionPane.showMessageDialog(null, "Alojamiento modificado con éxito.");
         } else {
             JOptionPane.showMessageDialog(null, "No se encontró un alojamiento con el ID especificado.");
         }
@@ -340,7 +340,7 @@ public class AlojamientoData {
             a.setCiudadDestino(ciudadDestino);
             a.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
             
-            JOptionPane.showMessageDialog(null, "Alojamiento encontrado con el importe especificado.");
+            //JOptionPane.showMessageDialog(null, "Alojamiento encontrado con el importe especificado.");
         } else {
             JOptionPane.showMessageDialog(null, "No se encontró ningún alojamiento con el importe especificado.");
         }

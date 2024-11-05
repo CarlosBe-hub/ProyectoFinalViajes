@@ -27,29 +27,7 @@
         public PaqueteData() {
             red = conexion.getConexion();
         }
-    /*
-        public void AgregarPaquete(Paquete paquete) {
-            String sql = "INSERT INTO paquete (nombre_paquete,id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje, estado) VALUES(?,?,?,?,?,?)";
-            try {
-                PreparedStatement ps = red.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, paquete.getNombrePaquete());
-                ps.setInt(2, paquete.getCiudadOrigen().getId_ciudad());
-                ps.setInt(3, paquete.getCiudadDestino().getId_ciudad());
-                ps.setInt(4, paquete.getAlojamiento().getId_alojamiento());
-                ps.setInt(5, paquete.getPasaje().getId_pasaje());
-                ps.setBoolean(6, true);
-                ps.executeUpdate();
-                ResultSet rs = ps.getGeneratedKeys();
-                if (rs.next()) {
-                    paquete.setId_paquete(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Paquete Registrado");
 
-                }
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error al acceder AgregarPaquete");
-            }
-        }
-    */
         public void AgregarPaquete(Paquete paquete) {
             String sql = "INSERT INTO paquete (nombre_paquete,id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje, estado, importePaquete) VALUES(?,?,?,?,?,?,?)";
             try {
@@ -65,7 +43,7 @@
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     paquete.setId_paquete(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Paquete Registrado");
+                    //JOptionPane.showMessageDialog(null, "Paquete Registrado");
 
                 }
             } catch (SQLException e) {
@@ -82,7 +60,7 @@
                 int i = ps.executeUpdate();
 
                 if (i == 1) {
-                    JOptionPane.showMessageDialog(null, "Se ha modificado el Paquete");
+                    //JOptionPane.showMessageDialog(null, "Se ha modificado el Paquete");
                 }
 
             } catch (SQLException e) {
@@ -99,7 +77,7 @@
                 int i = ps.executeUpdate();
 
                 if (i == 1) {
-                    JOptionPane.showMessageDialog(null, "Se ha modificado el Paquete");
+                    //JOptionPane.showMessageDialog(null, "Se ha modificado el Paquete");
                 }
 
             } catch (SQLException e) {
@@ -115,7 +93,7 @@
                 ps.setInt(1, id);
                 int i = ps.executeUpdate();
                 if (i == 1) {
-                    JOptionPane.showMessageDialog(null, "Se ha eliminado el Paquete");
+                    //JOptionPane.showMessageDialog(null, "Se ha eliminado el Paquete");
                 }
 
             } catch (SQLException e) {
@@ -215,7 +193,7 @@
 
                     paquete1.add(p);
 
-                    JOptionPane.showMessageDialog(null, "lista encontrada");
+                    //JOptionPane.showMessageDialog(null, "lista encontrada");
                 }
 
             } catch (SQLException e) {
@@ -274,7 +252,7 @@
             paquetes.add(p);
         }
 
-        JOptionPane.showMessageDialog(null, "Lista encontrada con " + paquetes.size() + " paquetes.");
+        //JOptionPane.showMessageDialog(null, "Lista encontrada con " + paquetes.size() + " paquetes.");
 
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla paquete.");
@@ -282,24 +260,5 @@
     return paquetes;
 }
         }
-    //     public void AgregarPaqueteC(Paquete paquete) {
-    //        String sql = "INSERT INTO paquete (id_ciudadOrigen, id_ciudadDestino, id_alojamiento, id_pasaje) VALUES(?,?,?,?)";
-    //        try {
-    //            PreparedStatement ps = red.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-    //            ps.setInt(1, paquete.getCiudadOrigen().getId_ciudad());
-    //            ps.setInt(2, paquete.getCiudadDestino().getId_ciudad());
-    //            ps.setInt(3, paquete.getAlojamiento().getId_alojamiento());
-    //            ps.setInt(4, paquete.getPasaje().getId_pasaje());
-    //            ps.executeUpdate();
-    //            ResultSet rs = ps.getGeneratedKeys();
-    //            if (rs.next()) {
-    //                paquete.setId_paquete(rs.getInt(1));
-    //                JOptionPane.showMessageDialog(null, "Paquete Registrado");
-    //
-    //            }
-    //        } catch (SQLException e) {
-    //            JOptionPane.showMessageDialog(null, "Error al acceder AgregarPaquete");
-    //        }
-    //    }
 
     

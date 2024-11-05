@@ -324,10 +324,9 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
    int filaSeleccionada = jTable1.getSelectedRow();
 
-    if (filaSeleccionada != -1) { // Verifica si hay una fila seleccionada
+    if (filaSeleccionada != -1) {
         double importe = (double) jTable1.getValueAt(filaSeleccionada, 5);
 
-        // Muestra el importe en el campo de texto
         jtAlojamiento.setText(String.valueOf(importe));
     } else {
         JOptionPane.showMessageDialog(this, "Seleccione una fila para cargar el importe.");

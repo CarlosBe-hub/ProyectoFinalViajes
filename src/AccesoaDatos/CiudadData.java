@@ -7,6 +7,7 @@ package AccesoaDatos;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.naming.spi.DirStateFactory;
 import javax.swing.JOptionPane;
 import modelo.Ciudad;
 
@@ -139,23 +140,6 @@ public class CiudadData {
         return ciudad;
     }
 
-//    public void eliminarCiudad(int id) {
-//        String sql = "UPDATE ciudad SET estado = 0 WHERE id_ciudad =?";
-//        try {
-//            PreparedStatement ps = red.prepareStatement(sql);
-//            ps.setInt(1, id);
-//            int i = ps.executeUpdate();
-//            if (i == 1) {
-//                JOptionPane.showMessageDialog(null, "Se ha dado de Baja la Ciudad");
-//
-//            }
-//
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ciudad");
-//
-//        }
-//    }
-
     public void modificarCiudad(Ciudad ciudad) {
         String sql = "UPDATE ciudad SET nombre = ?, pais = ?, provincia = ? WHERE id_ciudad = ?";
         try {
@@ -166,7 +150,7 @@ public class CiudadData {
             ps.setInt(4, ciudad.getId_ciudad());
             int o = ps.executeUpdate();
             if (o == 1) {
-                JOptionPane.showMessageDialog(null, "Se ha modificado la Ciudad");
+                //JOptionPane.showMessageDialog(null, "Se ha modificado la Ciudad");
             }
 
         } catch (SQLException e) {
@@ -248,7 +232,7 @@ public class CiudadData {
         int resultado = ps.executeUpdate();
         
        if (resultado > 0) {
-            JOptionPane.showMessageDialog(null, "Ciudad eliminada correctamente.");
+            //JOptionPane.showMessageDialog(null, "Ciudad eliminada correctamente.");
         } else {
             JOptionPane.showMessageDialog(null, "No se encontro la ciudad con el nombre que inserto.");
         }
@@ -268,7 +252,7 @@ public class CiudadData {
         int filasAfectadas = ps.executeUpdate();
         
         if (filasAfectadas > 0) {
-            JOptionPane.showMessageDialog(null, "Estado de la ciudad actualizado exitosamente.");
+            //JOptionPane.showMessageDialog(null, "Estado de la ciudad actualizado exitosamente.");
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar el estado de la ciudad.");
         }
@@ -277,5 +261,30 @@ public class CiudadData {
     }
 }
     
+    public List<Ciudad>listarCiudades(){
+        String sql = "SELECT * FROM ciudad WHERE estado = 1";
+        
+        ArrayList<Ciudad> listaCiudad = new ArrayList<>();
+        try {
+            PreparedStatement ps = red.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Ciudad ciudad = new Ciudad();
+                
+                ciudad.setId_ciudad(rs.getInt("id_ciudad"));
+                ciudad.setNombre(rs.getString("nombre"));
+                ciudad.setEstado(true);
+                ciudad.setProvincia(rs.getString("provincia"));
+                ciudad.setPais(rs.getString("pais"));
+                
+                listaCiudad.add(ciudad);
+                
+            }
+                    
+        } catch (SQLException e) {
+        }
+        return listaCiudad;
+    }
     
 }
