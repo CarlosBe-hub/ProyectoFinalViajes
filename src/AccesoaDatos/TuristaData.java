@@ -31,7 +31,9 @@ public class TuristaData {
         ps.setInt(2, turista.getDni());
         ps.setString(3, turista.getNombre());
         ps.setInt(4, turista.getEdad());
-        ps.setBoolean(5, turista.isEstado());  
+        
+        
+        ps.setInt(5, turista.isEstado() ? 1 : 0);
 
         ps.execute();
         ResultSet rs = ps.getGeneratedKeys();
@@ -44,6 +46,7 @@ public class TuristaData {
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Error al acceder a la tabla turista: " + e.getMessage());
     }
+
 }
 
     public List<Turista> listarTuristas() {

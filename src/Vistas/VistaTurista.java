@@ -130,34 +130,35 @@ private TuristaData td;
     }//GEN-LAST:event_jBsalirActionPerformed
 
     private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
-       try {
-            
+        try {
             if (jTdni.getText().isEmpty() || jTnombre.getText().isEmpty() || jTedad.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Por favor complete todos los campos");
                 return;
             }
 
-           
             int dni = Integer.parseInt(jTdni.getText());
             String nombre = jTnombre.getText();
             int edad = Integer.parseInt(jTedad.getText());
 
-            
             Turista turista = new Turista();
             turista.setDni(dni);
             turista.setNombre(nombre);
             turista.setEdad(edad);
-            
+
+            boolean estado = jRestado.isSelected();
+            turista.setEstado(estado);
+
             td.agregarTurista(turista);
-            
+
             jTdni.setText("");
             jTnombre.setText("");
             jTedad.setText("");
-            
+            jRestado.setSelected(false);
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error: ingrese valores validos para DNI y Edad");
         }
-    
+
     }//GEN-LAST:event_jBagregarActionPerformed
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
@@ -181,23 +182,7 @@ private TuristaData td;
     }//GEN-LAST:event_jBeliminarActionPerformed
 
     private void jRestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRestadoActionPerformed
-        try {
-        if (jTdni.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingrese el DNI del turista.");
-            return;
-        }
-
-        int dni = Integer.parseInt(jTdni.getText());
-        int nuevoEstado = jRestado.isSelected() ? 1 : 0; 
-
-        
-        td.actualizarEstadoTurista(dni, nuevoEstado);
-
-        JOptionPane.showMessageDialog(this, "Estado del turista actualizado correctamente.");
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Error: ingrese un numero vlido para el DNI.");
-    }
-
+      
     }//GEN-LAST:event_jRestadoActionPerformed
 
 
