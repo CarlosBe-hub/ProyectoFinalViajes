@@ -13,22 +13,24 @@ public class Turista {
     private int dni;
     private String nombre;
     private int edad;
+    private boolean estado;
 
-    public Turista(int id_turista, int dni, String nombre, int edad) {
+    public Turista(int id_turista, int dni, String nombre, int edad, boolean estado) {
         this.id_turista = id_turista;
         this.dni = dni;
         this.nombre = nombre;
         this.edad = edad;
+        this.estado = estado;
     }
 
-    public Turista(int dni, String nombre, int edad) {
+    public Turista(int dni, String nombre, int edad, boolean estado) {
         this.dni = dni;
         this.nombre = nombre;
         this.edad = edad;
+        this.estado = estado;
     }
-
     public Turista() {
-    }
+}
 
     public int getId_turista() {
         return id_turista;
@@ -62,10 +64,19 @@ public class Turista {
         this.edad = edad;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
-        return "Turista{" + "id_turista=" + id_turista + ", dni=" + dni + ", nombre=" + nombre + ", edad=" + edad + '}';
+        return "Turista{" + "id_turista=" + id_turista + ", dni=" + dni + ", nombre=" + nombre + ", edad=" + edad + ", estado=" + estado + '}';
     }
     
-
 }
+
+

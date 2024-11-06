@@ -33,6 +33,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -69,6 +70,14 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem3);
+
+        jMenuItem9.setText("ADM.Turista");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem9);
 
         jMenuItem4.setText("ADM.Paquete");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -211,6 +220,14 @@ VistaPaquete a = new VistaPaquete();
         escritorio.add(p);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+       escritorio.removeAll();
+        escritorio.repaint();
+ VistaTurista t = new VistaTurista();
+        t.setVisible(true);
+        escritorio.add(t);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -260,5 +277,6 @@ VistaPaquete a = new VistaPaquete();
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
