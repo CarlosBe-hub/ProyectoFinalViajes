@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Ciudad;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Alojamiento;
 import modelo.Paquete;
@@ -313,34 +314,70 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
 
                                         
-    try {
-        Ciudad ciudadOrigen = new Ciudad();
-        Ciudad ciudadDestino = new Ciudad();
-        ciudadOrigen = cd.buscarCiudad("San Luis");
-        ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
+     try {
+       
+        List<Turista> turistas = new ArrayList<>();
         
-        if (ciudadOrigen == null || ciudadDestino == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione ciudades válidas.");
-            System.out.println("oriege: "+ciudadOrigen+", destino: "+ciudadDestino);
+        if (jcbTurista1.getSelectedIndex() != -1) {
+            turistas.add(td.buscarTuristaPorNombre(jcbTurista1.getSelectedItem().toString()));
+        }
+        if (jcbTurista2.getSelectedIndex() != -1) {
+            turistas.add(td.buscarTuristaPorNombre(jcbTurista2.getSelectedItem().toString()));
+        }
+        if (jcbTurista3.getSelectedIndex() != -1) {
+            turistas.add(td.buscarTuristaPorNombre(jcbTurista3.getSelectedItem().toString()));
+        }
+        if (jcbTurista4.getSelectedIndex() != -1) {
+            turistas.add(td.buscarTuristaPorNombre(jcbTurista4.getSelectedItem().toString()));
+        }
+
+        // Validar que haya entre 1 y 4 turistas seleccionados
+        int turistasSeleccionados = turistas.size();
+        if (turistasSeleccionados < 1 || turistasSeleccionados > 4) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar entre 1 y 4 turistas.");
             return;
         }
 
+        
+        Ciudad ciudadOrigen = cd.buscarCiudad("San Luis");
+        Ciudad ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
 
+        if (ciudadOrigen == null || ciudadDestino == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione ciudades válidas.");
+            return;
+        }
+
+        
         double importeTransporte = Double.parseDouble(jTimporteTransporte.getText());
-        Pasaje pasaje = new Pasaje(jCtransporte.getSelectedItem().toString(), importeTransporte, ciudadOrigen,ciudadDestino, true);
+        Pasaje pasaje = new Pasaje(jCtransporte.getSelectedItem().toString(), importeTransporte, ciudadOrigen, ciudadDestino, true);
         pasaje = ps.guardarPasaje(pasaje);
 
+     
         Alojamiento alojamiento = ad.buscarAlojamientoPorImporte(Double.parseDouble(jtAlojamiento.getText()));
         if (alojamiento == null) {
             JOptionPane.showMessageDialog(this, "Alojamiento no encontrado.");
             return;
         }
 
-
+        
         double importePaquete = Double.parseDouble(ImporteTotalPaquete.getText());
-        //Paquete paquete = new Paquete("Paquete Turistico",ciudadOrigen, ciudadDestino, alojamiento, pasaje, true,importePaquete);
-        //paquete.setImportePaquete(importePaquete);
-        //pd.AgregarPaquete(paquete);
+        Paquete paquete = new Paquete();
+        paquete.setNombrePaquete("Paquete Turistico");
+        paquete.setCiudadOrigen(ciudadOrigen);
+        paquete.setCiudadDestino(ciudadDestino);
+        paquete.setAlojamiento(alojamiento);
+        paquete.setPasaje(pasaje);
+        paquete.setEstado(true);
+        paquete.setImportePaquete(importePaquete);
+
+      
+        if (turistasSeleccionados > 0) paquete.setId_turista1(turistas.get(0));
+        if (turistasSeleccionados > 1) paquete.setId_turista2(turistas.get(1));
+        if (turistasSeleccionados > 2) paquete.setId_turista3(turistas.get(2));
+        if (turistasSeleccionados > 3) paquete.setId_turista4(turistas.get(3));
+
+       
+        pd.AgregarPaquete(paquete);
 
         JOptionPane.showMessageDialog(this, "Paquete agregado exitosamente.");
 
@@ -348,11 +385,9 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "Formato no válido: " + e.getMessage());
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage());
-    }
+    }                                   
 
-               
-
-
+              
     }//GEN-LAST:event_jBagregarActionPerformed
 
     private void jCtransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtransporteActionPerformed

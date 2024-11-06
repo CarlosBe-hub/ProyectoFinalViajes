@@ -111,5 +111,30 @@ public class TuristaData {
             System.out.println("Error al actualizar el estado del turista: " + e.getMessage());
         }
     }
+     public Turista buscarTuristaPorNombre(String nombre) {
+    Turista turista = null;
+    String sql = "SELECT * FROM Turista WHERE nombre = ?";
+
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setString(1, nombre);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            turista = new Turista();
+            turista.setId_turista(rs.getInt("id_turista"));
+            turista.setDni(rs.getInt("dni"));
+            turista.setNombre(rs.getString("nombre"));
+            turista.setEdad(rs.getInt("edad"));
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al buscar el turista por nombre");
+    }
+
+    return turista;
+}
+    
+    
 }
 
