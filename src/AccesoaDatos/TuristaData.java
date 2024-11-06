@@ -5,6 +5,8 @@
 package AccesoaDatos;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.Turista;
 
@@ -43,6 +45,30 @@ public class TuristaData {
              JOptionPane.showMessageDialog(null, "Error al acceder a la tabla turista");
         }
     
+    }
+    
+    public List<Turista> listarTuristas() {
+        List<Turista> turistas = new ArrayList<>();
+        String sql = "SELECT * FROM Turista";
+
+        try {
+            PreparedStatement ps = red.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Turista turista = new Turista();
+                turista.setId_turista(rs.getInt("id_turista"));
+                turista.setDni(rs.getInt("dni"));
+                turista.setNombre(rs.getString("nombre"));
+                turista.setEdad(rs.getInt("edad"));
+                turistas.add(turista);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al listar los turistas");
+        }
+
+        return turistas;
     }
     
 }
