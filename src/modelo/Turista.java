@@ -13,21 +13,18 @@ public class Turista {
     private int dni;
     private String nombre;
     private int edad;
-    private Paquete id_paquete;
 
-    public Turista(int id_turista, int dni, String nombre, int edad, Paquete id_paquete) {
+    public Turista(int id_turista, int dni, String nombre, int edad) {
         this.id_turista = id_turista;
         this.dni = dni;
         this.nombre = nombre;
         this.edad = edad;
-        this.id_paquete = id_paquete;
     }
 
-    public Turista(int dni, String nombre, int edad, Paquete id_paquete) {
+    public Turista(int dni, String nombre, int edad) {
         this.dni = dni;
         this.nombre = nombre;
         this.edad = edad;
-        this.id_paquete = id_paquete;
     }
 
     public Turista() {
@@ -65,18 +62,10 @@ public class Turista {
         this.edad = edad;
     }
 
-    public Paquete getId_paquete() {
-        return id_paquete;
-    }
-
-    public void setId_paquete(Paquete id_paquete) {
-        this.id_paquete = id_paquete;
-    }
-
     @Override
     public String toString() {
-        return "Turista{" + "id_turista=" + id_turista + ", dni=" + dni + ", nombre=" + nombre + ", edad=" + edad + ", id_paquete=" + id_paquete + '}';
+        return "Turista{" + "id_turista=" + id_turista + ", dni=" + dni + ", nombre=" + nombre + ", edad=" + edad + '}';
     }
     
-    
+
 }

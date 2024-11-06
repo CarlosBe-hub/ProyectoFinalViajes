@@ -19,8 +19,12 @@ public class Paquete {
   private Pasaje pasaje;
   private boolean estado;
   private double importePaquete;
+  private Turista id_turista1;
+  private Turista id_turista2;
+  private Turista id_turista3;
+  private Turista id_turista4;
 
-    public Paquete(int id_paquete, String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, double importePaquete) {
+    public Paquete(int id_paquete, String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, double importePaquete, Turista id_turista1, Turista id_turista2, Turista id_turista3, Turista id_turista4) {
         this.id_paquete = id_paquete;
         this.nombrePaquete = nombrePaquete;
         this.ciudadOrigen = ciudadOrigen;
@@ -29,9 +33,14 @@ public class Paquete {
         this.pasaje = pasaje;
         this.estado = estado;
         this.importePaquete = importePaquete;
+        this.id_turista1 = id_turista1;
+        this.id_turista2 = id_turista2;
+        this.id_turista3 = id_turista3;
+        this.id_turista4 = id_turista4;
     }
 
-    public Paquete(String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, double importePaquete) {
+    public Paquete(int id_paquete, String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, double importePaquete, Turista id_turista1, Turista id_turista2, Turista id_turista3) {
+        this.id_paquete = id_paquete;
         this.nombrePaquete = nombrePaquete;
         this.ciudadOrigen = ciudadOrigen;
         this.ciudadDestino = ciudadDestino;
@@ -39,6 +48,45 @@ public class Paquete {
         this.pasaje = pasaje;
         this.estado = estado;
         this.importePaquete = importePaquete;
+        this.id_turista1 = id_turista1;
+        this.id_turista2 = id_turista2;
+        this.id_turista3 = id_turista3;
+    }
+
+    public Paquete(int id_paquete, String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, double importePaquete, Turista id_turista1, Turista id_turista2) {
+        this.id_paquete = id_paquete;
+        this.nombrePaquete = nombrePaquete;
+        this.ciudadOrigen = ciudadOrigen;
+        this.ciudadDestino = ciudadDestino;
+        this.alojamiento = alojamiento;
+        this.pasaje = pasaje;
+        this.estado = estado;
+        this.importePaquete = importePaquete;
+        this.id_turista1 = id_turista1;
+        this.id_turista2 = id_turista2;
+    }
+
+    public Paquete(int id_paquete, String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, double importePaquete, Turista id_turista1) {
+        this.id_paquete = id_paquete;
+        this.nombrePaquete = nombrePaquete;
+        this.ciudadOrigen = ciudadOrigen;
+        this.ciudadDestino = ciudadDestino;
+        this.alojamiento = alojamiento;
+        this.pasaje = pasaje;
+        this.estado = estado;
+        this.importePaquete = importePaquete;
+        this.id_turista1 = id_turista1;
+    }
+
+    public Paquete(String nombrePaquete, Ciudad ciudadOrigen, Ciudad ciudadDestino, Alojamiento alojamiento, Pasaje pasaje, boolean estado, double importePaquete, Turista id_turista1) {
+        this.nombrePaquete = nombrePaquete;
+        this.ciudadOrigen = ciudadOrigen;
+        this.ciudadDestino = ciudadDestino;
+        this.alojamiento = alojamiento;
+        this.pasaje = pasaje;
+        this.estado = estado;
+        this.importePaquete = importePaquete;
+        this.id_turista1 = id_turista1;
     }
 
     public Paquete() {
@@ -108,13 +156,41 @@ public class Paquete {
         this.importePaquete = importePaquete;
     }
 
-    @Override
-    public String toString() {
-        return "Paquete{" + "id_paquete=" + id_paquete + ", nombrePaquete=" + nombrePaquete + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", alojamiento=" + alojamiento + ", pasaje=" + pasaje + ", estado=" + estado + ", importePaquete=" + importePaquete + '}';
+    public Turista getId_turista1() {
+        return id_turista1;
     }
 
-   
+    public void setId_turista1(Turista id_turista1) {
+        this.id_turista1 = id_turista1;
+    }
 
-    
+    public Turista getId_turista2() {
+        return id_turista2;
+    }
+
+    public void setId_turista2(Turista id_turista2) {
+        this.id_turista2 = id_turista2;
+    }
+
+    public Turista getId_turista3() {
+        return id_turista3;
+    }
+
+    public void setId_turista3(Turista id_turista3) {
+        this.id_turista3 = id_turista3;
+    }
+
+    public Turista getId_turista4() {
+        return id_turista4;
+    }
+
+    public void setId_turista4(Turista id_turista4) {
+        this.id_turista4 = id_turista4;
+    }
+
+    @Override
+    public String toString() {
+        return "Paquete{" + "id_paquete=" + id_paquete + ", nombrePaquete=" + nombrePaquete + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", alojamiento=" + alojamiento + ", pasaje=" + pasaje + ", estado=" + estado + ", importePaquete=" + importePaquete + ", id_turista1=" + id_turista1 + ", id_turista2=" + id_turista2 + ", id_turista3=" + id_turista3 + ", id_turista4=" + id_turista4 + '}';
+    }
   
 }
