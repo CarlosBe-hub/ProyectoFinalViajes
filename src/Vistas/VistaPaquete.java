@@ -53,6 +53,10 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         cargarCombopaises();
         cargarComboprovincias();
         cargarComboTuristas();
+        jcbTurista1.setSelectedIndex(-1);
+        jcbTurista2.setSelectedIndex(-1);
+        jcbTurista3.setSelectedIndex(-1);
+        jcbTurista4.setSelectedIndex(-1);
 
     }
     private DefaultTableModel modelo = new DefaultTableModel();
