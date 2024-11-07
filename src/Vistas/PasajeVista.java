@@ -58,6 +58,7 @@ public class PasajeVista extends javax.swing.JInternalFrame {
         jTidpasaje = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jCtransportes = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,20 +66,20 @@ public class PasajeVista extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Administrar Pasaje");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, -1, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 510, 10));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tranporte:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
 
         jTciudad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTciudadKeyReleased(evt);
             }
         });
-        jPanel1.add(jTciudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 270, 30));
+        jPanel1.add(jTciudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 270, 30));
 
         jTpasaje.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,36 +94,40 @@ public class PasajeVista extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTpasaje);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, 170));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, 150));
 
         jBcargar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jBcargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-aprobar-y-actualizar-64.png"))); // NOI18N
         jBcargar.setText("Cargar");
         jBcargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBcargarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBcargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, -1, -1));
+        jPanel1.add(jBcargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, -1));
 
         jBsalir.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jBsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/exit icon.png"))); // NOI18N
         jBsalir.setText("Salir");
         jBsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBsalirActionPerformed(evt);
             }
         });
-        jPanel1.add(jBsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 530, 60, -1));
+        jPanel1.add(jBsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 530, 80, -1));
 
         jBeliminar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jBeliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         jBeliminar.setText("Eliminar");
         jBeliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBeliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 530, -1, -1));
+        jPanel1.add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 530, -1, -1));
 
         jBmodificar1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jBmodificar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Files-Edit-File-icon.png"))); // NOI18N
         jBmodificar1.setText("Modificar");
         jBmodificar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,7 +135,7 @@ public class PasajeVista extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jBmodificar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, -1, -1));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 470, 10));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 510, 10));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -150,6 +155,9 @@ public class PasajeVista extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 160, -1));
 
         jPanel1.add(jCtransportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, 130, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/adm_pasaje.png"))); // NOI18N
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -201,8 +209,7 @@ public class PasajeVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBcargarActionPerformed
 
     private void jBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalirActionPerformed
-        this.setVisible(false);
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jBsalirActionPerformed
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
@@ -303,6 +310,7 @@ try {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

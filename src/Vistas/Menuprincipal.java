@@ -55,7 +55,8 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem9.setText("ADM.Turista");
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon_user.png"))); // NOI18N
+        jMenuItem9.setText("Turistas");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -63,7 +64,8 @@ public class Menuprincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem9);
 
-        jMenuItem1.setText("ADM.Ciudades");
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/city_icon.png"))); // NOI18N
+        jMenuItem1.setText("Ciudades");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -71,7 +73,8 @@ public class Menuprincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem3.setText("ADM.Alojamiento");
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon_hotel.png"))); // NOI18N
+        jMenuItem3.setText("Alojamiento");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -79,7 +82,8 @@ public class Menuprincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
-        jMenuItem4.setText("ADM.Paquete");
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/package_icon.png"))); // NOI18N
+        jMenuItem4.setText("Paquete");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -87,7 +91,8 @@ public class Menuprincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
-        jMenuItem5.setText("ADM.Pasaje");
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pasaje_icon.png"))); // NOI18N
+        jMenuItem5.setText("Pasaje");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -99,6 +104,7 @@ public class Menuprincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Consutas");
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizar_alojamiento.png"))); // NOI18N
         jMenuItem6.setText("Actualizar Alojamiento");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +113,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem6);
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/consultar_paquete.png"))); // NOI18N
         jMenuItem7.setText("Consultas de Paquetes");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +122,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem7);
 
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar_paquete.png"))); // NOI18N
         jMenuItem8.setText("Eliminar Paquetes");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,6 +135,7 @@ public class Menuprincipal extends javax.swing.JFrame {
 
         jMenu3.setText("Salir");
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/exit_icon 2.png"))); // NOI18N
         jMenuItem2.setText("Salir");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,11 +152,13 @@ public class Menuprincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -203,9 +214,9 @@ VistaPaquete a = new VistaPaquete();
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
- EliminarPaquete a = new EliminarPaquete();
-        a.setVisible(true);
-        escritorio.add(a);
+ EliminarPaquete e = new EliminarPaquete();
+        e.setVisible(true);
+        escritorio.add(e);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed

@@ -70,12 +70,14 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jbEliminar = new javax.swing.JButton();
         jbActualizar2 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel2.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 147, -1));
 
         jbBuscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon search.png"))); // NOI18N
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +102,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 720, 118));
 
         jbCargarDatosTabla.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jbCargarDatosTabla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/check icon.png"))); // NOI18N
         jbCargarDatosTabla.setText("Cargar");
         jbCargarDatosTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,9 +169,10 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, -1, -1));
         jPanel2.add(jtfImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 158, -1));
         jPanel2.add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, -1, -1));
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 22, 390, 10));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 390, 10));
 
         jbEliminar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +182,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jPanel2.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 520, -1, -1));
 
         jbActualizar2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jbActualizar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-aprobar-y-actualizar-64.png"))); // NOI18N
         jbActualizar2.setText("Actualizar");
         jbActualizar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +190,9 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
             }
         });
         jPanel2.add(jbActualizar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 520, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-edit-property-50.png"))); // NOI18N
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -351,6 +359,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
