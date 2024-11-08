@@ -19,6 +19,10 @@ public class PasajeVista extends javax.swing.JInternalFrame {
 
     private PasajeData pd;
 
+    private static final double PRECIO_AVION = 150000.65;
+    private static final double PRECIO_COLECTIVO = 55000.36;
+    private static final double PRECIO_TREN = 75000.00;
+
     /**
      * Creates new form PasajeVista
      */
@@ -28,6 +32,18 @@ public class PasajeVista extends javax.swing.JInternalFrame {
         armarCabecera();
         jTpasaje.setModel(modelo);
         llenarComboTransportes();
+
+        jTidpasaje.setEnabled(false);
+        jTimporte.setEnabled(false);
+        jCtransportes.setEnabled(false);
+        jTimporteTransporte.setEnabled(false);
+        jrbEstado.setEnabled(false);
+        jBmodificar1.setEnabled(false);
+        jBeliminar.setEnabled(false);
+
+        jTidpasaje.setEditable(false);
+        jTimporte.setEditable(false);
+        jTimporteTransporte.setEditable(false);
     }
     private DefaultTableModel modelo = new DefaultTableModel();
 
@@ -59,6 +75,9 @@ public class PasajeVista extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jCtransportes = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        jTimporteTransporte = new javax.swing.JTextField();
+        jrbEstado = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -114,7 +133,7 @@ public class PasajeVista extends javax.swing.JInternalFrame {
                 jBsalirActionPerformed(evt);
             }
         });
-        jPanel1.add(jBsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 530, 80, -1));
+        jPanel1.add(jBsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 550, 80, -1));
 
         jBeliminar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jBeliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
@@ -124,7 +143,7 @@ public class PasajeVista extends javax.swing.JInternalFrame {
                 jBeliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 530, -1, -1));
+        jPanel1.add(jBeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 550, -1, -1));
 
         jBmodificar1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jBmodificar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Files-Edit-File-icon.png"))); // NOI18N
@@ -134,30 +153,42 @@ public class PasajeVista extends javax.swing.JInternalFrame {
                 jBmodificar1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jBmodificar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, -1, -1));
+        jPanel1.add(jBmodificar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 550, -1, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 510, 10));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Importe");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 60, -1));
-        jPanel1.add(jTimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 130, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 60, -1));
+        jPanel1.add(jTimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 130, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tipo de Transporte");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 160, -1));
-        jPanel1.add(jTidpasaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 130, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, 160, -1));
+        jPanel1.add(jTidpasaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 130, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Número de pasaje");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 160, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 160, -1));
 
-        jPanel1.add(jCtransportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, 130, -1));
+        jCtransportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCtransportesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jCtransportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 130, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/adm_pasaje.png"))); // NOI18N
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
+        jPanel1.add(jTimporteTransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, 130, -1));
+        jPanel1.add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Estado del Transporte");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,37 +205,48 @@ public class PasajeVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBcargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcargarActionPerformed
-       int filaSeleccionada = jTpasaje.getSelectedRow();
-       
-       if( filaSeleccionada == -1){
-           JOptionPane.showMessageDialog(null, "Seleccione un pasaje de la tabla!");
-           return;
-       }
-       
-       Integer id = (Integer) jTpasaje.getValueAt(filaSeleccionada, 0);
-       
-       Pasaje pasaje = pd.buscarPasaje(id);
-       
-       if(pasaje != null){
-           jTidpasaje.setText(String.valueOf(pasaje.getId_pasaje()));
-           jTimporte.setText(String.valueOf(pasaje.getImporte()));
-           
-           String tipoTransporte = pasaje.getTipoTransporte();
-           if (tipoTransporte != null) {
-               
-            if (tipoTransporte.equalsIgnoreCase("Avion")) {
-                jCtransportes.setSelectedIndex(1);
-            } else if (tipoTransporte.equalsIgnoreCase("Colectivo")) {
-                jCtransportes.setSelectedIndex(2);
-            } else if (tipoTransporte.equalsIgnoreCase("Tren")) {
-                jCtransportes.setSelectedIndex(3);
-            } else {
-                jCtransportes.setSelectedIndex(0); 
-            }
-        } else {
-            jCtransportes.setSelectedIndex(0); 
+        int filaSeleccionada = jTpasaje.getSelectedRow();
+
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un pasaje de la tabla!");
+            return;
         }
-    }
+
+        Integer id = (Integer) jTpasaje.getValueAt(filaSeleccionada, 0);
+
+        Pasaje pasaje = pd.buscarPasaje(id);
+
+        if (pasaje != null) {
+            jTidpasaje.setText(String.valueOf(pasaje.getId_pasaje()));
+            jTimporte.setText(String.valueOf(pasaje.getImporte()));
+            jrbEstado.setSelected(pasaje.isEstado());
+
+            String tipoTransporte = pasaje.getTipoTransporte();
+            if (tipoTransporte != null) {
+
+                if (tipoTransporte.equalsIgnoreCase("Avion")) {
+                    jCtransportes.setSelectedIndex(1);
+                } else if (tipoTransporte.equalsIgnoreCase("Colectivo")) {
+                    jCtransportes.setSelectedIndex(2);
+                } else if (tipoTransporte.equalsIgnoreCase("Tren")) {
+                    jCtransportes.setSelectedIndex(3);
+                } else {
+                    jCtransportes.setSelectedIndex(0);
+                }
+            } else {
+                jCtransportes.setSelectedIndex(0);
+            }
+
+            jTidpasaje.setEnabled(true);
+            jTimporte.setEnabled(true);
+            jCtransportes.setEnabled(true);
+            jTimporteTransporte.setEnabled(true);
+            jrbEstado.setEnabled(true);
+            jBmodificar1.setEnabled(true);
+            jBeliminar.setEnabled(true);
+            jBsalir.setEnabled(false);
+
+        }
 
     }//GEN-LAST:event_jBcargarActionPerformed
 
@@ -223,6 +265,7 @@ public class PasajeVista extends javax.swing.JInternalFrame {
                 pd.eliminarPasaje(idPasaje);
                 modelo.removeRow(filaSeleccionada);
                 JOptionPane.showMessageDialog(null, "El Pasaje se elimino con exito.");
+                limpiarCampos();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione un pasaje para eliminar.");
@@ -263,40 +306,52 @@ public class PasajeVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTciudadKeyReleased
 
     private void jBmodificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificar1ActionPerformed
-      int filaSeleccionada = jTpasaje.getSelectedRow();
+        int filaSeleccionada = jTpasaje.getSelectedRow();
 
-if (filaSeleccionada == -1) {
-    JOptionPane.showMessageDialog(null, "Seleccione un pasaje para modificar.");
-    return;
-}
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un pasaje para modificar.");
+            return;
+        }
 
-try {
-    int idPasaje = Integer.parseInt(jTidpasaje.getText());
-    double importe = Double.parseDouble(jTimporte.getText());
-    String tipoTransporte = jCtransportes.getSelectedItem().toString();
-    
-    if (tipoTransporte.equals("---Seleccionar---")) {
-        JOptionPane.showMessageDialog(null, "Seleccione un tipo de transporte válido.");
-        return;
-    }
-    
-    Pasaje pasaje = new Pasaje();
-    pasaje.setId_pasaje(idPasaje);
-    pasaje.setImporte(importe);
-    pasaje.setTipoTransporte(tipoTransporte);
-    
-    if (pd.modificarPasaje(idPasaje, pasaje)) { 
-        JOptionPane.showMessageDialog(null, "El pasaje se modificó con éxito.");
-        
-        modelo.setValueAt(importe, filaSeleccionada, 3);
-        modelo.setValueAt(tipoTransporte, filaSeleccionada, 4);
-    } else {
-        JOptionPane.showMessageDialog(null, "No se pudo modificar el pasaje.");
-    }
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(null, "Por favor, ingrese valores numéricos válidos para el ID y el importe.");
-}
+        try {
+            int idPasaje = Integer.parseInt(jTidpasaje.getText());
+            double importe = Double.parseDouble(jTimporte.getText());
+            String tipoTransporte = jCtransportes.getSelectedItem().toString();
+            boolean estado = jrbEstado.isSelected();
+
+            if (tipoTransporte.equals("---Seleccionar---")) {
+                JOptionPane.showMessageDialog(null, "Seleccione un tipo de transporte válido.");
+                return;
+            }
+
+            Pasaje pasaje = new Pasaje();
+            pasaje.setId_pasaje(idPasaje);
+            pasaje.setImporte(importe);
+            pasaje.setTipoTransporte(tipoTransporte);
+            pasaje.setEstado(estado);
+
+            if (pd.modificarPasaje(idPasaje, pasaje)) {
+                JOptionPane.showMessageDialog(null, "El pasaje se modificó con éxito.");
+
+                modelo.setValueAt(importe, filaSeleccionada, 3);
+                modelo.setValueAt(tipoTransporte, filaSeleccionada, 4);
+                modelo.setValueAt(estado, filaSeleccionada, 5);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo modificar el pasaje.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese valores numéricos válidos para el ID y el importe.");
+        } finally {
+            limpiarCampos();
+        }
     }//GEN-LAST:event_jBmodificar1ActionPerformed
+
+    private void jCtransportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtransportesActionPerformed
+        // TODO add your handling code here:
+
+        cargarImporteTransporte();
+        calcularImporteTotal();
+    }//GEN-LAST:event_jCtransportesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -311,6 +366,7 @@ try {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -318,7 +374,9 @@ try {
     private javax.swing.JTextField jTciudad;
     private javax.swing.JTextField jTidpasaje;
     private javax.swing.JTextField jTimporte;
+    private javax.swing.JTextField jTimporteTransporte;
     private javax.swing.JTable jTpasaje;
+    private javax.swing.JRadioButton jrbEstado;
     // End of variables declaration//GEN-END:variables
 
     private void armarCabecera() {
@@ -331,10 +389,75 @@ try {
         modelo.addColumn("Estado");
 
     }
-private void llenarComboTransportes() {
-    jCtransportes.addItem("---Seleccionar---"); 
-    jCtransportes.addItem("Avion");
-    jCtransportes.addItem("Colectivo");
-    jCtransportes.addItem("Tren");
-}
+
+    private void llenarComboTransportes() {
+        jCtransportes.addItem("---Seleccionar---");
+        jCtransportes.addItem("Avion");
+        jCtransportes.addItem("Colectivo");
+        jCtransportes.addItem("Tren");
+    }
+
+    private void cargarImporteTransporte() {
+        double precioTransporte;
+        String tipoTransporte = (String) jCtransportes.getSelectedItem();
+
+        switch (tipoTransporte) {
+            case "Avion":
+                precioTransporte = PRECIO_AVION;
+                break;
+            case "Colectivo":
+                precioTransporte = PRECIO_COLECTIVO;
+                break;
+            case "Tren":
+                precioTransporte = PRECIO_TREN;
+                break;
+            default:
+                precioTransporte = 0;
+                break;
+        }
+
+        jTimporteTransporte.setText(String.valueOf(precioTransporte));
+    }
+
+    private void calcularImporteTotal() {
+        double precioTransporte;
+        double importeAlojamiento = 0.0;
+
+        try {
+            precioTransporte = Double.parseDouble(jTimporteTransporte.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El importe del transporte no es un número válido.");
+            return;
+        }
+
+        String alojamientoText = jTimporte.getText();
+        if (!alojamientoText.isEmpty()) {
+            try {
+                importeAlojamiento = Double.parseDouble(alojamientoText);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "El importe del alojamiento no es un número válido.");
+                return;
+            }
+        }
+
+    }
+
+    private void limpiarCampos() {
+
+        jTidpasaje.setText("");
+        jTimporte.setText("");
+        jTimporteTransporte.setText("");
+        jCtransportes.setSelectedIndex(0);
+        jrbEstado.setSelected(false);
+        jTciudad.setText("");
+        modelo.setRowCount(0);
+        jTidpasaje.setEnabled(false);
+        jTimporte.setEnabled(false);
+        jCtransportes.setEnabled(false);
+        jTimporteTransporte.setEnabled(false);
+        jrbEstado.setEnabled(false);
+        jBmodificar1.setEnabled(false);
+        jBeliminar.setEnabled(false);
+        jBsalir.setEnabled(true);
+    }
 }

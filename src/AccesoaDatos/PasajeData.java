@@ -158,8 +158,8 @@ public class PasajeData {
         ps.setInt(2, id);
         int i = ps.executeUpdate();
         if (i == 1) {
-            String mensaje = estado ? "El Pasaje se activo exitosamente!" : "El Pasaje se desactivo correctamente";
-            JOptionPane.showMessageDialog(null, mensaje);
+//            String mensaje = estado ? "El Pasaje se activo exitosamente!" : "El Pasaje se desactivo correctamente";
+//            JOptionPane.showMessageDialog(null, mensaje);
         }
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Error al cambiar el estado del pasaje.");
