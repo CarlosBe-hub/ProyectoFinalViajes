@@ -160,6 +160,12 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, -1, -1));
 
         jPanel1.add(jcbCiudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 150, -1));
+
+        jtImporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtImporteActionPerformed(evt);
+            }
+        });
         jPanel1.add(jtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, 160, -1));
         jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 530, -1));
         jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 530, 10));
@@ -262,7 +268,12 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
             // Ajuste por tipo de servicio
             switch (tipoServicio) {
-                
+                case "---Seleccionar---":
+                    ajusteServicio= 1.0;
+                    break;
+                case " Sin Pensión":
+                    ajusteServicio= 1.0;
+                    break;
                 case "Desayuno":
                     ajusteServicio = 1.02;
                     break;
@@ -338,6 +349,10 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jdSalida.setDate(null);
         jrbActivo.setSelected(false);
     }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jtImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtImporteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtImporteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
