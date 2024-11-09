@@ -4,16 +4,10 @@
  */
 package Vistas;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.time.LocalDate;
-import java.util.ArrayList;
+
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.Ciudad;
-import modelo.Alojamiento;
-import AccesoaDatos.AlojamientoData;
 import AccesoaDatos.CiudadData;
 import AccesoaDatos.PaqueteData;
 import modelo.Paquete;
@@ -39,6 +33,7 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         jBbuscar.setEnabled(false);
         cargarMeses();
         jScantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1));
+        
     }
 
     public enum Mes {

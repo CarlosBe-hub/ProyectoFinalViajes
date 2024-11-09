@@ -139,7 +139,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jCprovincias, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 160, -1));
 
-        jCtransporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Avion", "Colectivo", "Tren" }));
+        jCtransporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Seleccionar---", "Avion", "Colectivo", "Tren" }));
         jCtransporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCtransporteActionPerformed(evt);

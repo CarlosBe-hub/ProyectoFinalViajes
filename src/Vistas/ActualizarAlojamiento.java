@@ -141,7 +141,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jLabel5.setText("Servicio");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 440, -1, -1));
 
-        jcTAlojamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hotel", "Hostel", "Cabaña", "Departamento" }));
+        jcTAlojamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Seleccionar---", "Hotel", "Hostel", "Cabaña", "Departamento" }));
         jcTAlojamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcTAlojamientoActionPerformed(evt);
@@ -149,7 +149,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         });
         jPanel2.add(jcTAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 360, 152, -1));
 
-        jcServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desayuno", "Media Pensión", "Pensión Completa" }));
+        jcServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Seleccionar---", "Sin Pensión", "Desayuno", "Media Pensión", "Pensión Completa" }));
         jPanel2.add(jcServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, 152, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
