@@ -283,7 +283,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
                 }
             }
 
-            jtfImporte.setText(String.valueOf(alojamiento.getImporteDiario()));
+            jtfImporte.setText(String.format("%.0f", alojamiento.getImporteDiario()));
             jrbEstado.setSelected(alojamiento.isEstado());
         } else {
             JOptionPane.showMessageDialog(this, "Alojamiento no encontrado.");
