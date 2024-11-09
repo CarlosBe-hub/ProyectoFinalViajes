@@ -46,7 +46,7 @@ public class Ciudades extends javax.swing.JInternalFrame {
         jBeliminar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N

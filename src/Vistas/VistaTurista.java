@@ -59,7 +59,7 @@ public class VistaTurista extends javax.swing.JInternalFrame {
         jbtBuscar = new javax.swing.JButton();
         jbNuevo = new javax.swing.JButton();
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 204));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -141,6 +141,7 @@ public class VistaTurista extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jbtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 80, -1));
 
+        jbNuevo.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jbNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuario.png"))); // NOI18N
         jbNuevo.setText("Nuevo");
         jbNuevo.addActionListener(new java.awt.event.ActionListener() {

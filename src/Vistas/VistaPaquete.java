@@ -108,7 +108,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
         jButton2.setText("jButton2");
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
@@ -183,7 +183,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 560, 150));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 650, 150));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -504,12 +504,12 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     }
 
     private void armarCabecera() {
-        modelo.addColumn("id");
-        modelo.addColumn("fecha de inicio");
-        modelo.addColumn("fecha fin");
-        modelo.addColumn("tipo alojamiento");
-        modelo.addColumn("servicio");
-        modelo.addColumn("importe diario");
+        modelo.addColumn("Codigo Paquete");
+        modelo.addColumn("Fecha de inicio");
+        modelo.addColumn("Fecha fin");
+        modelo.addColumn("Tipo alojamiento");
+        modelo.addColumn("Servicio");
+        modelo.addColumn("Importe diario");
         jTable1.setModel(modelo);
 
     }

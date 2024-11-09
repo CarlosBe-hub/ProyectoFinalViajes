@@ -69,7 +69,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jbActualizar2 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(0, 153, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel2.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 147, -1));
 
@@ -96,7 +96,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 720, 118));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 750, 118));
 
         jbCargarDatosTabla.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jbCargarDatosTabla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/check icon.png"))); // NOI18N
@@ -111,8 +111,8 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ID");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, -1));
+        jLabel1.setText("Codigo Alojamiento");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -157,7 +157,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Actualizar Alojamiento");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, -1, -1));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, -1));
         jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 352, 14));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -171,7 +171,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, -1, -1));
         jPanel2.add(jtfImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 158, -1));
         jPanel2.add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, -1, -1));
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 390, 10));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 390, 10));
 
         jbEliminar.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
@@ -194,13 +194,13 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jPanel2.add(jbActualizar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 520, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-edit-property-50.png"))); // NOI18N
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,7 +407,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void armarCabezera() {
-        modelo.addColumn("ID Alojamiento");
+        modelo.addColumn("Codigo Alojamiento");
         modelo.addColumn("Fecha de Inicio");
         modelo.addColumn("Fecha de Fin");
         modelo.addColumn("Servicio");

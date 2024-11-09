@@ -74,7 +74,7 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -329,7 +329,7 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void tablaCiudad() {
-        modelo1.addColumn("Id");
+        modelo1.addColumn("Codigo Ciudad");
         modelo1.addColumn("Ciudad");
         modelo1.addColumn("Provincia");
         modelo1.addColumn("Pais");
@@ -337,8 +337,8 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
     }
 
     private void tablaPaquete() {
-        modelo2.addColumn("IdPaquete");
-        modelo2.addColumn("IdPasaje");
+        modelo2.addColumn("Codigo Paquete");
+        modelo2.addColumn("Codigo Pasaje");
         modelo2.addColumn("Ciudad Destino");
         modelo2.addColumn("Fecha de Inicio");
         jtPaquete.setModel(modelo2);
