@@ -21,6 +21,8 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
     private CiudadData cd;
     private AlojamientoData ad;
+    private String lastSelectedServicio = "";
+    private double importeBase = 0.0;
 
     /**
      * Creates new form Alojamiento
@@ -310,6 +312,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
             jtImporte.setText(String.valueOf((int) importeTotal));
 
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error en el formato del importe base");
         } catch (NullPointerException np) {
@@ -343,7 +346,19 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jcbServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbServicioActionPerformed
+
+        String selectedServicio = jcbServicio.getSelectedItem().toString();
+        
+
+       if (selectedServicio.equals(lastSelectedServicio)) {
+            JOptionPane.showMessageDialog(null, "El tipo de servicio esta duplicado");
+            return;
+        }
+
         calcularImportePorServicio();
+        
+        lastSelectedServicio = selectedServicio;
+    
     }//GEN-LAST:event_jcbServicioActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
