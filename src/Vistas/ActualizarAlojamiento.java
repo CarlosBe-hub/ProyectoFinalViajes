@@ -158,6 +158,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Actualizar Alojamiento");
+        jLabel9.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, -1));
         jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 352, 14));
 
