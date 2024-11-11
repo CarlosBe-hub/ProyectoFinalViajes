@@ -426,6 +426,67 @@ public List<String[]> obtenerDetallesAlojamientoPorCiudad(String nombreCiudad) {
         }
         return detallesAlojamientos;
     }
+
+public List<Alojamiento>AlojamientoPorTemporada(String temporada) {
+    List<Alojamiento> alojamientos = new ArrayList<>();
+    String sql = "SELECT * FROM alojamiento WHERE estado = 1 AND (determinarTemporada(Fecha_inicio) = ? OR determinarTemporada(Fecha_fin) = ?)";
+    try (PreparedStatement ps = red.prepareStatement(sql)) {
+        ps.setString(1, temporada);
+        ps.setString(2, temporada);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Alojamiento alojamiento = new Alojamiento();
+            alojamiento.setId_alojamiento(rs.getInt("id_alojamiento"));
+            alojamiento.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
+            alojamiento.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+            alojamiento.setEstado(rs.getBoolean("estado"));
+            alojamiento.setServicio(rs.getString("servicio"));
+            alojamiento.setImporteDiario(rs.getDouble("importe_diario"));
+            alojamiento.setCiudadDestino(new Ciudad());
+            alojamiento.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
+            alojamientos.add(alojamiento);
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al obtener alojamientos por temporada: " + e.getMessage());
+    }
+    return alojamientos;
+}
+
+public List<Alojamiento> AlojamientoXTemporada(String temporada) {
+    List<Alojamiento> alojamientos = new ArrayList<>();
+    String sql = "SELECT a.*, c.nombre AS ciudad_nombre " +
+                 "FROM alojamiento a " +
+                 "JOIN ciudad c ON a.id_ciudadDestino = c.id_ciudad " +
+                 "WHERE a.estado = 1";
+
+    try (PreparedStatement ps = red.prepareStatement(sql)) {
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Alojamiento alojamiento = new Alojamiento();
+            alojamiento.setId_alojamiento(rs.getInt("id_alojamiento"));
+            alojamiento.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
+            alojamiento.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+            alojamiento.setEstado(rs.getBoolean("estado"));
+            alojamiento.setServicio(rs.getString("servicio"));
+            alojamiento.setImporteDiario(rs.getDouble("importe_diario"));
+            alojamiento.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
+
+            // Crear objeto Ciudad y asignarle el nombre
+            Ciudad ciudad = new Ciudad();
+            ciudad.setNombre(rs.getString("ciudad_nombre"));
+            alojamiento.setCiudadDestino(ciudad);
+
+            // Verificar si la temporada de la fecha de inicio coincide con la seleccionada
+            String temporadaInicio = determinarTemporada(alojamiento.getFechaInicio());
+            if (temporadaInicio.equalsIgnoreCase(temporada)) {
+                alojamientos.add(alojamiento);
+            }
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al obtener alojamientos por temporada: " + e.getMessage());
+    }
+    return alojamientos;
+}
 }
 
 
