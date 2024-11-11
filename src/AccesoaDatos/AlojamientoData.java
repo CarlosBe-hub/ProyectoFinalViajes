@@ -349,5 +349,42 @@ public class AlojamientoData {
     }
     return a;
 }
+ public List<Alojamiento> listarAlojamientoPorCiudad(String nombreCiudad) {
+    List<Alojamiento> alojamientos = new ArrayList<>();
+    String sql = "SELECT a.id_alojamiento, a.Fecha_inicio, a.fecha_fin, a.estado, a.servicio, " +
+                 "a.importe_diario, a.tipo_lojamiento, c.nombre " +
+                 "FROM alojamiento a " +
+                 "JOIN ciudad c ON a.id_ciudadDestino = c.id_ciudad " +
+                 "WHERE c.nombre = ?";
+
+    try (PreparedStatement ps = red.prepareStatement(sql)) {
+        ps.setString(1, nombreCiudad);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Alojamiento alojamiento = new Alojamiento();
+            Ciudad ciudad = new Ciudad();
+            
+           
+            alojamiento.setId_alojamiento(rs.getInt("id_alojamiento"));
+            alojamiento.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
+            alojamiento.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
+            alojamiento.setEstado(rs.getBoolean("estado"));
+            alojamiento.setServicio(rs.getString("servicio"));
+            alojamiento.setImporteDiario(rs.getDouble("importe_diario"));
+            alojamiento.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
+
+          
+            ciudad.setNombre(rs.getString("nombre"));
+            alojamiento.setCiudadDestino(ciudad);
+
+            alojamientos.add(alojamiento);
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al listar alojamientos por ciudad: " + e.getMessage());
+    }
+    return alojamientos;
 }
+}
+
 

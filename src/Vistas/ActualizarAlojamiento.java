@@ -6,7 +6,6 @@ package Vistas;
 
 import AccesoaDatos.AlojamientoData;
 import AccesoaDatos.PaqueteData;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -31,6 +30,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     public ActualizarAlojamiento() {
         initComponents();
         armarCabezera();
+        jtfID.setEditable(false);
         pd = new PaqueteData();
         ad = new AlojamientoData();
     }
@@ -43,7 +43,6 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jdFecha = new com.toedter.calendar.JDateChooser();
         jbBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -70,10 +69,10 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         jbEliminar = new javax.swing.JButton();
         jbActualizar2 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jTnombreciudad = new javax.swing.JTextField();
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 147, -1));
 
         jbBuscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon search.png"))); // NOI18N
@@ -83,7 +82,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
                 jbBuscarActionPerformed(evt);
             }
         });
-        jPanel2.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, -1, 20));
+        jPanel2.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, 20));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,6 +196,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-edit-property-50.png"))); // NOI18N
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+        jPanel2.add(jTnombreciudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 180, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -214,24 +214,31 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
-            LocalDate fechaIngreso = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            List<Alojamiento> alojamientos = ad.listarAlojamientoPorFechas(fechaIngreso);
-            borrarFilas();
-            for (Alojamiento alojamiento : alojamientos) {
-                String estadoTexto = alojamiento.isEstado() ? "Activo" : "Inactivo";
-                modelo.addRow(new Object[]{
-                    alojamiento.getId_alojamiento(),
-                    alojamiento.getFechaInicio(),
-                    alojamiento.getFechaFin(),
-                    alojamiento.getServicio(),
-                    alojamiento.getImporteDiario(),
-                    alojamiento.getTipoAlojamiento(),
-                    estadoTexto
-                });
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al buscar alojamientos: " + e.getMessage());
+        String nombreCiudad = jTnombreciudad.getText().trim();
+        if (nombreCiudad.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el nombre de una ciudad.");
+            return;
         }
+
+        List<Alojamiento> alojamientos = ad.listarAlojamientoPorCiudad(nombreCiudad);
+        borrarFilas();
+
+        for (Alojamiento alojamiento : alojamientos) {
+            String estadoTexto = alojamiento.isEstado() ? "Activo" : "Inactivo";
+            modelo.addRow(new Object[]{
+                alojamiento.getId_alojamiento(),
+                alojamiento.getFechaInicio(),
+                alojamiento.getFechaFin(),
+                alojamiento.getServicio(),
+                alojamiento.getImporteDiario(),
+                alojamiento.getTipoAlojamiento(),
+                estadoTexto,
+                alojamiento.getCiudadDestino().getNombre() 
+            });
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar alojamientos: " + e.getMessage());
+    }
 
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -328,46 +335,55 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbActualizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizar2ActionPerformed
-        if (jtfID.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.");
+         if (jtfID.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.");
+        return;
+    }
+
+    try {
+       
+        int id = Integer.parseInt(jtfID.getText());
+        Alojamiento alojamiento = new Alojamiento();
+        alojamiento.setId_alojamiento(id);
+
+        
+        if (fechaInicio.getDate() == null || fechaFin.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese fechas válidas.");
             return;
         }
 
+        
+        alojamiento.setFechaInicio(fechaInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        alojamiento.setFechaFin(fechaFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+
+        
+        alojamiento.setTipoAlojamiento((String) jcTAlojamiento.getSelectedItem());
+        alojamiento.setServicio((String) jcServicio.getSelectedItem());
+
+      
+        String importeTexto = jtfImporte.getText();
+        if (importeTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un importe válido.");
+            return;
+        }
+
+        double importeDiario;
         try {
-            int id = Integer.parseInt(jtfID.getText());
-            Alojamiento alojamiento = new Alojamiento();
-            alojamiento.setId_alojamiento(id);
+            
+            importeTexto = importeTexto.replace(",", ".");
+            importeDiario = Double.parseDouble(importeTexto);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Formato de importe incorrecto. Ingrese un valor numérico.");
+            return;
+        }
 
-            if (fechaInicio.getDate() == null || fechaFin.getDate() == null) {
-                JOptionPane.showMessageDialog(this, "Por favor, ingrese fechas válidas.");
-                return;
-            }
-
-            alojamiento.setFechaInicio(fechaInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            alojamiento.setFechaFin(fechaFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            alojamiento.setTipoAlojamiento((String) jcTAlojamiento.getSelectedItem());
-            alojamiento.setServicio((String) jcServicio.getSelectedItem());
-
-            String importeTexto = jtfImporte.getText();
-            if (importeTexto.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Por favor, ingrese un importe válido.");
-                return;
-            }
-
-            double importeDiario;
-            try {
-                importeDiario = Double.parseDouble(importeTexto);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Formato de importe incorrecto. Ingrese un valor numérico.");
-                return;
-            }
-
-            alojamiento.setImporteDiario(importeDiario);
-            alojamiento.setEstado(jrbEstado.isSelected());
-
-            ad.modificarAlojamientoPorId(id, alojamiento);
-
-            int filaSeleccionada = jTable1.getSelectedRow();
+        
+        alojamiento.setImporteDiario(importeDiario);
+        alojamiento.setEstado(jrbEstado.isSelected());
+        
+        ad.modificarAlojamientoPorId(id, alojamiento);
+        
+        int filaSeleccionada = jTable1.getSelectedRow();
             if (filaSeleccionada != -1) {
                 modelo.setValueAt(alojamiento.getFechaInicio(), filaSeleccionada, 1);
                 modelo.setValueAt(alojamiento.getFechaFin(), filaSeleccionada, 2);
@@ -377,12 +393,15 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
                 modelo.setValueAt(alojamiento.isEstado() ? "Activo" : "Inactivo", filaSeleccionada, 6);
             }
 
-            JOptionPane.showMessageDialog(this, "El alojamiento se actualizó correctamente.");
+       
 
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Formato de ID incorrecto.");
-        }
+        JOptionPane.showMessageDialog(this, "Alojamiento actualizado correctamente.");
 
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Error: ID inválido. Ingrese un número entero.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar el alojamiento: " + e.getMessage());
+    }
     }//GEN-LAST:event_jbActualizar2ActionPerformed
 
     private void jcServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcServicioActionPerformed
@@ -409,13 +428,13 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTnombreciudad;
     private javax.swing.JButton jbActualizar2;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbCargarDatosTabla;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JComboBox<String> jcServicio;
     private javax.swing.JComboBox<String> jcTAlojamiento;
-    private com.toedter.calendar.JDateChooser jdFecha;
     private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtfID;
     private javax.swing.JTextField jtfImporte;
@@ -444,18 +463,15 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
 
     private void calcularImportePorServicio() {
         try {
-            LocalDate fechaIngreso = fechaInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate fechaSalida = fechaFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-            if (fechaSalida.isBefore(fechaIngreso)) {
-                JOptionPane.showMessageDialog(this, "Fecha de salida incorrecta");
-                return;
+            
+            if (jtfImporte.getText().isEmpty()) {
+                jtfImporte.setText("0"); 
             }
 
             double importeBase = Double.parseDouble(jtfImporte.getText());
+           
             double ajusteServicio = 1.0;
-            String tipoServicio = jcServicio.getSelectedItem().toString();
-
+            String tipoServicio = (String) jcServicio.getSelectedItem();
             switch (tipoServicio) {
                 case "Sin Pensión":
                     ajusteServicio = 1.0;
@@ -469,28 +485,16 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
                 case "Pensión Completa":
                     ajusteServicio = 1.10;
                     break;
-                default:
-                    ajusteServicio = 1.0;
-                    break;
             }
 
-            String temporada = ad.calculodeTemporada(fechaIngreso);
-            double ajusteTemporada = 1.0;
-
-            if ("temporada Alta".equals(temporada)) {
-                ajusteTemporada = 1.30;
-            } else if ("temporada Media".equals(temporada)) {
-                ajusteTemporada = 1.15;
-            }
-            double importeTotal = importeBase * ajusteServicio * ajusteTemporada;
-
-            jtfImporte.setText(String.format("%.2f", importeTotal));
+           
+            double importeTotal = importeBase * ajusteServicio;
+            jtfImporte.setText(String.format("%.0f", importeTotal));
 
         } catch (NumberFormatException e) {
-
-        } catch (NullPointerException np) {
-            JOptionPane.showMessageDialog(this, "Campos vacíos o formato incorrecto.");
+            JOptionPane.showMessageDialog(this, "Formato de importe incorrecto. Ingrese un valor numérico.");
         }
+    
     }
 
     private void cargarImporteAlojamiento() {
@@ -502,7 +506,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
             double importeConIncremento = importeActual * 1.10;
 
             
-            jtfImporte.setText(String.format("%.2f", importeConIncremento));
+            jtfImporte.setText(String.format("%.0f", importeConIncremento));
 
         } catch (NumberFormatException e) {
             
