@@ -72,7 +72,6 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jCprovincias = new javax.swing.JComboBox<>();
@@ -90,7 +89,6 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jtAlojamiento = new javax.swing.JTextField();
         jBbuscar = new javax.swing.JButton();
         jBagregar = new javax.swing.JButton();
-        jDfechadeinicio = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         jTimporteTransporte = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -116,11 +114,6 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel1.setText("Cargar Paquete");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 590, 10));
-
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Fecha de Inicio");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -183,7 +176,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 650, 150));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 650, 150));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -210,7 +203,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jBbuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 130, -1));
+        jPanel1.add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 130, -1));
 
         jBagregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/check icon.png"))); // NOI18N
         jBagregar.setText("AGREGAR");
@@ -220,7 +213,6 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 660, 130, 30));
-        jPanel1.add(jDfechadeinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 200, -1));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -241,7 +233,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jBcargarimporteActionPerformed(evt);
             }
         });
-        jPanel1.add(jBcargarimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, -1, -1));
+        jPanel1.add(jBcargarimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -311,14 +303,33 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCprovinciasActionPerformed
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
+                                       
+    try {
 
-        try {
-            CiudadData cd = new CiudadData();
-            Ciudad c = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
-            cargarTabla(c.getId_ciudad(), jDfechadeinicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Formato Incorrecto");
+        String paisSeleccionado = (String) jCpaises.getSelectedItem();
+        String provinciaSeleccionada = (String) jCprovincias.getSelectedItem();
+        String ciudadSeleccionada = (String) jCciudades.getSelectedItem();
+
+
+        if (paisSeleccionado == null || provinciaSeleccionada == null || ciudadSeleccionada == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un país, una provincia y una ciudad válidos.");
+            return;
         }
+
+
+        Ciudad ciudad = cd.buscarCiudad(ciudadSeleccionada);
+        if (ciudad == null) {
+            JOptionPane.showMessageDialog(this, "Ciudad no encontrada.");
+            return;
+        }
+
+
+        cargarTabla(ciudad.getId_ciudad());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage());
+    }
+
+
     }//GEN-LAST:event_jBbuscarActionPerformed
 
     private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
@@ -431,14 +442,12 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jCpaises;
     private javax.swing.JComboBox<String> jCprovincias;
     private javax.swing.JComboBox<String> jCtransporte;
-    private com.toedter.calendar.JDateChooser jDfechadeinicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -523,24 +532,26 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
     }
 
-    private void cargarTabla(int ciudad, LocalDate fechainicio) {
-        AlojamientoData ad = new AlojamientoData();
+    
+    private void cargarTabla(int ciudadId) {
+    AlojamientoData ad = new AlojamientoData();
+    
 
-        List<Alojamiento> al = ad.listarAlojamiento(ciudad, fechainicio);
-        System.out.println("alojamiento encontrado :" + al.size());
-        borrarfilas();
-        for (Alojamiento alojamiento : al) {
-            modelo.addRow(new Object[]{
-                alojamiento.getId_alojamiento(),
-                alojamiento.getFechaInicio(),
-                alojamiento.getFechaFin(),
-                alojamiento.getTipoAlojamiento(),
-                alojamiento.getServicio(),
-                alojamiento.getImporteDiario()
-            });
-        }
+    List<Alojamiento> alojamientos = ad.listarAlojamientosPorCiudad(ciudadId);
 
+    System.out.println("Alojamientos encontrados: " + alojamientos.size());
+    borrarfilas();
+    for (Alojamiento alojamiento : alojamientos) {
+        modelo.addRow(new Object[]{
+            alojamiento.getId_alojamiento(),
+            alojamiento.getFechaInicio(),
+            alojamiento.getFechaFin(),
+            alojamiento.getTipoAlojamiento(),
+            alojamiento.getServicio(),
+            alojamiento.getImporteDiario()
+        });
     }
+}
 
     private void cargarImporteTransporte() {
         double precioTransporte;
