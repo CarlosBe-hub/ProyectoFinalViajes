@@ -5,7 +5,6 @@
 package Vistas;
 
 import AccesoaDatos.PasajeData;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -297,7 +296,7 @@ public class PasajeVista extends javax.swing.JInternalFrame {
                     fila[2] = p.getCiudadDestino().getNombre();
                     fila[3] = p.getImporte();
                     fila[4] = p.getTipoTransporte();
-                    fila[5] = p.isEstado();
+                    fila[5] = p.isEstado() ? ("Activo") : ("Inactivo");
 
                     modelo.addRow(fila);
                 }
@@ -422,6 +421,8 @@ public class PasajeVista extends javax.swing.JInternalFrame {
                 precioTransporte = 0;
                 break;
         }
+        
+        precioTransporte = precioTransporte +(precioTransporte * 0.10 );
 
         jTimporteTransporte.setText(String.valueOf(precioTransporte));
     }
