@@ -271,7 +271,7 @@ public class AlojamientoData {
         JOptionPane.showMessageDialog(null, "Error al modificar el alojamiento: ");
     }
 }
- public List<Alojamiento> listarAlojamientoPorFechas(LocalDate fecha_inicio) {
+ public List<Alojamiento> listarAlojamientoPorFechas(String fecha_inicio) {
     String sql = "SELECT id_alojamiento, Fecha_inicio, fecha_fin, servicio, importe_diario, tipo_lojamiento " +
                  "FROM alojamiento WHERE Fecha_inicio = ? AND estado = 1";
     List<Alojamiento> listasdeAlojamiento = new ArrayList<>();
@@ -381,6 +381,52 @@ public class AlojamientoData {
     }
     return alojamientos;
 }
+
+ public String determinarTemporada(LocalDate fechaInicio) {
+        Month mes = fechaInicio.getMonth();
+        int dia = fechaInicio.getDayOfMonth();
+
+        // Temporada Alta
+        if ((mes == Month.DECEMBER && dia >= 15) || mes == Month.JANUARY || mes == Month.FEBRUARY ||
+            (mes == Month.JULY)) {
+            return "Alta";
+        }
+        
+        else if (mes == Month.SEPTEMBER || mes == Month.OCTOBER || mes == Month.NOVEMBER ||
+                 (mes == Month.MARCH && dia >= 20) || (mes == Month.JUNE && dia <= 21)) {
+            return "Media";
+        }
+        // Temporada Baja
+        else {
+            return "Baja";
+        }
+    }
+
+public List<String[]> obtenerDetallesAlojamientoPorCiudad(String nombreCiudad) {
+        List<String[]> detallesAlojamientos = new ArrayList<>();
+        String sql = "SELECT a.Fecha_inicio, a.fecha_fin, c.nombre " +
+                     "FROM alojamiento a " +
+                     "JOIN ciudad c ON a.id_ciudadDestino = c.id_ciudad " +
+                     "WHERE c.nombre = ?";
+
+        try (PreparedStatement ps = red.prepareStatement(sql)) {
+            ps.setString(1, nombreCiudad);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                LocalDate fechaInicio = rs.getDate("Fecha_inicio").toLocalDate();
+                String temporada = determinarTemporada(fechaInicio);
+                String mes = fechaInicio.getMonth().toString();
+
+                String[] detalle = {rs.getString("nombre"), temporada, mes};
+                detallesAlojamientos.add(detalle);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener detalles del alojamiento: " + e.getMessage());
+        }
+        return detallesAlojamientos;
+    }
 }
+
 
 
