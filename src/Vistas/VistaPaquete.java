@@ -59,7 +59,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         DescuentoXMenores();
         CalculoParaImporteTotal();
         jTimporteTransporte.setEditable(false);
-        ImporteTotalPaquete.setEditable(false);
+        ImporteTotalPaquetemenores.setEditable(false);
         ImporteTotal.setEditable(false);
         jtAlojamiento.setEditable(false);
 
@@ -74,6 +74,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jButton2 = new javax.swing.JButton();
+        ImporteTotalPaquete1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -109,6 +110,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jcbTurista4 = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        ImporteTotalPaquetemenores = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
         ImporteTotalPaquete = new javax.swing.JTextField();
 
         jButton2.setText("jButton2");
@@ -146,7 +149,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jCtransporteActionPerformed(evt);
             }
         });
-        jPanel1.add(jCtransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, 160, -1));
+        jPanel1.add(jCtransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 160, -1));
 
         jCciudades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +162,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Importe");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 470, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, -1, -1));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 242, 580, 0));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/exit icon.png"))); // NOI18N
@@ -201,8 +204,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Tipo de Transporte");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 500, -1, -1));
-        jPanel1.add(jtAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 160, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, -1, -1));
+        jPanel1.add(jtAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 160, -1));
 
         jBbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon search.png"))); // NOI18N
         jBbuscar.setText("BUSCAR");
@@ -225,8 +228,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Importe de Transporte");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 530, -1, -1));
-        jPanel1.add(jTimporteTransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 530, 160, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, -1, -1));
+        jPanel1.add(jTimporteTransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, 160, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -276,9 +279,15 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Importe por persona");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 560, 170, -1));
-        jPanel1.add(ImporteTotalPaquete, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, 160, -1));
+        jLabel15.setText("Importe -10");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 560, 100, -1));
+        jPanel1.add(ImporteTotalPaquetemenores, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, 160, -1));
+
+        jLabel16.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Importe +18");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 530, 100, -1));
+        jPanel1.add(ImporteTotalPaquete, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 530, 160, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -453,6 +462,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ImporteTotal;
     private javax.swing.JTextField ImporteTotalPaquete;
+    private javax.swing.JTextField ImporteTotalPaquete1;
+    private javax.swing.JTextField ImporteTotalPaquetemenores;
     private javax.swing.JButton jBagregar;
     private javax.swing.JButton jBbuscar;
     private javax.swing.JButton jBcargarimporte;
@@ -469,6 +480,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -626,12 +638,12 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
    
     int importeTotal = precioTransporte + importeAlojamiento;
-    ImporteTotalPaquete.setText(String.valueOf(importeTotal));
+    ImporteTotal.setText(String.valueOf(importeTotal));
 
     
-    String totalPaqueteTexto = ImporteTotalPaquete.getText().trim();
+    String totalPaqueteTexto = ImporteTotalPaquetemenores.getText().trim();
     if (totalPaqueteTexto.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "El importe total por persona está vacío.");
+        //JOptionPane.showMessageDialog(null, "El importe total por persona está vacío.");
         return;
     }
 
@@ -639,7 +651,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     try {
         importeTotalPaquete = Integer.parseInt(totalPaqueteTexto);
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "El importe total por persona no es un número válido.");
+       // JOptionPane.showMessageDialog(null, "El importe total por persona no es un número válido.");
         return;
     }
 
@@ -668,44 +680,57 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     }
 
     private void aplicarDescuentoPorMenores() {
-        double importeTotal = Double.parseDouble(ImporteTotal.getText());
-        int cantidadMenores = 0;
+    double importeTotalPaqueteMayores = 0.0;
+    double importeTotalPaqueteMenores = 0.0;
 
-        
-        if (jcbTurista1.getSelectedIndex() != -1) {
-            Turista turista1 = td.buscarTuristaPorNombre(jcbTurista1.getSelectedItem().toString());
-            if (turista1 != null && turista1.getEdad() <= 10) {
-                cantidadMenores++;
-            }
-        }
-        if (jcbTurista2.getSelectedIndex() != -1) {
-            Turista turista2 = td.buscarTuristaPorNombre(jcbTurista2.getSelectedItem().toString());
-            if (turista2 != null && turista2.getEdad() <= 10) {
-                cantidadMenores++;
-            }
-        }
-        if (jcbTurista3.getSelectedIndex() != -1) {
-            Turista turista3 = td.buscarTuristaPorNombre(jcbTurista3.getSelectedItem().toString());
-            if (turista3 != null && turista3.getEdad() <= 10) {
-                cantidadMenores++;
-            }
-        }
-        if (jcbTurista4.getSelectedIndex() != -1) {
-            Turista turista4 = td.buscarTuristaPorNombre(jcbTurista4.getSelectedItem().toString());
-            if (turista4 != null && turista4.getEdad() <= 10) {
-                cantidadMenores++;
-            }
-        }
+    
+    double importeTransporte = Double.parseDouble(jTimporteTransporte.getText());
+    double importeAlojamiento = Double.parseDouble(jtAlojamiento.getText());
 
-        
-        if (cantidadMenores > 0) {
-            double descuento = importeTotal * 0.5 * cantidadMenores;
-            importeTotal -= descuento;
+    
+    if (jcbTurista1.getSelectedIndex() != -1) {
+        Turista turista1 = td.buscarTuristaPorNombre(jcbTurista1.getSelectedItem().toString());
+        if (turista1 != null && turista1.getEdad() <= 10) {
+            
+            importeTotalPaqueteMenores += (importeTransporte / 2) + (importeAlojamiento / 2);
+        } else {
+          
+            importeTotalPaqueteMayores += importeTransporte + importeAlojamiento;
         }
-
-        
-        ImporteTotal.setText(String.valueOf(importeTotal));
     }
+    if (jcbTurista2.getSelectedIndex() != -1) {
+        Turista turista2 = td.buscarTuristaPorNombre(jcbTurista2.getSelectedItem().toString());
+        if (turista2 != null && turista2.getEdad() <= 10) {
+            importeTotalPaqueteMenores += (importeTransporte / 2) + (importeAlojamiento / 2);
+        } else {
+            importeTotalPaqueteMayores += importeTransporte + importeAlojamiento;
+        }
+    }
+    if (jcbTurista3.getSelectedIndex() != -1) {
+        Turista turista3 = td.buscarTuristaPorNombre(jcbTurista3.getSelectedItem().toString());
+        if (turista3 != null && turista3.getEdad() <= 10) {
+            importeTotalPaqueteMenores += (importeTransporte / 2) + (importeAlojamiento / 2);
+        } else {
+            importeTotalPaqueteMayores += importeTransporte + importeAlojamiento;
+        }
+    }
+    if (jcbTurista4.getSelectedIndex() != -1) {
+        Turista turista4 = td.buscarTuristaPorNombre(jcbTurista4.getSelectedItem().toString());
+        if (turista4 != null && turista4.getEdad() <= 10) {
+            importeTotalPaqueteMenores += (importeTransporte / 2) + (importeAlojamiento / 2);
+        } else {
+            importeTotalPaqueteMayores += importeTransporte + importeAlojamiento;
+        }
+    }
+
+    
+    ImporteTotalPaquete.setText(String.valueOf(importeTotalPaqueteMayores));
+    ImporteTotalPaquetemenores.setText(String.valueOf(importeTotalPaqueteMenores));
+
+    
+    double importeTotalFinal = importeTotalPaqueteMayores + importeTotalPaqueteMenores;
+    ImporteTotal.setText(String.valueOf(importeTotalFinal));
+}
 
     private void DescuentoXMenores() {
         jcbTurista1.addActionListener(e -> aplicarDescuentoPorMenores());
