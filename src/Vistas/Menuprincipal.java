@@ -4,6 +4,7 @@
  */
 package Vistas;
 
+
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -41,6 +42,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -56,6 +58,7 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
+        jMenuItem9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon_user.png"))); // NOI18N
         jMenuItem9.setText("Turistas");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +68,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem9);
 
+        jMenuItem1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/city_icon.png"))); // NOI18N
         jMenuItem1.setText("Ciudades");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -74,6 +78,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon_hotel.png"))); // NOI18N
         jMenuItem3.setText("Alojamiento");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +88,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
+        jMenuItem4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/package_icon.png"))); // NOI18N
         jMenuItem4.setText("Paquete");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +98,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
+        jMenuItem5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pasaje_icon.png"))); // NOI18N
         jMenuItem5.setText("Pasaje");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +112,7 @@ public class Menuprincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Consutas");
 
+        jMenuItem6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizar_alojamiento.png"))); // NOI18N
         jMenuItem6.setText("Actualizar Alojamiento");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +122,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem6);
 
+        jMenuItem7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/consultar_paquete.png"))); // NOI18N
         jMenuItem7.setText("Consultas de Paquetes");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +132,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem7);
 
+        jMenuItem8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar_paquete.png"))); // NOI18N
         jMenuItem8.setText("Eliminar Paquetes");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
@@ -141,6 +151,16 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem10);
+
+        jMenuItem11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-queries-66.png"))); // NOI18N
+        jMenuItem11.setText("Paquetes Comprados");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem11);
 
         jMenuBar1.add(jMenu2);
 
@@ -258,6 +278,14 @@ VistaPaquete a = new VistaPaquete();
         escritorio.add(x);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+ PaquetesComprados u = new PaquetesComprados ();
+        u.setVisible(true);
+        escritorio.add(u);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -301,6 +329,7 @@ VistaPaquete a = new VistaPaquete();
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
