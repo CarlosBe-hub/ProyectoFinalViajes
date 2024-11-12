@@ -31,6 +31,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         initComponents();
         armarCabezera();
         jtfID.setEditable(false);
+        jtfImporte.setEditable(false);
         pd = new PaqueteData();
         ad = new AlojamientoData();
     }
