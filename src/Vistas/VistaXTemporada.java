@@ -16,6 +16,8 @@ import modelo.Alojamiento;
  * @author carlo
  */
 public class VistaXTemporada extends javax.swing.JInternalFrame {
+    
+    private DefaultTableModel modelo = new DefaultTableModel();
 
     /**
      * Creates new form VistaXTemporada
@@ -28,6 +30,8 @@ public class VistaXTemporada extends javax.swing.JInternalFrame {
         jComboBox1.addItem("Baja");
 
         jComboBox1.addActionListener(evt -> cargarTabla());
+        
+        armarCabezera();
     }
     
     /**
@@ -162,4 +166,14 @@ public class VistaXTemporada extends javax.swing.JInternalFrame {
 
     
     jTable1.setModel(model);
-}}
+}
+  
+  private void armarCabezera(){
+    modelo.addColumn("Fecha de Inicio");
+    modelo.addColumn("Ciudad de Destino");
+    modelo.addColumn("Temporada");
+    modelo.addColumn("Mes");
+    jTable1.setModel(modelo);
+    
+}
+}
