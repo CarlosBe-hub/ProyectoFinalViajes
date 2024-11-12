@@ -12,8 +12,6 @@ import AccesoaDatos.TuristaData;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.Ciudad;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Alojamiento;
@@ -33,9 +31,9 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private AlojamientoData ad;
     private TuristaData td;
 
-    private static final double PRECIO_AVION = 150000.65;
-    private static final double PRECIO_COLECTIVO = 55000.36;
-    private static final double PRECIO_TREN = 75000.00;
+    private static final double PRECIO_AVION = 150000;
+    private static final double PRECIO_COLECTIVO = 55000;
+    private static final double PRECIO_TREN = 75000;
 
     /**
      * Creates new form Paquete
@@ -57,6 +55,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jcbTurista2.setSelectedIndex(-1);
         jcbTurista3.setSelectedIndex(-1);
         jcbTurista4.setSelectedIndex(-1);
+        DescuentoXMenores();
+        CalculoParaImporteTotal();
 
     }
     private DefaultTableModel modelo = new DefaultTableModel();
@@ -92,7 +92,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jTimporteTransporte = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        ImporteTotalPaquete = new javax.swing.JTextField();
+        ImporteTotal = new javax.swing.JTextField();
         jBcargarimporte = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -103,6 +103,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jcbTurista3 = new javax.swing.JComboBox<>();
         jcbTurista4 = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        ImporteTotalPaquete = new javax.swing.JTextField();
 
         jButton2.setText("jButton2");
 
@@ -162,7 +164,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 660, 150, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 680, 150, 30));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -213,7 +215,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jBagregarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 660, 130, 30));
+        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 680, 130, 30));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -223,9 +225,9 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Importe del Paquete");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 600, 170, -1));
-        jPanel1.add(ImporteTotalPaquete, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 600, 160, -1));
+        jLabel9.setText("Importe total:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 640, 170, -1));
+        jPanel1.add(ImporteTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 640, 160, -1));
 
         jBcargarimporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-aprobar-y-actualizar-48.png"))); // NOI18N
         jBcargarimporte.setText("Cargar");
@@ -267,6 +269,12 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-worldwide-delivery-50.png"))); // NOI18N
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, -1, 50));
 
+        jLabel15.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Importe por persona");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 600, 170, -1));
+        jPanel1.add(ImporteTotalPaquete, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 600, 160, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -304,112 +312,110 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCprovinciasActionPerformed
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
-                                       
-    try {
 
-        String paisSeleccionado = (String) jCpaises.getSelectedItem();
-        String provinciaSeleccionada = (String) jCprovincias.getSelectedItem();
-        String ciudadSeleccionada = (String) jCciudades.getSelectedItem();
+        try {
 
+            String paisSeleccionado = (String) jCpaises.getSelectedItem();
+            String provinciaSeleccionada = (String) jCprovincias.getSelectedItem();
+            String ciudadSeleccionada = (String) jCciudades.getSelectedItem();
 
-        if (paisSeleccionado == null || provinciaSeleccionada == null || ciudadSeleccionada == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione un país, una provincia y una ciudad válidos.");
-            return;
+            if (paisSeleccionado == null || provinciaSeleccionada == null || ciudadSeleccionada == null) {
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione un país, una provincia y una ciudad válidos.");
+                return;
+            }
+
+            Ciudad ciudad = cd.buscarCiudad(ciudadSeleccionada);
+            if (ciudad == null) {
+                JOptionPane.showMessageDialog(this, "Ciudad no encontrada.");
+                return;
+            }
+
+            cargarTabla(ciudad.getId_ciudad());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage());
         }
-
-
-        Ciudad ciudad = cd.buscarCiudad(ciudadSeleccionada);
-        if (ciudad == null) {
-            JOptionPane.showMessageDialog(this, "Ciudad no encontrada.");
-            return;
-        }
-
-
-        cargarTabla(ciudad.getId_ciudad());
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage());
-    }
 
 
     }//GEN-LAST:event_jBbuscarActionPerformed
 
     private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
 
-                                        
-     try {
-       
-        List<Turista> turistas = new ArrayList<>();
-        
-        if (jcbTurista1.getSelectedIndex() != -1) {
-            turistas.add(td.buscarTuristaPorNombre(jcbTurista1.getSelectedItem().toString()));
+        try {
+
+            List<Turista> turistas = new ArrayList<>();
+
+            if (jcbTurista1.getSelectedIndex() != -1) {
+                turistas.add(td.buscarTuristaPorNombre(jcbTurista1.getSelectedItem().toString()));
+            }
+            if (jcbTurista2.getSelectedIndex() != -1) {
+                turistas.add(td.buscarTuristaPorNombre(jcbTurista2.getSelectedItem().toString()));
+            }
+            if (jcbTurista3.getSelectedIndex() != -1) {
+                turistas.add(td.buscarTuristaPorNombre(jcbTurista3.getSelectedItem().toString()));
+            }
+            if (jcbTurista4.getSelectedIndex() != -1) {
+                turistas.add(td.buscarTuristaPorNombre(jcbTurista4.getSelectedItem().toString()));
+            }
+
+            // Validar que haya entre 1 y 4 turistas seleccionados
+            int turistasSeleccionados = turistas.size();
+            if (turistasSeleccionados < 1 || turistasSeleccionados > 4) {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar entre 1 y 4 turistas.");
+                return;
+            }
+
+            Ciudad ciudadOrigen = cd.buscarCiudad("San Luis");
+            Ciudad ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
+
+            if (ciudadOrigen == null || ciudadDestino == null) {
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione ciudades válidas.");
+                return;
+            }
+
+            double importeTransporte = Double.parseDouble(jTimporteTransporte.getText());
+            Pasaje pasaje = new Pasaje(jCtransporte.getSelectedItem().toString(), importeTransporte, ciudadOrigen, ciudadDestino, true);
+            pasaje = ps.guardarPasaje(pasaje);
+
+            Alojamiento alojamiento = ad.buscarAlojamientoPorImporte(Double.parseDouble(jtAlojamiento.getText()));
+            if (alojamiento == null) {
+                JOptionPane.showMessageDialog(this, "Alojamiento no encontrado.");
+                return;
+            }
+
+            double importePaquete = Double.parseDouble(ImporteTotal.getText());
+            Paquete paquete = new Paquete();
+            paquete.setNombrePaquete("Paquete Turistico");
+            paquete.setCiudadOrigen(ciudadOrigen);
+            paquete.setCiudadDestino(ciudadDestino);
+            paquete.setAlojamiento(alojamiento);
+            paquete.setPasaje(pasaje);
+            paquete.setEstado(true);
+            paquete.setImportePaquete(importePaquete);
+
+            if (turistasSeleccionados > 0) {
+                paquete.setId_turista1(turistas.get(0));
+            }
+            if (turistasSeleccionados > 1) {
+                paquete.setId_turista2(turistas.get(1));
+            }
+            if (turistasSeleccionados > 2) {
+                paquete.setId_turista3(turistas.get(2));
+            }
+            if (turistasSeleccionados > 3) {
+                paquete.setId_turista4(turistas.get(3));
+            }
+
+            pd.AgregarPaquete(paquete);
+
+            JOptionPane.showMessageDialog(this, "Paquete agregado exitosamente.");
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Formato no válido: " + e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage());
         }
-        if (jcbTurista2.getSelectedIndex() != -1) {
-            turistas.add(td.buscarTuristaPorNombre(jcbTurista2.getSelectedItem().toString()));
-        }
-        if (jcbTurista3.getSelectedIndex() != -1) {
-            turistas.add(td.buscarTuristaPorNombre(jcbTurista3.getSelectedItem().toString()));
-        }
-        if (jcbTurista4.getSelectedIndex() != -1) {
-            turistas.add(td.buscarTuristaPorNombre(jcbTurista4.getSelectedItem().toString()));
-        }
 
-        // Validar que haya entre 1 y 4 turistas seleccionados
-        int turistasSeleccionados = turistas.size();
-        if (turistasSeleccionados < 1 || turistasSeleccionados > 4) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar entre 1 y 4 turistas.");
-            return;
-        }
 
-        
-        Ciudad ciudadOrigen = cd.buscarCiudad("San Luis");
-        Ciudad ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
-
-        if (ciudadOrigen == null || ciudadDestino == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione ciudades válidas.");
-            return;
-        }
-
-        
-        double importeTransporte = Double.parseDouble(jTimporteTransporte.getText());
-        Pasaje pasaje = new Pasaje(jCtransporte.getSelectedItem().toString(), importeTransporte, ciudadOrigen, ciudadDestino, true);
-        pasaje = ps.guardarPasaje(pasaje);
-
-     
-        Alojamiento alojamiento = ad.buscarAlojamientoPorImporte(Double.parseDouble(jtAlojamiento.getText()));
-        if (alojamiento == null) {
-            JOptionPane.showMessageDialog(this, "Alojamiento no encontrado.");
-            return;
-        }
-
-        
-        double importePaquete = Double.parseDouble(ImporteTotalPaquete.getText());
-        Paquete paquete = new Paquete();
-        paquete.setNombrePaquete("Paquete Turistico");
-        paquete.setCiudadOrigen(ciudadOrigen);
-        paquete.setCiudadDestino(ciudadDestino);
-        paquete.setAlojamiento(alojamiento);
-        paquete.setPasaje(pasaje);
-        paquete.setEstado(true);
-        paquete.setImportePaquete(importePaquete);
-
-      
-        if (turistasSeleccionados > 0) paquete.setId_turista1(turistas.get(0));
-        if (turistasSeleccionados > 1) paquete.setId_turista2(turistas.get(1));
-        if (turistasSeleccionados > 2) paquete.setId_turista3(turistas.get(2));
-        if (turistasSeleccionados > 3) paquete.setId_turista4(turistas.get(3));
-
-       
-        pd.AgregarPaquete(paquete);
-
-        JOptionPane.showMessageDialog(this, "Paquete agregado exitosamente.");
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Formato no válido: " + e.getMessage());
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage());
-    }                                   
-
-              
     }//GEN-LAST:event_jBagregarActionPerformed
 
     private void jCtransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtransporteActionPerformed
@@ -420,19 +426,20 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
     private void jBcargarimporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcargarimporteActionPerformed
 
-   int filaSeleccionada = jTable1.getSelectedRow();
+        int filaSeleccionada = jTable1.getSelectedRow();
 
-    if (filaSeleccionada != -1) {
-        double importe = (double) jTable1.getValueAt(filaSeleccionada, 5);
+        if (filaSeleccionada != -1) {
+            double importe = (double) jTable1.getValueAt(filaSeleccionada, 5);
 
-        jtAlojamiento.setText(String.valueOf(importe));
-    } else {
-        JOptionPane.showMessageDialog(this, "Seleccione una fila para cargar el importe.");
-    }
+            jtAlojamiento.setText(String.valueOf(importe));
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una fila para cargar el importe.");
+        }
     }//GEN-LAST:event_jBcargarimporteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ImporteTotal;
     private javax.swing.JTextField ImporteTotalPaquete;
     private javax.swing.JButton jBagregar;
     private javax.swing.JButton jBbuscar;
@@ -449,6 +456,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -533,26 +541,24 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
     }
 
-    
     private void cargarTabla(int ciudadId) {
-    AlojamientoData ad = new AlojamientoData();
-    
+        AlojamientoData ad = new AlojamientoData();
 
-    List<Alojamiento> alojamientos = ad.listarAlojamientosPorCiudad(ciudadId);
+        List<Alojamiento> alojamientos = ad.listarAlojamientosPorCiudad(ciudadId);
 
-    System.out.println("Alojamientos encontrados: " + alojamientos.size());
-    borrarfilas();
-    for (Alojamiento alojamiento : alojamientos) {
-        modelo.addRow(new Object[]{
-            alojamiento.getId_alojamiento(),
-            alojamiento.getFechaInicio(),
-            alojamiento.getFechaFin(),
-            alojamiento.getTipoAlojamiento(),
-            alojamiento.getServicio(),
-            alojamiento.getImporteDiario()
-        });
+        System.out.println("Alojamientos encontrados: " + alojamientos.size());
+        borrarfilas();
+        for (Alojamiento alojamiento : alojamientos) {
+            modelo.addRow(new Object[]{
+                alojamiento.getId_alojamiento(),
+                alojamiento.getFechaInicio(),
+                alojamiento.getFechaFin(),
+                alojamiento.getTipoAlojamiento(),
+                alojamiento.getServicio(),
+                alojamiento.getImporteDiario()
+            });
+        }
     }
-}
 
     private void cargarImporteTransporte() {
         double precioTransporte;
@@ -577,31 +583,68 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
     }
 
     private void calcularImporteTotal() {
-        double precioTransporte;
-        double importeAlojamiento = 0.0;
+    int precioTransporte;
+    int importeAlojamiento = 0;
 
+   
+    String importe = jTimporteTransporte.getText().trim();
+    if (importe.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese el importe del transporte.");
+        return;
+    }
+
+    
+    try {
+        precioTransporte = (int) Double.parseDouble(importe);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El importe del transporte no es un número válido.");
+        return;
+    }
+
+    
+    String alojamientoText = jtAlojamiento.getText().trim();
+    if (!alojamientoText.isEmpty()) {
         try {
-            precioTransporte = Double.parseDouble(jTimporteTransporte.getText());
+            importeAlojamiento = (int) Double.parseDouble(alojamientoText);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "El importe del transporte no es un número válido.");
+            JOptionPane.showMessageDialog(null, "El importe del alojamiento no es un número válido.");
             return;
         }
-
-        String alojamientoText = jtAlojamiento.getText();
-        if (!alojamientoText.isEmpty()) {
-            try {
-                importeAlojamiento = Double.parseDouble(alojamientoText);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "El importe del alojamiento no es un número válido.");
-                return;
-            }
-        }
-
-        double importeTotal = precioTransporte + importeAlojamiento;
-        ImporteTotalPaquete.setText(String.valueOf(importeTotal));
-
     }
+
+   
+    int importeTotal = precioTransporte + importeAlojamiento;
+    ImporteTotalPaquete.setText(String.valueOf(importeTotal));
+
     
+    String totalPaqueteTexto = ImporteTotalPaquete.getText().trim();
+    if (totalPaqueteTexto.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "El importe total por persona está vacío.");
+        return;
+    }
+
+    int importeTotalPaquete;
+    try {
+        importeTotalPaquete = Integer.parseInt(totalPaqueteTexto);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El importe total por persona no es un número válido.");
+        return;
+    }
+
+    
+    int cantidadTuristas = 0;
+    if (jcbTurista1.getSelectedIndex() != -1) cantidadTuristas++;
+    if (jcbTurista2.getSelectedIndex() != -1) cantidadTuristas++;
+    if (jcbTurista3.getSelectedIndex() != -1) cantidadTuristas++;
+    if (jcbTurista4.getSelectedIndex() != -1) cantidadTuristas++;
+
+    
+    int total = importeTotalPaquete * cantidadTuristas;
+    ImporteTotal.setText(String.valueOf(total));
+}
+
+    
+
     private void cargarComboTuristas() {
         List<Turista> turistas = td.listarTuristas();
         for (Turista turista : turistas) {
@@ -610,5 +653,60 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
             jcbTurista3.addItem(turista.getNombre());
             jcbTurista4.addItem(turista.getNombre());
         }
+    }
+
+    private void aplicarDescuentoPorMenores() {
+        double importeTotal = Double.parseDouble(ImporteTotal.getText());
+        int cantidadMenores = 0;
+
+        
+        if (jcbTurista1.getSelectedIndex() != -1) {
+            Turista turista1 = td.buscarTuristaPorNombre(jcbTurista1.getSelectedItem().toString());
+            if (turista1 != null && turista1.getEdad() <= 10) {
+                cantidadMenores++;
+            }
+        }
+        if (jcbTurista2.getSelectedIndex() != -1) {
+            Turista turista2 = td.buscarTuristaPorNombre(jcbTurista2.getSelectedItem().toString());
+            if (turista2 != null && turista2.getEdad() <= 10) {
+                cantidadMenores++;
+            }
+        }
+        if (jcbTurista3.getSelectedIndex() != -1) {
+            Turista turista3 = td.buscarTuristaPorNombre(jcbTurista3.getSelectedItem().toString());
+            if (turista3 != null && turista3.getEdad() <= 10) {
+                cantidadMenores++;
+            }
+        }
+        if (jcbTurista4.getSelectedIndex() != -1) {
+            Turista turista4 = td.buscarTuristaPorNombre(jcbTurista4.getSelectedItem().toString());
+            if (turista4 != null && turista4.getEdad() <= 10) {
+                cantidadMenores++;
+            }
+        }
+
+        
+        if (cantidadMenores > 0) {
+            double descuento = importeTotal * 0.5 * cantidadMenores;
+            importeTotal -= descuento;
+        }
+
+        
+        ImporteTotal.setText(String.valueOf(importeTotal));
+    }
+
+    private void DescuentoXMenores() {
+        jcbTurista1.addActionListener(e -> aplicarDescuentoPorMenores());
+        jcbTurista2.addActionListener(e -> aplicarDescuentoPorMenores());
+        jcbTurista3.addActionListener(e -> aplicarDescuentoPorMenores());
+        jcbTurista4.addActionListener(e -> aplicarDescuentoPorMenores());
+    }
+
+    private void CalculoParaImporteTotal() {
+        jCtransporte.addActionListener(e -> calcularImporteTotal());
+        jcbTurista1.addActionListener(e -> calcularImporteTotal());
+        jcbTurista2.addActionListener(e -> calcularImporteTotal());
+        jcbTurista3.addActionListener(e -> calcularImporteTotal());
+        jcbTurista4.addActionListener(e -> calcularImporteTotal());
     }
 }
