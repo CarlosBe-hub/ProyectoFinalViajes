@@ -245,6 +245,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                 ad.calculodeVacaciones(fechaIng, fechaSalida);
                 Alojamiento alojamiento2 = new Alojamiento(fechaIng, fechaSalida, estado, tipoServicio, importeDiario, ciudad1, tipoAlojamiento);
                 ad.guardarAlojamiento(alojamiento2);
+                JOptionPane.showMessageDialog(this, "Alojamiento Registrado!");
             } else {
                 JOptionPane.showMessageDialog(this, "Fecha de salida incorrecta");
             }
@@ -266,7 +267,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                 return;
             }
 
-            String importeTexto = jtImporte.getText().trim(); // Eliminar espacios en blanco
+            String importeTexto = jtImporte.getText().trim(); 
             if (importeTexto.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Por favor, ingrese un importe válido");
                 return;
