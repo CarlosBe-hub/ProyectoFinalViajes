@@ -150,7 +150,7 @@ public class VistaTurista extends javax.swing.JInternalFrame {
                 jbNuevoActionPerformed(evt);
             }
         });
-        jPanel1.add(jbNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 90, 40));
+        jPanel1.add(jbNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 110, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
