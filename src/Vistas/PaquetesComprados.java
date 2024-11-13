@@ -14,12 +14,15 @@ import modelo.Alojamiento;
  * @author carlo
  */
 public class PaquetesComprados extends javax.swing.JInternalFrame {
+    
+    private DefaultTableModel modelo = new DefaultTableModel();
 
     /**
      * Creates new form PaquetesComprados
      */
     public PaquetesComprados() {
         initComponents();
+        armarCabezera();
     }
 
     /**
@@ -148,4 +151,12 @@ public class PaquetesComprados extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabezera() {
+        modelo.addColumn("Codigo Alojamiento");
+        modelo.addColumn("Fecha Inicio");
+        modelo.addColumn("Fecha Fin");
+        modelo.addColumn("Ciudad Destino");
+        jTable1.setModel(modelo);
+}
 }

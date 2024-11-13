@@ -33,6 +33,21 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         ad = new AlojamientoData();
         cargarComboPaises();
 
+        jcbCiudades.removeAllItems();
+        jcbPais.setSelectedIndex(-1);
+        jcbProvincias.removeAllItems();
+        jcbProvincias.setEnabled(false);
+        jcbTipoAlojamiento.setSelectedIndex(0);
+        jcbTipoAlojamiento.setEnabled(false);
+        jtImporte.setEnabled(false);
+        jdIngreso.setEnabled(false);
+        jdSalida.setEnabled(false);
+        jrbActivo.setSelected(false);
+        jrbActivo.setEnabled(false);
+        jcbServicio.setSelectedIndex(0);
+        jcbServicio.setEnabled(false);
+        jbNuevo.setEnabled(false);
+        jbGuardar.setEnabled(false);
     }
 
     /**
@@ -163,6 +178,11 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jLabel9.setText("Importe Diario");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, -1, -1));
 
+        jcbCiudades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbCiudadesActionPerformed(evt);
+            }
+        });
         jPanel1.add(jcbCiudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 150, -1));
 
         jtImporte.addActionListener(new java.awt.event.ActionListener() {
@@ -231,8 +251,25 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
         try {
+
+            if (jdIngreso.getDate() == null || jdSalida.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese las fechas de ingreso y salida.");
+                return;
+            }
+
             LocalDate fechaIng = jdIngreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate fechaSalida = jdSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            if (fechaSalida.isBefore(fechaIng)) {
+                JOptionPane.showMessageDialog(this, "La fecha de salida debe ser posterior a la fecha de ingreso.");
+                return;
+            }
+
+            if (fechaIng.isEqual(fechaSalida)) {
+                JOptionPane.showMessageDialog(this, "La fecha de ingreso no puede ser igual a la fecha de salida.");
+                return;
+            }
+
             boolean estado = jrbActivo.isSelected();
             String tipoServicio = jcbServicio.getSelectedItem().toString();
             String importe = jtImporte.getText().replace(",", ".").trim();
@@ -241,20 +278,20 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             Ciudad ciudad1 = cd.buscarCiudad(ciudadDestino);
             String tipoAlojamiento = jcbTipoAlojamiento.getSelectedItem().toString();
 
-            if (fechaSalida.isAfter(fechaIng)) {
-                ad.calculodeVacaciones(fechaIng, fechaSalida);
-                Alojamiento alojamiento2 = new Alojamiento(fechaIng, fechaSalida, estado, tipoServicio, importeDiario, ciudad1, tipoAlojamiento);
-                ad.guardarAlojamiento(alojamiento2);
-                JOptionPane.showMessageDialog(this, "Alojamiento Registrado!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Fecha de salida incorrecta");
-            }
+            ad.calculodeVacaciones(fechaIng, fechaSalida);
+            Alojamiento alojamiento2 = new Alojamiento(fechaIng, fechaSalida, estado, tipoServicio, importeDiario, ciudad1, tipoAlojamiento);
+            ad.guardarAlojamiento(alojamiento2);
 
-        } catch (NullPointerException np) {
-            JOptionPane.showMessageDialog(this, "Campos vacios y/o Formato no valido");
+            JOptionPane.showMessageDialog(this, "Alojamiento Registrado!");
+            jbGuardar.setEnabled(false);
+            jbNuevo.setEnabled(true);
+
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error en el formato del importe diario");
+            JOptionPane.showMessageDialog(this, "Error en el formato del importe diario.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage());
         }
+
     }
 
     private void calcularImportePorServicio() {
@@ -267,7 +304,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                 return;
             }
 
-            String importeTexto = jtImporte.getText().trim(); 
+            String importeTexto = jtImporte.getText().trim();
             if (importeTexto.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Por favor, ingrese un importe válido");
                 return;
@@ -277,13 +314,13 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
             double importeBase = Double.parseDouble(importeTexto);
             double ajusteServicio = 1.0;
-            
+
             String tipoServicio = jcbServicio.getSelectedItem().toString();
             if ("---Seleccionar---".equals(tipoServicio)) {
                 JOptionPane.showMessageDialog(this, "Por favor, seleccione un tipo de servicio válido.");
-                return; 
+                return;
             }
-            
+
             // Ajuste por tipo de servicio
             switch (tipoServicio) {
                 case "Sin Pensión":
@@ -314,11 +351,10 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
             jtImporte.setText(String.valueOf((int) importeTotal));
 
-
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error en el formato del importe base");
         } catch (NullPointerException np) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese las fechas de ingreso y salida");
+//            JOptionPane.showMessageDialog(null, "Por favor, ingrese las fechas de ingreso y salida");
         }
 
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -337,6 +373,13 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
             cargarComboCiudades(pais, provincia);
             jcbCiudades.setEnabled(true);
+            jcbTipoAlojamiento.setEnabled(false);
+            jdIngreso.setEnabled(false);
+            jdSalida.setEnabled(false);
+            jtImporte.setEnabled(false);
+            jcbServicio.setEnabled(false);
+            jrbActivo.setEnabled(false);
+            jbGuardar.setEnabled(false);
 
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Combos Vacios");
@@ -350,33 +393,66 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     private void jcbServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbServicioActionPerformed
 
         String selectedServicio = jcbServicio.getSelectedItem().toString();
-        
 
-       if (selectedServicio.equals(lastSelectedServicio)) {
+        if (selectedServicio.equals(lastSelectedServicio)) {
             JOptionPane.showMessageDialog(null, "El tipo de servicio esta duplicado");
             return;
         }
 
         calcularImportePorServicio();
-        
+
         lastSelectedServicio = selectedServicio;
-    
+
     }//GEN-LAST:event_jcbServicioActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
-
         jcbCiudades.removeAllItems();
+
+        jcbPais.setSelectedIndex(-1);
+
+        jcbProvincias.removeAllItems();
+        jcbProvincias.setEnabled(false);
+
         jcbTipoAlojamiento.setSelectedIndex(0);
+        jcbTipoAlojamiento.setEnabled(false);
+
         jtImporte.setText("");
+        jtImporte.setEnabled(false);
+
         jdIngreso.setDate(null);
+        jdIngreso.setEnabled(false);
         jdSalida.setDate(null);
+        jdSalida.setEnabled(false);
+
         jrbActivo.setSelected(false);
+        jrbActivo.setEnabled(false);
+
+        jcbServicio.setSelectedIndex(0);
+        jcbServicio.setEnabled(false);
+
+        jbGuardar.setEnabled(false);
+        jbNuevo.setEnabled(false);
+
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jtImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtImporteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtImporteActionPerformed
+
+    private void jcbCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCiudadesActionPerformed
+        // TODO add your handling code here:
+        if (jcbCiudades.getSelectedItem() != null) {
+            // Habilita los componentes deseados
+            jcbTipoAlojamiento.setEnabled(true);
+            jdIngreso.setEnabled(true);
+            jdSalida.setEnabled(true);
+            jtImporte.setEnabled(true);
+            jcbServicio.setEnabled(true);
+            jrbActivo.setEnabled(true);
+            jbGuardar.setEnabled(true);
+        }
+    }//GEN-LAST:event_jcbCiudadesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
