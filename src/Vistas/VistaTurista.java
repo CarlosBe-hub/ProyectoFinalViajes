@@ -288,40 +288,7 @@ public class VistaTurista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBeliminarActionPerformed
 
     private void jRestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRestadoActionPerformed
-        try {
-        
-        if (jTdni.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese el DNI del turista que desea eliminar.");
-            return;
-        }
-
-        int dni = Integer.parseInt(jTdni.getText());
-
-        int confirm = JOptionPane.showConfirmDialog(
-            this, 
-            "¿Está seguro de que desea eliminar al turista con DNI: " + dni + "?", 
-            "Confirmar Eliminacion", 
-            JOptionPane.YES_NO_OPTION
-        );
        
-        if (confirm == JOptionPane.YES_OPTION) {
-            
-            td.eliminarTuristaPorDni(dni);
-           
-            JOptionPane.showMessageDialog(this, "Turista eliminado exitosamente.");
-       
-            jTdni.setText("");
-            jTnombre.setText("");
-            jTedad.setText("");
-        } else {
-            
-            JOptionPane.showMessageDialog(this, "Eliminación cancelada.");
-        }
-
-    } catch (NumberFormatException e) {
-        
-        JOptionPane.showMessageDialog(this, "Error: Por favor, ingrese un número válido para el DNI.");
-    }
     }//GEN-LAST:event_jRestadoActionPerformed
 
     private void jbtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBuscarActionPerformed

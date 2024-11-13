@@ -138,7 +138,9 @@ public class VistaXTemporada extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
-
+        
+        modelo.setRowCount(0);
+        
         String temporada = (String) jComboBox1.getSelectedItem();
         AlojamientoData alojamientoData = new AlojamientoData();
 
