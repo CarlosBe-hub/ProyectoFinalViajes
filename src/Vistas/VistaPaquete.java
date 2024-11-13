@@ -79,7 +79,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jbNuevo.setEnabled(false);
 
     }
-    private DefaultTableModel modelo = new DefaultTableModel();
+    
+    private NonEditableTableModel modelo = new NonEditableTableModel();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -883,4 +884,11 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
         deshabilitarCampos();
     }
+    
+    class NonEditableTableModel extends DefaultTableModel {
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false; // No permite la edición de ninguna celda
+    }
+}
 }

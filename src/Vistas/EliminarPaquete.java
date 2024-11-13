@@ -22,8 +22,8 @@ import modelo.Paquete;
  */
 public class EliminarPaquete extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel modelo1 = new DefaultTableModel();
-    private DefaultTableModel modelo2 = new DefaultTableModel();
+    private NonEditableTableModel modelo1 = new NonEditableTableModel();
+    private NonEditableTableModel modelo2 = new NonEditableTableModel();
 
     CiudadData cd = new CiudadData();
     PaqueteData pqd = new PaqueteData();
@@ -232,30 +232,29 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
 
     private void jtCiudadesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCiudadesKeyReleased
 
-    borrarFilas();
-    
-    List<Ciudad> listasCiudad = cd.listarCiudades();
-    
-    String encuentra = jtCiudades.getText().toLowerCase();
-    
+        borrarFilas();
 
-    if (!encuentra.isEmpty()) {
-        for (Ciudad ciudad : listasCiudad) {
-            if (ciudad.getNombre().toLowerCase().contains(encuentra)) {
-                modelo1.addRow(new Object[]{
-                    ciudad.getId_ciudad(),
-                    ciudad.getNombre(),
-                    ciudad.getProvincia(),
-                    ciudad.getPais()
-                });
+        List<Ciudad> listasCiudad = cd.listarCiudades();
+
+        String encuentra = jtCiudades.getText().toLowerCase();
+
+        if (!encuentra.isEmpty()) {
+            for (Ciudad ciudad : listasCiudad) {
+                if (ciudad.getNombre().toLowerCase().contains(encuentra)) {
+                    modelo1.addRow(new Object[]{
+                        ciudad.getId_ciudad(),
+                        ciudad.getNombre(),
+                        ciudad.getProvincia(),
+                        ciudad.getPais()
+                    });
+                }
             }
         }
-    }
     }//GEN-LAST:event_jtCiudadesKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         try {
             int fila = jTable1.getSelectedRow();
             Integer idCiudad = (Integer) jTable1.getValueAt(fila, 0);
@@ -263,81 +262,80 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
             borrarFilas();
             for (Paquete paquete : lista) {
                 modelo2.addRow(new Object[]{
-                paquete.getId_paquete(),
+                    paquete.getId_paquete(),
                     paquete.getPasaje().getId_pasaje(),
                     paquete.getAlojamiento().getCiudadDestino(),
                     paquete.getAlojamiento().getFechaInicio()
                 });
-                
+
             }
-            
-            
+
         } catch (ArrayIndexOutOfBoundsException e) {
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbBorrarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarPaqueteActionPerformed
-       try {
-        int fila = jtPaquete.getSelectedRow();
-        if (fila >= 0) {
-            String[] opciones = {"Si", "No"}; 
-            int confirmacion = JOptionPane.showOptionDialog(this, 
-                "¿Esta seguro de que desea eliminar este paquete?", 
-                "Confirme Por favor!", 
-                JOptionPane.YES_NO_OPTION, 
-                JOptionPane.QUESTION_MESSAGE, 
-                null, 
-                opciones, 
-                opciones[1]);
+        try {
+            int fila = jtPaquete.getSelectedRow();
+            if (fila >= 0) {
+                String[] opciones = {"Si", "No"};
+                int confirmacion = JOptionPane.showOptionDialog(this,
+                        "¿Esta seguro de que desea eliminar este paquete?",
+                        "Confirme Por favor!",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        opciones,
+                        opciones[1]);
 
-            if (confirmacion == JOptionPane.YES_OPTION) {
-                Integer idPaquete = (Integer) jtPaquete.getValueAt(fila, 0);
-                Integer idPasaje = (Integer) jtPaquete.getValueAt(fila, 1);
-                Object fechaInicioObj = jtPaquete.getValueAt(fila, 3);
+                if (confirmacion == JOptionPane.YES_OPTION) {
+                    Integer idPaquete = (Integer) jtPaquete.getValueAt(fila, 0);
+                    Integer idPasaje = (Integer) jtPaquete.getValueAt(fila, 1);
+                    Object fechaInicioObj = jtPaquete.getValueAt(fila, 3);
 
-                Date fechaInicio;
-                if (fechaInicioObj instanceof LocalDate) {
-                    LocalDate localDate = (LocalDate) fechaInicioObj;
-                    fechaInicio = java.sql.Date.valueOf(localDate);
-                } else if (fechaInicioObj instanceof Date) {
-                    fechaInicio = (Date) fechaInicioObj;
-                } else {
-                    throw new IllegalArgumentException("Fecha no válida");
-                }
-
-                if (cancelarPackage(fechaInicio)) {
-                    pqd.EliminarPaquete(idPaquete);
-                    psd.eliminarPasaje(idPasaje);
-
-                    borrarPaquete();
-
-                    int filaCiudad = jTable1.getSelectedRow();
-                    if (filaCiudad >= 0) {
-                        Integer idCiudad = (Integer) jTable1.getValueAt(filaCiudad, 0);
-                        List<Paquete> lista = pqd.listaPaquetesXciudad(idCiudad);
-                        for (Paquete paquete : lista) {
-                            modelo2.addRow(new Object[]{
-                                paquete.getId_paquete(),
-                                paquete.getPasaje().getId_pasaje(),
-                                paquete.getAlojamiento().getCiudadDestino(),
-                                paquete.getAlojamiento().getFechaInicio()
-                            });
-                        }
+                    Date fechaInicio;
+                    if (fechaInicioObj instanceof LocalDate) {
+                        LocalDate localDate = (LocalDate) fechaInicioObj;
+                        fechaInicio = java.sql.Date.valueOf(localDate);
+                    } else if (fechaInicioObj instanceof Date) {
+                        fechaInicio = (Date) fechaInicioObj;
+                    } else {
+                        throw new IllegalArgumentException("Fecha no válida");
                     }
-                    JOptionPane.showMessageDialog(this, "Paquete eliminado con éxito.");
-                } else {
-                    JOptionPane.showMessageDialog(this, "No es posible cancelar el paquete. Debe cancelarse al menos 30 días antes del viaje.");
+
+                    if (cancelarPackage(fechaInicio)) {
+                        pqd.EliminarPaquete(idPaquete);
+                        psd.eliminarPasaje(idPasaje);
+
+                        borrarPaquete();
+
+                        int filaCiudad = jTable1.getSelectedRow();
+                        if (filaCiudad >= 0) {
+                            Integer idCiudad = (Integer) jTable1.getValueAt(filaCiudad, 0);
+                            List<Paquete> lista = pqd.listaPaquetesXciudad(idCiudad);
+                            for (Paquete paquete : lista) {
+                                modelo2.addRow(new Object[]{
+                                    paquete.getId_paquete(),
+                                    paquete.getPasaje().getId_pasaje(),
+                                    paquete.getAlojamiento().getCiudadDestino(),
+                                    paquete.getAlojamiento().getFechaInicio()
+                                });
+                            }
+                        }
+                        JOptionPane.showMessageDialog(this, "Paquete eliminado con éxito.");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No es posible cancelar el paquete. Debe cancelarse al menos 30 días antes del viaje.");
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Seleccione un paquete para eliminar.");
             }
-        } else {
+        } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Seleccione un paquete para eliminar.");
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
-    } catch (ArrayIndexOutOfBoundsException e) {
-        JOptionPane.showMessageDialog(this, "Seleccione un paquete para eliminar.");
-    } catch (IllegalArgumentException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
-    }
     }//GEN-LAST:event_jbBorrarPaqueteActionPerformed
 
 
@@ -384,17 +382,16 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
             modelo1.removeRow(i);
         }
     }
-    
-    private void borrarPaquete(){
+
+    private void borrarPaquete() {
         int f = jtPaquete.getRowCount() - 1;
 
         for (int i = f; i >= 0; i--) {
             modelo2.removeRow(i);
         }
-        
+
     }
-    
-    
+
     private boolean cancelarPackage(Date fechaInicio) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaInicio);
@@ -408,6 +405,12 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
         return currentDate.after(cancelDeadline);
     }
 
-    
-    
+    class NonEditableTableModel extends DefaultTableModel {
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    }
+
 }
