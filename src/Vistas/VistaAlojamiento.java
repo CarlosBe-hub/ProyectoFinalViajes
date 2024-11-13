@@ -48,6 +48,8 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jcbServicio.setEnabled(false);
         jbNuevo.setEnabled(false);
         jbGuardar.setEnabled(false);
+        jcbProvincias.addActionListener(e -> jbBuscar.setEnabled(true));
+        jcbPais.addActionListener(e -> jbBuscar.setEnabled(true));
     }
 
     /**
@@ -207,7 +209,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                 jbBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, -1, -1));
+        jPanel1.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, -1, -1));
 
         jbNuevo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jbNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/new archive.png"))); // NOI18N
@@ -380,6 +382,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             jcbServicio.setEnabled(false);
             jrbActivo.setEnabled(false);
             jbGuardar.setEnabled(false);
+            jbBuscar.setEnabled(false);
 
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Combos Vacios");

@@ -158,19 +158,23 @@ public class Ciudades extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        
-    if (!jTpais.getText().isEmpty() && !jTprovincia.getText().isEmpty() && !jTciudad.getText().isEmpty()) {
-        CiudadData cd = new CiudadData();
+       if (!jTpais.getText().isEmpty() && !jTprovincia.getText().isEmpty() && !jTciudad.getText().isEmpty()) {
         String pais = jTpais.getText();
         String provincia = jTprovincia.getText();
         String ciudad = jTciudad.getText();
+        
+        
+        if (!esSoloLetras(pais) || !esSoloLetras(provincia) || !esSoloLetras(ciudad)) {
+            JOptionPane.showMessageDialog(this, "Los campos no deben contener numeros.");
+            return; 
+        }
+
+        CiudadData cd = new CiudadData();
         boolean estado = jrEstado.isSelected();
 
-        
         if (cd.buscarCiudad(ciudad) != null) {
             JOptionPane.showMessageDialog(this, "La ciudad ya existe en la base de datos.");
         } else {
-            
             Ciudad nuevaCiudad = new Ciudad(ciudad, pais, estado, provincia);
             cd.agregarCiudad(nuevaCiudad);
             JOptionPane.showMessageDialog(this, "Ciudad guardada exitosamente.");
@@ -178,9 +182,7 @@ public class Ciudades extends javax.swing.JInternalFrame {
         }
     } else {
         JOptionPane.showMessageDialog(this, "No deje campos vacios!");
-    }
-
-        
+    }   
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
@@ -188,6 +190,7 @@ public class Ciudades extends javax.swing.JInternalFrame {
     CiudadData cd = new CiudadData();
     
     Ciudad ciudad = cd.buscarCiudad(nombreCiudad);
+    
     if (ciudad != null) {
         int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar la ciudad seleccionada?", "Confirme Por favor!", JOptionPane.YES_NO_OPTION);
         
@@ -254,4 +257,7 @@ private void limpiarCampos(){
     jTciudad.setText("");
     jrEstado.setSelected(false);
 }
-}
+
+private boolean esSoloLetras(String texto) {
+    return texto.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+"); // Acepta letras y espacios
+}}

@@ -278,10 +278,20 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbBorrarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarPaqueteActionPerformed
+       try {
+        int fila = jtPaquete.getSelectedRow();
+        if (fila >= 0) {
+            String[] opciones = {"Si", "No"}; 
+            int confirmacion = JOptionPane.showOptionDialog(this, 
+                "¿Esta seguro de que desea eliminar este paquete?", 
+                "Confirme Por favor!", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                opciones, 
+                opciones[1]);
 
-try {
-            int fila = jtPaquete.getSelectedRow();
-            if (fila >= 0) {
+            if (confirmacion == JOptionPane.YES_OPTION) {
                 Integer idPaquete = (Integer) jtPaquete.getValueAt(fila, 0);
                 Integer idPasaje = (Integer) jtPaquete.getValueAt(fila, 1);
                 Object fechaInicioObj = jtPaquete.getValueAt(fila, 3);
@@ -319,16 +329,15 @@ try {
                 } else {
                     JOptionPane.showMessageDialog(this, "No es posible cancelar el paquete. Debe cancelarse al menos 30 días antes del viaje.");
                 }
-            } else {
-                System.out.println("No se ha seleccionado ningún paquete para borrar.");
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } else {
             JOptionPane.showMessageDialog(this, "Seleccione un paquete para eliminar.");
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
         }
-
-
+    } catch (ArrayIndexOutOfBoundsException e) {
+        JOptionPane.showMessageDialog(this, "Seleccione un paquete para eliminar.");
+    } catch (IllegalArgumentException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
     }//GEN-LAST:event_jbBorrarPaqueteActionPerformed
 
 

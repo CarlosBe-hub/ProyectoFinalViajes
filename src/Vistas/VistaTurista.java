@@ -245,39 +245,83 @@ public class VistaTurista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBagregarActionPerformed
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
-                                       
-    try {
+        try {
+            if (jTdni.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese el DNI del turista que desea eliminar.");
+                return;
+            }
+
+            int dni = Integer.parseInt(jTdni.getText());
+
+            Object[] opciones = {"Sí", "No"};
+            int confirm = JOptionPane.showOptionDialog(
+                    this,
+                    "¿Está seguro de que desea eliminar al turista con DNI: " + dni + "?",
+                    "Confirme Por favor!",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    opciones,
+                    opciones[0]
+            );
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                td.eliminarTuristaPorDni(dni);
+                JOptionPane.showMessageDialog(this, "Turista eliminado exitosamente.");
+
+                jTdni.setText("");
+                jTnombre.setText("");
+                jTedad.setText("");
+                jRestado.setSelected(false);
+                jTnombre.setEnabled(false);
+                jTedad.setEnabled(false);
+                jRestado.setEnabled(false);
+                jBagregar.setEnabled(false);
+                jBeliminar.setEnabled(false);
+                jbNuevo.setEnabled(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Eliminación cancelada.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: Por favor, ingrese un número válido para el DNI.");
+        }                        
+    }//GEN-LAST:event_jBeliminarActionPerformed
+
+    private void jRestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRestadoActionPerformed
+        try {
+        
         if (jTdni.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingrese el DNI del turista que desea eliminar.");
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el DNI del turista que desea eliminar.");
             return;
         }
 
         int dni = Integer.parseInt(jTdni.getText());
 
-        int confirm = JOptionPane.showInternalConfirmDialog(null, "¿Desea eliminar este turista?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
-
+        int confirm = JOptionPane.showConfirmDialog(
+            this, 
+            "¿Está seguro de que desea eliminar al turista con DNI: " + dni + "?", 
+            "Confirmar Eliminacion", 
+            JOptionPane.YES_NO_OPTION
+        );
+       
         if (confirm == JOptionPane.YES_OPTION) {
-
+            
             td.eliminarTuristaPorDni(dni);
+           
             JOptionPane.showMessageDialog(this, "Turista eliminado exitosamente.");
-
+       
             jTdni.setText("");
             jTnombre.setText("");
             jTedad.setText("");
         } else {
-
+            
             JOptionPane.showMessageDialog(this, "Eliminación cancelada.");
         }
 
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Error: Por favor ingrese un número válido para el DNI.");
+        
+        JOptionPane.showMessageDialog(this, "Error: Por favor, ingrese un número válido para el DNI.");
     }
- 
-
-    }//GEN-LAST:event_jBeliminarActionPerformed
-
-    private void jRestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRestadoActionPerformed
-
     }//GEN-LAST:event_jRestadoActionPerformed
 
     private void jbtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBuscarActionPerformed
