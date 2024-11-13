@@ -32,7 +32,7 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         jCmes.setEnabled(false);
         jBbuscar.setEnabled(false);
         cargarMeses();
-        jScantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1));
+        //jScantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1));
         
     }
 
@@ -73,19 +73,15 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jCpais = new javax.swing.JComboBox<>();
         jCprovincia = new javax.swing.JComboBox<>();
         jCmes = new javax.swing.JComboBox<>();
-        jScantidad = new javax.swing.JSpinner();
         jBbuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabla = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jBsalir = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
@@ -94,21 +90,17 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         jLabel2.setText("Consultas de Paquetes");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Seleccione Pais de Destino");
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Seleccione un Provincia");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Seleccione un Mes");
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Cantidad de Personas");
 
         jCpais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,13 +120,7 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
             }
         });
 
-        jScantidad.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jScantidadStateChanged(evt);
-            }
-        });
-
-        jBbuscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jBbuscar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jBbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon search.png"))); // NOI18N
         jBbuscar.setText("Buscar");
         jBbuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -167,10 +153,6 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/consultar_paquete.png"))); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Cantidad de Menores");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -178,33 +160,32 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
+                        .addGap(121, 121, 121)
                         .addComponent(jLabel6)
-                        .addGap(125, 125, 125)
+                        .addGap(250, 250, 250)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 951, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(149, 149, 149)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(32, 32, 32)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jCpais, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jCprovincia, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jCmes, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(52, 52, 52)
-                                        .addComponent(jBbuscar))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jSpinner1, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)))))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jCmes, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jCprovincia, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(56, 56, 56)
+                                        .addComponent(jCpais, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(168, 168, 168)
+                                .addComponent(jBbuscar)))))
+                .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -212,7 +193,7 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,36 +203,28 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
                         .addGap(9, 9, 9)
                         .addComponent(jLabel6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(19, 19, 19)
                         .addComponent(jLabel2)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jCpais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
                     .addComponent(jCprovincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBbuscar))
-                .addGap(24, 24, 24)
+                    .addComponent(jLabel3)
+                    .addComponent(jBbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jCmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jScantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jBsalir)
-                .addGap(10, 10, 10))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -310,10 +283,6 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jBsalirActionPerformed
 
-    private void jScantidadStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jScantidadStateChanged
-        ajustarImportePorCantidad();
-    }//GEN-LAST:event_jScantidadStateChanged
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
@@ -325,14 +294,10 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jScantidad;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTabla;
     // End of variables declaration//GEN-END:variables
 
@@ -354,8 +319,13 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         }
     }
 
-    private void agregarPaqueteATabla(Paquete paquete, double importeBase) {
-         modelo.addRow(new Object[]{
+    private void agregarPaqueteATabla(Paquete paquete, double importeBase) {    
+    PaqueteData paqueteData = new PaqueteData();
+    List<String> turistas = paqueteData.listarTuristasPorPaquete(paquete.getId_paquete());
+    String nombresTuristas = String.join(", ", turistas);
+    int numeroTuristas = turistas.size();
+
+    modelo.addRow(new Object[]{
         paquete.getCiudadDestino().getNombre(),
         paquete.getAlojamiento().getFechaInicio(),
         paquete.getAlojamiento().getFechaFin(),
@@ -363,22 +333,28 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         paquete.getAlojamiento().getTipoAlojamiento(),
         paquete.getAlojamiento().getServicio(),
         importeBase,
-        importeBase  
+        importeBase,
+        nombresTuristas,
+        numeroTuristas
     });
+ 
     }
 
     private void armarCabecera() {
-        modelo.addColumn("Ciudad");
-        modelo.addColumn("Fecha Inicio");
-        modelo.addColumn("Fecha Fin");
-        modelo.addColumn("Transporte");
-        modelo.addColumn("Alojamiento");
-        modelo.addColumn("Servicios");
-        modelo.addColumn("Precio Total");
-        modelo.addColumn("Importe Base");
-        jTabla.setModel(modelo);
-        jTabla.getColumnModel().getColumn(7).setMinWidth(0); 
-        jTabla.getColumnModel().getColumn(7).setMaxWidth(0);
+    modelo.addColumn("Ciudad");
+    modelo.addColumn("Fecha Inicio");
+    modelo.addColumn("Fecha Fin");
+    modelo.addColumn("Transporte");
+    modelo.addColumn("Alojamiento");
+    modelo.addColumn("Servicios");
+    modelo.addColumn("Precio Total");
+    modelo.addColumn("Importe Base");
+    modelo.addColumn("Turistas");
+    modelo.addColumn("Num.Turistas");
+    jTabla.setModel(modelo);
+    jTabla.getColumnModel().getColumn(7).setMinWidth(0); 
+    jTabla.getColumnModel().getColumn(7).setMaxWidth(0);
+
     }
 
     public String traducir(String fecha) {
@@ -410,13 +386,4 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
             modelo.removeRow(i);
         }
     }
-
-    private void ajustarImportePorCantidad() {
-        int cantidadPersonas = (int) jScantidad.getValue();
-    for (int i = 0; i < modelo.getRowCount(); i++) {
-        double importeBase = (double) modelo.getValueAt(i, 7); 
-        double costoTotal = importeBase * cantidadPersonas;     
-        modelo.setValueAt(costoTotal, i, 6);                    
-    }
-}
 }

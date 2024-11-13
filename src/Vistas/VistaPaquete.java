@@ -62,6 +62,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         ImporteTotalPaquetemenores.setEditable(false);
         ImporteTotal.setEditable(false);
         jtAlojamiento.setEditable(false);
+        ImporteTotalPaquete.setEditable(false);
 
     }
     private DefaultTableModel modelo = new DefaultTableModel();
@@ -149,7 +150,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jCtransporteActionPerformed(evt);
             }
         });
-        jPanel1.add(jCtransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 160, -1));
+        jPanel1.add(jCtransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, 160, -1));
 
         jCciudades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,7 +163,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Importe");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, -1, -1));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 242, 580, 0));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/exit icon.png"))); // NOI18N
@@ -172,7 +173,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 640, 150, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 560, 150, 30));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -187,7 +188,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 650, 150));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 650, 120));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -204,8 +205,8 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Tipo de Transporte");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, -1, -1));
-        jPanel1.add(jtAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 160, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, -1, -1));
+        jPanel1.add(jtAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 370, 160, -1));
 
         jBbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon search.png"))); // NOI18N
         jBbuscar.setText("BUSCAR");
@@ -223,19 +224,19 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jBagregarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 640, 130, 30));
+        jPanel1.add(jBagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, 130, 30));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Importe de Transporte");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, -1, -1));
-        jPanel1.add(jTimporteTransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, 160, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, -1, -1));
+        jPanel1.add(jTimporteTransporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 160, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Importe total:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 590, 170, -1));
-        jPanel1.add(ImporteTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 590, 160, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 530, 170, -1));
+        jPanel1.add(ImporteTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 530, 160, -1));
 
         jBcargarimporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-aprobar-y-actualizar-48.png"))); // NOI18N
         jBcargarimporte.setText("Cargar");
@@ -244,35 +245,35 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
                 jBcargarimporteActionPerformed(evt);
             }
         });
-        jPanel1.add(jBcargarimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, -1, 50));
+        jPanel1.add(jBcargarimporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, -1, 50));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Turista 1 ");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Turista 2");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Turista 3");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Turista 4");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, -1, -1));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, -1, -1));
 
-        jPanel1.add(jcbTurista2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, 150, -1));
+        jPanel1.add(jcbTurista2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 440, 150, -1));
 
-        jPanel1.add(jcbTurista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, 150, -1));
+        jPanel1.add(jcbTurista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 150, -1));
 
-        jPanel1.add(jcbTurista3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 560, 150, -1));
+        jPanel1.add(jcbTurista3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 480, 150, -1));
 
-        jPanel1.add(jcbTurista4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 600, 150, -1));
+        jPanel1.add(jcbTurista4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, 150, -1));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-worldwide-delivery-50.png"))); // NOI18N
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, -1, 50));
@@ -280,14 +281,14 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Importe -10");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 560, 100, -1));
-        jPanel1.add(ImporteTotalPaquetemenores, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, 160, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 500, 100, -1));
+        jPanel1.add(ImporteTotalPaquetemenores, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, 160, -1));
 
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Importe +18");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 530, 100, -1));
-        jPanel1.add(ImporteTotalPaquete, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 530, 160, -1));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 100, -1));
+        jPanel1.add(ImporteTotalPaquete, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 160, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -297,9 +298,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -549,7 +548,7 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
         modelo.addColumn("Codigo Paquete");
         modelo.addColumn("Fecha de inicio");
         modelo.addColumn("Fecha fin");
-        modelo.addColumn("Tipo alojamiento");
+        modelo.addColumn("Alojamiento");
         modelo.addColumn("Servicio");
         modelo.addColumn("Importe diario");
         jTable1.setModel(modelo);

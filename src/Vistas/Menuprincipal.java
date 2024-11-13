@@ -49,7 +49,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        escritorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo de pantalla.png"))); // NOI18N
+        escritorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo de pantalla final.png")));
 
         jMenu1.setText("Administracion");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -183,13 +183,11 @@ public class Menuprincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1120, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

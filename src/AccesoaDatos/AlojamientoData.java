@@ -471,12 +471,12 @@ public List<Alojamiento> AlojamientoXTemporada(String temporada) {
             alojamiento.setImporteDiario(rs.getDouble("importe_diario"));
             alojamiento.setTipoAlojamiento(rs.getString("tipo_lojamiento"));
 
-            // Crear objeto Ciudad y asignarle el nombre
+            
             Ciudad ciudad = new Ciudad();
             ciudad.setNombre(rs.getString("ciudad_nombre"));
             alojamiento.setCiudadDestino(ciudad);
 
-            // Verificar si la temporada de la fecha de inicio coincide con la seleccionada
+            
             String temporadaInicio = determinarTemporada(alojamiento.getFechaInicio());
             if (temporadaInicio.equalsIgnoreCase(temporada)) {
                 alojamientos.add(alojamiento);
@@ -488,16 +488,16 @@ public List<Alojamiento> AlojamientoXTemporada(String temporada) {
     return alojamientos;
 }
 
-public List<Alojamiento> listarAlojamientosUltimosDosMeses() {
+public List<Alojamiento> listarAlojamientosOctubreNoviembre() {
     List<Alojamiento> alojamientos = new ArrayList<>();
     String sql = "SELECT a.id_alojamiento, a.Fecha_inicio, a.fecha_fin, c.nombre AS ciudad_nombre " +
                  "FROM alojamiento a " +
                  "JOIN ciudad c ON a.id_ciudadDestino = c.id_ciudad " +
-                 "WHERE a.estado = 1 AND a.Fecha_inicio >= ? AND a.Fecha_inicio < ?";
+                 "WHERE a.estado = 1 AND a.Fecha_inicio >= ? AND a.Fecha_inicio <= ?";
 
-    // Calcular la fecha de inicio y fin para el rango de los últimos dos meses
-    LocalDate fechaFin = LocalDate.now().withDayOfMonth(1); 
-    LocalDate fechaInicio = fechaFin.minusMonths(2); 
+    
+    LocalDate fechaInicio = LocalDate.of(LocalDate.now().getYear(), 10, 1); 
+    LocalDate fechaFin = LocalDate.of(LocalDate.now().getYear(), 11, 30); 
 
     try (PreparedStatement ps = red.prepareStatement(sql)) {
         ps.setDate(1, Date.valueOf(fechaInicio));
@@ -510,7 +510,6 @@ public List<Alojamiento> listarAlojamientosUltimosDosMeses() {
             alojamiento.setFechaInicio(rs.getDate("Fecha_inicio").toLocalDate());
             alojamiento.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
 
-            
             Ciudad ciudad = new Ciudad();
             ciudad.setNombre(rs.getString("ciudad_nombre"));
             alojamiento.setCiudadDestino(ciudad);
@@ -518,10 +517,11 @@ public List<Alojamiento> listarAlojamientosUltimosDosMeses() {
             alojamientos.add(alojamiento);
         }
     } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error al listar alojamientos de los últimos dos meses: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al listar alojamientos de octubre y noviembre: " + e.getMessage());
     }
     return alojamientos;
 }}
+
 
 
 

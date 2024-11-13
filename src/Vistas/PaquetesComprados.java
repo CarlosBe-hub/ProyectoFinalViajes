@@ -120,9 +120,8 @@ public class PaquetesComprados extends javax.swing.JInternalFrame {
         AlojamientoData alojamientoData = new AlojamientoData();
 
         
-        List<Alojamiento> alojamientos = alojamientoData.listarAlojamientosUltimosDosMeses();
+        List<Alojamiento> alojamientos = alojamientoData.listarAlojamientosOctubreNoviembre();
 
-        // Llenar la tabla con los datos obtenidos
         for (Alojamiento alojamiento : alojamientos) {
             model.addRow(new Object[] {
                 alojamiento.getId_alojamiento(),

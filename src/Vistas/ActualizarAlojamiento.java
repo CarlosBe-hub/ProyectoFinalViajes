@@ -448,7 +448,7 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
         modelo.addColumn("Fecha de Fin");
         modelo.addColumn("Servicio");
         modelo.addColumn("Importe Diario");
-        modelo.addColumn("Tipo Alojamineto");
+        modelo.addColumn("Alojamineto");
         modelo.addColumn("Estado");
         jTable1.setModel(modelo);
     }

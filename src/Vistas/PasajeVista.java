@@ -391,8 +391,8 @@ public class PasajeVista extends javax.swing.JInternalFrame {
         modelo.addColumn("Codigo Pasaje");
         modelo.addColumn("Ciudad origen");
         modelo.addColumn("Ciudad Destino");
-        modelo.addColumn("importe");
-        modelo.addColumn("Tipo de Transporte");
+        modelo.addColumn("Importe");
+        modelo.addColumn("Transporte");
         modelo.addColumn("Estado");
 
     }

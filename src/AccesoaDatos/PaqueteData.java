@@ -265,6 +265,30 @@
     }
     return paquetes;
 }
+        
+public List<String> listarTuristasPorPaquete(int idPaquete) {
+    List<String> turistas = new ArrayList<>();
+    String sql = "SELECT t.nombre " +
+                 "FROM paquete p " +
+                 "LEFT JOIN turista t ON " +
+                 "    t.id_turista = p.id_turista1 OR " +
+                 "    t.id_turista = p.id_turista2 OR " +
+                 "    t.id_turista = p.id_turista3 OR " +
+                 "    t.id_turista = p.id_turista4 " +
+                 "WHERE p.id_paquete = ? AND t.id_turista IS NOT NULL";
+
+    try { PreparedStatement ps = red.prepareStatement(sql);
+        ps.setInt(1, idPaquete);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            turistas.add(rs.getString("nombre"));
         }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return turistas;
+}
+
+    }
 
     
