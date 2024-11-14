@@ -7,6 +7,7 @@ package Vistas;
 import AccesoaDatos.AlojamientoData;
 import AccesoaDatos.PaqueteData;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -337,32 +338,47 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbActualizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizar2ActionPerformed
-         if (jtfID.getText().isEmpty()) {
+                                                                                     
+    if (jtfID.getText().isEmpty()) {
         JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.");
         return;
     }
 
     try {
-       
         int id = Integer.parseInt(jtfID.getText());
         Alojamiento alojamiento = new Alojamiento();
         alojamiento.setId_alojamiento(id);
 
-        
+
         if (fechaInicio.getDate() == null || fechaFin.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese fechas válidas.");
             return;
         }
 
-        
-        alojamiento.setFechaInicio(fechaInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        alojamiento.setFechaFin(fechaFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 
-        
+        Date fechaInicioDate = fechaInicio.getDate();
+        Date fechaFinDate = fechaFin.getDate();
+
+
+        if (fechaInicioDate.after(fechaFinDate)) {
+            JOptionPane.showMessageDialog(this, "La fecha de inicio no puede ser posterior a la fecha de fin.");
+            return;
+        }
+
+
+        Date fechaActual = new Date();
+        if (fechaInicioDate.before(fechaActual) || fechaFinDate.before(fechaActual)) {
+            JOptionPane.showMessageDialog(this, "Las fechas no pueden ser anteriores a la fecha actual.");
+            return;
+        }
+
+
+        alojamiento.setFechaInicio(fechaInicioDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        alojamiento.setFechaFin(fechaFinDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+
         alojamiento.setTipoAlojamiento((String) jcTAlojamiento.getSelectedItem());
         alojamiento.setServicio((String) jcServicio.getSelectedItem());
 
-      
         String importeTexto = jtfImporte.getText();
         if (importeTexto.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un importe válido.");
@@ -371,7 +387,6 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
 
         double importeDiario;
         try {
-            
             importeTexto = importeTexto.replace(",", ".");
             importeDiario = Double.parseDouble(importeTexto);
         } catch (NumberFormatException e) {
@@ -379,23 +394,20 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
             return;
         }
 
-        
         alojamiento.setImporteDiario(importeDiario);
         alojamiento.setEstado(jrbEstado.isSelected());
-        
-        ad.modificarAlojamientoPorId(id, alojamiento);
-        
-        int filaSeleccionada = jTable1.getSelectedRow();
-            if (filaSeleccionada != -1) {
-                modelo.setValueAt(alojamiento.getFechaInicio(), filaSeleccionada, 1);
-                modelo.setValueAt(alojamiento.getFechaFin(), filaSeleccionada, 2);
-                modelo.setValueAt(alojamiento.getServicio(), filaSeleccionada, 3);
-                modelo.setValueAt(alojamiento.getImporteDiario(), filaSeleccionada, 4);
-                modelo.setValueAt(alojamiento.getTipoAlojamiento(), filaSeleccionada, 5);
-                modelo.setValueAt(alojamiento.isEstado() ? "Activo" : "Inactivo", filaSeleccionada, 6);
-            }
 
-       
+        ad.modificarAlojamientoPorId(id, alojamiento);
+
+        int filaSeleccionada = jTable1.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            modelo.setValueAt(alojamiento.getFechaInicio(), filaSeleccionada, 1);
+            modelo.setValueAt(alojamiento.getFechaFin(), filaSeleccionada, 2);
+            modelo.setValueAt(alojamiento.getServicio(), filaSeleccionada, 3);
+            modelo.setValueAt(alojamiento.getImporteDiario(), filaSeleccionada, 4);
+            modelo.setValueAt(alojamiento.getTipoAlojamiento(), filaSeleccionada, 5);
+            modelo.setValueAt(alojamiento.isEstado() ? "Activo" : "Inactivo", filaSeleccionada, 6);
+        }
 
         JOptionPane.showMessageDialog(this, "Alojamiento actualizado correctamente.");
 
@@ -404,6 +416,8 @@ public class ActualizarAlojamiento extends javax.swing.JInternalFrame {
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error al actualizar el alojamiento: " + e.getMessage());
     }
+
+                                              
     }//GEN-LAST:event_jbActualizar2ActionPerformed
 
     private void jcServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcServicioActionPerformed
