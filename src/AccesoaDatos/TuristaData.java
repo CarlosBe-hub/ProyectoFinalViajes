@@ -91,26 +91,7 @@ public class TuristaData {
         }
 
     }
-/*
-    public void actualizarEstadoTurista(int dni, int nuevoEstado) {
-        String sql = "UPDATE turista SET estado = ? WHERE dni = ?";
-        try (Connection conn = conexion.getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setInt(1, nuevoEstado);
-            ps.setInt(2, dni);
-
-            int filasAfectadas = ps.executeUpdate();
-            if (filasAfectadas > 0) {
-                System.out.println("Estado del turista actualizado exitosamente.");
-            } else {
-                System.out.println("No se encontro un turista con el DNI especificado.");
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error al actualizar el estado del turista: " + e.getMessage());
-        }
-    }*/
-    
+  
     public void actualizarTurista(int dni, String nuevoNombre, int nuevaEdad, boolean nuevoEstado) {
     String sql = "UPDATE turista SET nombre = ?, edad = ?, estado = ? WHERE dni = ?";
 

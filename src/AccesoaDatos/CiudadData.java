@@ -7,7 +7,6 @@ package AccesoaDatos;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.spi.DirStateFactory;
 import javax.swing.JOptionPane;
 import modelo.Ciudad;
 

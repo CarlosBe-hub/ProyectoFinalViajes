@@ -232,7 +232,7 @@ public class AlojamientoData {
             aloja.setId_alojamiento(rs.getInt("id_alojamiento"));
             aloja.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
             aloja.setFechaFin(rs.getDate("fecha_fin").toLocalDate());
-            aloja.setEstado(true);  // Esto siempre es true según el filtro de la consulta
+            aloja.setEstado(true);  
             aloja.setServicio(rs.getString("servicio"));
             aloja.setImporteDiario(rs.getDouble("importe_diario"));
             aloja.setCiudadDestino(c);
@@ -391,7 +391,7 @@ public class AlojamientoData {
             (mes == Month.JULY)) {
             return "Alta";
         }
-        
+        // Temporada Media
         else if (mes == Month.SEPTEMBER || mes == Month.OCTOBER || mes == Month.NOVEMBER ||
                  (mes == Month.MARCH && dia >= 20) || (mes == Month.JUNE && dia <= 21)) {
             return "Media";

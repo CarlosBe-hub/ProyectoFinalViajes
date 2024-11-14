@@ -5,6 +5,7 @@
 package Vistas;
 
 
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -209,7 +210,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         escritorio.repaint();
 Ciudades a = new Ciudades();
         a.setVisible(true);
-        escritorio.add(a);
+        Component add = escritorio.add(a);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

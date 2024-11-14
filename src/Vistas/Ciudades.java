@@ -259,5 +259,5 @@ private void limpiarCampos(){
 }
 
 private boolean esSoloLetras(String texto) {
-    return texto.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+"); // Acepta letras y espacios
+    return texto.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+"); 
 }}

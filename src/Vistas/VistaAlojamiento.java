@@ -456,9 +456,9 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtImporteActionPerformed
 
     private void jcbCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCiudadesActionPerformed
-        // TODO add your handling code here:
+        
         if (jcbCiudades.getSelectedItem() != null) {
-            // Habilita los componentes deseados
+            
             jcbTipoAlojamiento.setEnabled(true);
             jdIngreso.setEnabled(true);
             jdSalida.setEnabled(true);
