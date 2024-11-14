@@ -50,7 +50,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        escritorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo de pantalla final.png")));
+        escritorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/imagen_fondo10.png")));
 
         jMenu1.setText("Administracion");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +164,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem11);
 
         jMenuItem12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icon search.png"))); // NOI18N
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ConsultaPaquete3.png"))); // NOI18N
         jMenuItem12.setText("Consultar Estado Paquete");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,11 +194,11 @@ public class Menuprincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1437, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1358, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
         );
 
         pack();
