@@ -251,49 +251,61 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-
-        try {
-
-            if (jdIngreso.getDate() == null || jdSalida.getDate() == null) {
-                JOptionPane.showMessageDialog(this, "Por favor, ingrese las fechas de ingreso y salida.");
-                return;
-            }
-
-            LocalDate fechaIng = jdIngreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate fechaSalida = jdSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-            if (fechaSalida.isBefore(fechaIng)) {
-                JOptionPane.showMessageDialog(this, "La fecha de salida debe ser posterior a la fecha de ingreso.");
-                return;
-            }
-
-            if (fechaIng.isEqual(fechaSalida)) {
-                JOptionPane.showMessageDialog(this, "La fecha de ingreso no puede ser igual a la fecha de salida.");
-                return;
-            }
-
-            boolean estado = jrbActivo.isSelected();
-            String tipoServicio = jcbServicio.getSelectedItem().toString();
-            String importe = jtImporte.getText().replace(",", ".").trim();
-            double importeDiario = Double.parseDouble(importe);
-            String ciudadDestino = jcbCiudades.getSelectedItem().toString();
-            Ciudad ciudad1 = cd.buscarCiudad(ciudadDestino);
-            String tipoAlojamiento = jcbTipoAlojamiento.getSelectedItem().toString();
-
-            ad.calculodeVacaciones(fechaIng, fechaSalida);
-            Alojamiento alojamiento2 = new Alojamiento(fechaIng, fechaSalida, estado, tipoServicio, importeDiario, ciudad1, tipoAlojamiento);
-            ad.guardarAlojamiento(alojamiento2);
-
-            JOptionPane.showMessageDialog(this, "Alojamiento Registrado!");
-            jbGuardar.setEnabled(false);
-            jbNuevo.setEnabled(true);
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error en el formato del importe diario.");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage());
+         try {
+        
+        if ("---Seleccionar---".equals(jcbTipoAlojamiento.getSelectedItem().toString())) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un tipo de alojamiento valido.");
+            return;
         }
 
+        
+        if ("---Seleccionar---".equals(jcbServicio.getSelectedItem().toString())) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un tipo de servicio valido.");
+            return;
+        }
+
+        
+        if (jdIngreso.getDate() == null || jdSalida.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese las fechas de ingreso y salida.");
+            return;
+        }
+
+        LocalDate fechaIng = jdIngreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate fechaSalida = jdSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        if (fechaSalida.isBefore(fechaIng)) {
+            JOptionPane.showMessageDialog(this, "La fecha de salida debe ser posterior a la fecha de ingreso.");
+            return;
+        }
+
+        if (fechaIng.isEqual(fechaSalida)) {
+            JOptionPane.showMessageDialog(this, "La fecha de ingreso no puede ser igual a la fecha de salida.");
+            return;
+        }
+
+        boolean estado = jrbActivo.isSelected();
+        String tipoServicio = jcbServicio.getSelectedItem().toString();
+        String importe = jtImporte.getText().replace(",", ".").trim();
+        double importeDiario = Double.parseDouble(importe);
+        String ciudadDestino = jcbCiudades.getSelectedItem().toString();
+        Ciudad ciudad1 = cd.buscarCiudad(ciudadDestino);
+        String tipoAlojamiento = jcbTipoAlojamiento.getSelectedItem().toString();
+
+        ad.calculodeVacaciones(fechaIng, fechaSalida);
+        Alojamiento alojamiento2 = new Alojamiento(fechaIng, fechaSalida, estado, tipoServicio, importeDiario, ciudad1, tipoAlojamiento);
+        ad.guardarAlojamiento(alojamiento2);
+
+        JOptionPane.showMessageDialog(this, "Alojamiento Registrado!");
+        jbGuardar.setEnabled(false);
+        jbNuevo.setEnabled(true);
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Error en el formato del importe diario.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage());
+    }
+
+        
     }
 
     private void calcularImportePorServicio() {

@@ -253,26 +253,25 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtCiudadesKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
         try {
-            int fila = jTable1.getSelectedRow();
-            Integer idCiudad = (Integer) jTable1.getValueAt(fila, 0);
-            List<Paquete> lista = pqd.listaPaquetesXciudad(idCiudad);
-            borrarFilas();
-            for (Paquete paquete : lista) {
-                modelo2.addRow(new Object[]{
-                    paquete.getId_paquete(),
-                    paquete.getPasaje().getId_pasaje(),
-                    paquete.getAlojamiento().getCiudadDestino(),
-                    paquete.getAlojamiento().getFechaInicio()
-                });
+        int fila = jTable1.getSelectedRow();
+        Integer idCiudad = (Integer) jTable1.getValueAt(fila, 0);
 
-            }
+        
+        borrarPaquete();
 
-        } catch (ArrayIndexOutOfBoundsException e) {
+        List<Paquete> lista = pqd.listaPaquetesXciudad(idCiudad);
+        for (Paquete paquete : lista) {
+            modelo2.addRow(new Object[]{
+                paquete.getId_paquete(),
+                paquete.getPasaje().getId_pasaje(),
+                paquete.getAlojamiento().getCiudadDestino(),
+                paquete.getAlojamiento().getFechaInicio()
+            });
         }
-
+    } catch (ArrayIndexOutOfBoundsException e) {
+        JOptionPane.showMessageDialog(this, "Seleccione una ciudad para cargar los paquetes.");
+    }     
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbBorrarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarPaqueteActionPerformed
@@ -304,7 +303,7 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
                         throw new IllegalArgumentException("Fecha no válida");
                     }
 
-                    if (cancelarPackage(fechaInicio)) {
+                    if (cancelarPaquete(fechaInicio)) {
                         pqd.EliminarPaquete(idPaquete);
                         psd.eliminarPasaje(idPasaje);
 
@@ -392,17 +391,18 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
 
     }
 
-    private boolean cancelarPackage(Date fechaInicio) {
+    private boolean cancelarPaquete(Date fechaInicio) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(fechaInicio);
+    calendar.setTime(fechaInicio);
 
-        calendar.add(Calendar.DAY_OF_MONTH, -30);
+    
+    calendar.add(Calendar.DAY_OF_MONTH, -30);
+    Date cancelDeadline = calendar.getTime();
 
-        Date cancelDeadline = calendar.getTime();
+    Date currentDate = new Date();
 
-        Date currentDate = new Date();
-
-        return currentDate.after(cancelDeadline);
+    
+    return currentDate.before(cancelDeadline);
     }
 
     class NonEditableTableModel extends DefaultTableModel {
