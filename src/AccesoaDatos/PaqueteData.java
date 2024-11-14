@@ -138,7 +138,10 @@
                     Pasaje pasaje = new Pasaje();
                     pasaje.setId_pasaje(rs.getInt("id_pasaje"));
                     paquete.setPasaje(pasaje);
-                    JOptionPane.showMessageDialog(null, "Se encontro el paquete");
+                    
+                     paquete.setEstado(rs.getBoolean("estado"));
+                     
+                   // JOptionPane.showMessageDialog(null, "Se encontro el paquete");
                 }
 
             } catch (SQLException e) {

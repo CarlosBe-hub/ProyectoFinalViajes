@@ -321,13 +321,13 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRestadoActionPerformed
 
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
-   int selectedRow = jTabla.getSelectedRow();
+  int selectedRow = jTabla.getSelectedRow();
     if (selectedRow == -1) {
         JOptionPane.showMessageDialog(this, "Seleccione un paquete de la tabla");
         return;
     }
 
-    
+    // Obtiene el ID del paquete seleccionado
     int paqueteId = (Integer) modelo.getValueAt(selectedRow, 0);
 
     PaqueteData paqueteData = new PaqueteData();
@@ -347,14 +347,9 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
 
         
         modelo.setValueAt(nuevoEstado ? "Activo" : "Inactivo", selectedRow, 11); 
+
         
-        
-        Object[] rowData = new Object[modelo.getColumnCount()];
-        for (int i = 0; i < modelo.getColumnCount(); i++) {
-            rowData[i] = modelo.getValueAt(selectedRow, i);
-        }
-        modelo.removeRow(selectedRow); 
-        modelo.insertRow(selectedRow, rowData); 
+        modelo.fireTableRowsUpdated(selectedRow, selectedRow);
 
         JOptionPane.showMessageDialog(this, "Estado del paquete modificado correctamente");
     } else {
