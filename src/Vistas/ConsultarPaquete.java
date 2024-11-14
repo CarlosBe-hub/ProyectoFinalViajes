@@ -83,7 +83,6 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jBsalir = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jRestado = new javax.swing.JRadioButton();
         jBmodificar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
@@ -156,13 +155,6 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/consultar_paquete.png"))); // NOI18N
 
-        jRestado.setText("Estado");
-        jRestado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRestadoActionPerformed(evt);
-            }
-        });
-
         jBmodificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Files-Edit-File-icon.png"))); // NOI18N
         jBmodificar.setText("Modificar Estado");
         jBmodificar.addActionListener(new java.awt.event.ActionListener() {
@@ -206,9 +198,7 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
                                         .addComponent(jCpais, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(260, 260, 260)
-                                        .addComponent(jRestado)
-                                        .addGap(18, 18, 18)
+                                        .addGap(349, 349, 349)
                                         .addComponent(jBmodificar))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(136, 136, 136)
@@ -247,9 +237,7 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jCmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBmodificar)
-                            .addComponent(jRestado))
+                        .addComponent(jBmodificar)
                         .addGap(36, 36, 36)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -316,10 +304,6 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jBsalirActionPerformed
 
-    private void jRestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRestadoActionPerformed
-        
-    }//GEN-LAST:event_jRestadoActionPerformed
-
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
   int selectedRow = jTabla.getSelectedRow();
     if (selectedRow == -1) {
@@ -371,7 +355,6 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRestado;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTabla;

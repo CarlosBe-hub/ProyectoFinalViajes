@@ -76,9 +76,7 @@
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
-                                          <Component id="jRestado" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="349" max="-2" attributes="0"/>
                                           <Component id="jBmodificar" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
@@ -133,10 +131,7 @@
                               <Component id="jCmes" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jBmodificar" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRestado" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jBmodificar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="145" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -301,14 +296,6 @@
               <Image iconType="3" name="/imagenes/consultar_paquete.png"/>
             </Property>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="jRestado">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Estado"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRestadoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBmodificar">
           <Properties>
