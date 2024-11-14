@@ -173,6 +173,7 @@
                     Pasaje pasajes = new Pasaje();
                     Ciudad ciudadO = new Ciudad();
                     Ciudad ciudadD = new Ciudad();
+                     p.setEstado(rs.getBoolean("estado"));
 
                     ciudadO.setId_ciudad(rs.getInt("id_ciudadOrigen"));
                     ciudadO.setNombre(rs.getString("co.nombre"));

@@ -383,89 +383,102 @@ public class VistaPaquete extends javax.swing.JInternalFrame {
 
     private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
 
-        try {
-            // aca validamos que se selecciono un tipo de trasnportee
-            String tipoTransporte = (String) jCtransporte.getSelectedItem();
-            if ("---Seleccionar---".equals(tipoTransporte) || tipoTransporte == null) {
-                JOptionPane.showMessageDialog(this, "Por favor, seleccione un tipo de transporte valido.");
-                return;
-            }
-
-            List<Turista> turistas = new ArrayList<>();
-
-            if (jcbTurista1.getSelectedIndex() != -1) {
-                turistas.add(td.buscarTuristaPorNombre(jcbTurista1.getSelectedItem().toString()));
-            }
-            if (jcbTurista2.getSelectedIndex() != -1) {
-                turistas.add(td.buscarTuristaPorNombre(jcbTurista2.getSelectedItem().toString()));
-            }
-            if (jcbTurista3.getSelectedIndex() != -1) {
-                turistas.add(td.buscarTuristaPorNombre(jcbTurista3.getSelectedItem().toString()));
-            }
-            if (jcbTurista4.getSelectedIndex() != -1) {
-                turistas.add(td.buscarTuristaPorNombre(jcbTurista4.getSelectedItem().toString()));
-            }
-
-            // Validar que haya entre 1 y 4 turistas seleccionados
-            int turistasSeleccionados = turistas.size();
-            if (turistasSeleccionados < 1 || turistasSeleccionados > 4) {
-                JOptionPane.showMessageDialog(this, "Debe seleccionar entre 1 y 4 turistas.");
-                return;
-            }
-
-            Ciudad ciudadOrigen = cd.buscarCiudad("San Luis");
-            Ciudad ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
-
-            if (ciudadOrigen == null || ciudadDestino == null) {
-                JOptionPane.showMessageDialog(this, "Por favor, seleccione ciudades válidas.");
-                return;
-            }
-
-            double importeTransporte = Double.parseDouble(jTimporteTransporte.getText());
-            Pasaje pasaje = new Pasaje(tipoTransporte, importeTransporte, ciudadOrigen, ciudadDestino, true);
-            pasaje = ps.guardarPasaje(pasaje);
-
-            Alojamiento alojamiento = ad.buscarAlojamientoPorImporte(Double.parseDouble(jtAlojamiento.getText()));
-            if (alojamiento == null) {
-                JOptionPane.showMessageDialog(this, "Alojamiento no encontrado.");
-                return;
-            }
-
-            double importePaquete = Double.parseDouble(ImporteTotal.getText());
-            Paquete paquete = new Paquete();
-            paquete.setNombrePaquete("Paquete Turistico");
-            paquete.setCiudadOrigen(ciudadOrigen);
-            paquete.setCiudadDestino(ciudadDestino);
-            paquete.setAlojamiento(alojamiento);
-            paquete.setPasaje(pasaje);
-            paquete.setEstado(true);
-            paquete.setImportePaquete(importePaquete);
-
-            if (turistasSeleccionados > 0) {
-                paquete.setId_turista1(turistas.get(0));
-            }
-            if (turistasSeleccionados > 1) {
-                paquete.setId_turista2(turistas.get(1));
-            }
-            if (turistasSeleccionados > 2) {
-                paquete.setId_turista3(turistas.get(2));
-            }
-            if (turistasSeleccionados > 3) {
-                paquete.setId_turista4(turistas.get(3));
-            }
-
-            pd.AgregarPaquete(paquete);
-            jBagregar.setEnabled(false);
-            jbNuevo.setEnabled(true);
-
-            JOptionPane.showMessageDialog(this, "Paquete agregado exitosamente.");
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Formato no valido: " + e.getMessage());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ocurrio un error: " + e.getMessage());
+           try {
+       
+        String tipoTransporte = (String) jCtransporte.getSelectedItem();
+        if ("---Seleccionar---".equals(tipoTransporte) || tipoTransporte == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un tipo de transporte válido.");
+            return;
         }
 
+        List<Turista> turistas = new ArrayList<>();
+        
+        
+        if (jcbTurista1.getSelectedIndex() != -1) {
+            turistas.add(td.buscarTuristaPorNombre(jcbTurista1.getSelectedItem().toString()));
+        }
+        if (jcbTurista2.getSelectedIndex() != -1) {
+            turistas.add(td.buscarTuristaPorNombre(jcbTurista2.getSelectedItem().toString()));
+        }
+        if (jcbTurista3.getSelectedIndex() != -1) {
+            turistas.add(td.buscarTuristaPorNombre(jcbTurista3.getSelectedItem().toString()));
+        }
+        if (jcbTurista4.getSelectedIndex() != -1) {
+            turistas.add(td.buscarTuristaPorNombre(jcbTurista4.getSelectedItem().toString()));
+        }
+
+        
+        int turistasSeleccionados = turistas.size();
+        if (turistasSeleccionados < 1 || turistasSeleccionados > 4) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar entre 1 y 4 turistas.");
+            return;
+        }
+
+        
+        boolean Mayor = false;
+        boolean todosMenores= true;
+
+        for (Turista turista : turistas) {
+            int edad = turista.getEdad();
+            if (edad > 10) todosMenores = false;
+            if (edad >= 18) Mayor= true;
+        }
+
+        if (todosMenores) {
+            JOptionPane.showMessageDialog(this, "Debe haber al menos un turista mayor de edad!");
+            return;
+        }
+
+        if (!Mayor) {
+            JOptionPane.showMessageDialog(this, "Debe haber al menos un turista mayor de 18 años!");
+            return;
+        }
+
+        
+        Ciudad ciudadOrigen = cd.buscarCiudad("San Luis");
+        Ciudad ciudadDestino = cd.buscarCiudad(jCciudades.getSelectedItem().toString());
+
+        if (ciudadOrigen == null || ciudadDestino == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione ciudades válidas.");
+            return;
+        }
+
+        double importeTransporte = Double.parseDouble(jTimporteTransporte.getText());
+        Pasaje pasaje = new Pasaje(tipoTransporte, importeTransporte, ciudadOrigen, ciudadDestino, true);
+        pasaje = ps.guardarPasaje(pasaje);
+
+        Alojamiento alojamiento = ad.buscarAlojamientoPorImporte(Double.parseDouble(jtAlojamiento.getText()));
+        if (alojamiento == null) {
+            JOptionPane.showMessageDialog(this, "Alojamiento no encontrado.");
+            return;
+        }
+
+        double importePaquete = Double.parseDouble(ImporteTotal.getText());
+        Paquete paquete = new Paquete();
+        paquete.setNombrePaquete("Paquete Turistico");
+        paquete.setCiudadOrigen(ciudadOrigen);
+        paquete.setCiudadDestino(ciudadDestino);
+        paquete.setAlojamiento(alojamiento);
+        paquete.setPasaje(pasaje);
+        paquete.setEstado(true);
+        paquete.setImportePaquete(importePaquete);
+
+        if (turistasSeleccionados > 0) paquete.setId_turista1(turistas.get(0));
+        if (turistasSeleccionados > 1) paquete.setId_turista2(turistas.get(1));
+        if (turistasSeleccionados > 2) paquete.setId_turista3(turistas.get(2));
+        if (turistasSeleccionados > 3) paquete.setId_turista4(turistas.get(3));
+
+        pd.AgregarPaquete(paquete);
+        jBagregar.setEnabled(false);
+        jbNuevo.setEnabled(true);
+
+        JOptionPane.showMessageDialog(this, "Paquete agregado exitosamente.");
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Formato no válido: " + e.getMessage());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage());
+    }
     }//GEN-LAST:event_jBagregarActionPerformed
 
     private void jCtransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtransporteActionPerformed

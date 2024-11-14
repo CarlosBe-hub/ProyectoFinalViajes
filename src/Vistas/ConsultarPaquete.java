@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Ciudad;
 import AccesoaDatos.CiudadData;
 import AccesoaDatos.PaqueteData;
+import javax.swing.JOptionPane;
 import modelo.Paquete;
 
 /**
@@ -30,7 +31,7 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         jCmes.setEnabled(false);
         jBbuscar.setEnabled(false);
         cargarMeses();
-        //jScantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1));
+        
 
     }
 
@@ -83,7 +84,7 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         jBsalir = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jRestado = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        jBmodificar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
@@ -162,11 +163,11 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Files-Edit-File-icon.png"))); // NOI18N
-        jButton1.setText("Modificar Estado");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBmodificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Files-Edit-File-icon.png"))); // NOI18N
+        jBmodificar.setText("Modificar Estado");
+        jBmodificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBmodificarActionPerformed(evt);
             }
         });
 
@@ -208,7 +209,7 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
                                         .addGap(260, 260, 260)
                                         .addComponent(jRestado)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton1))
+                                        .addComponent(jBmodificar))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(136, 136, 136)
                                         .addComponent(jBbuscar))))))
@@ -217,7 +218,7 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
                         .addComponent(jLabel6)
                         .addGap(250, 250, 250)
                         .addComponent(jLabel2)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(347, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,7 +248,7 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
                             .addComponent(jCmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
+                            .addComponent(jBmodificar)
                             .addComponent(jRestado))
                         .addGap(36, 36, 36)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,15 +320,53 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jRestadoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
+   int selectedRow = jTabla.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Seleccione un paquete de la tabla");
+        return;
+    }
+
+    
+    int paqueteId = (Integer) modelo.getValueAt(selectedRow, 0);
+
+    PaqueteData paqueteData = new PaqueteData();
+    Paquete paquete = paqueteData.buscarPaquete(paqueteId); 
+
+    if (paquete != null) {
+        // Cambiar el estado
+        boolean nuevoEstado = !paquete.isEstado();
+        paquete.setEstado(nuevoEstado);
+
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (nuevoEstado) {
+            paqueteData.ModificarPaqueteAlta(paqueteId);
+        } else {
+            paqueteData.ModificarPaqueteBaja(paqueteId);
+        }
+
+        
+        modelo.setValueAt(nuevoEstado ? "Activo" : "Inactivo", selectedRow, 11); 
+        
+        
+        Object[] rowData = new Object[modelo.getColumnCount()];
+        for (int i = 0; i < modelo.getColumnCount(); i++) {
+            rowData[i] = modelo.getValueAt(selectedRow, i);
+        }
+        modelo.removeRow(selectedRow); 
+        modelo.insertRow(selectedRow, rowData); 
+
+        JOptionPane.showMessageDialog(this, "Estado del paquete modificado correctamente");
+    } else {
+        JOptionPane.showMessageDialog(this, "No se pudo encontrar el paquete seleccionado");
+    }
+    }//GEN-LAST:event_jBmodificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
+    private javax.swing.JButton jBmodificar;
     private javax.swing.JButton jBsalir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCmes;
     private javax.swing.JComboBox<String> jCpais;
     private javax.swing.JComboBox<String> jCprovincia;
@@ -366,8 +405,13 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         List<String> turistas = paqueteData.listarTuristasPorPaquete(paquete.getId_paquete());
         String nombresTuristas = String.join(", ", turistas);
         int numeroTuristas = turistas.size();
+        
+        String estadoPaquete = paquete.isEstado() ? "Activo" : "Inactivo";
+        
+        
 
         modelo.addRow(new Object[]{
+            paquete.getId_paquete(),
             paquete.getCiudadDestino().getNombre(),
             paquete.getAlojamiento().getFechaInicio(),
             paquete.getAlojamiento().getFechaFin(),
@@ -377,12 +421,15 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
             importeBase,
             importeBase,
             nombresTuristas,
-            numeroTuristas
+            numeroTuristas,
+            estadoPaquete    
+                
         });
 
     }
 
     private void armarCabecera() {
+        modelo.addColumn("id");
         modelo.addColumn("Ciudad");
         modelo.addColumn("Fecha Inicio");
         modelo.addColumn("Fecha Fin");
@@ -393,9 +440,13 @@ public class ConsultarPaquete extends javax.swing.JInternalFrame {
         modelo.addColumn("Importe Base");
         modelo.addColumn("Turistas");
         modelo.addColumn("Num.Turistas");
+        modelo.addColumn("Estado");
         jTabla.setModel(modelo);
-        jTabla.getColumnModel().getColumn(7).setMinWidth(0);
-        jTabla.getColumnModel().getColumn(7).setMaxWidth(0);
+        
+        jTabla.getColumnModel().getColumn(0).setMinWidth(0);
+        jTabla.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTabla.getColumnModel().getColumn(8).setMinWidth(0);
+        jTabla.getColumnModel().getColumn(8).setMaxWidth(0);
 
     }
 
