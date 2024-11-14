@@ -288,7 +288,40 @@ public List<String> listarTuristasPorPaquete(int idPaquete) {
     }
     return turistas;
 }
+public List<Paquete> listarPaquetesPorEstado(int estado) {
+    String sql = "SELECT p.id_paquete, co.nombre AS ciudadOrigen, cd.nombre AS ciudadDestino, p.estado " +
+                 "FROM paquete p " +
+                 "JOIN ciudad co ON p.id_ciudadOrigen = co.id_ciudad " +
+                 "JOIN ciudad cd ON p.id_ciudadDestino = cd.id_ciudad " +
+                 "WHERE p.estado = ?";
+    List<Paquete> paquetes = new ArrayList<>();
 
+    try {
+        PreparedStatement ps = red.prepareStatement(sql);
+        ps.setInt(1, estado);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Paquete paquete = new Paquete();
+            paquete.setId_paquete(rs.getInt("id_paquete"));
+
+            Ciudad ciudadOrigen = new Ciudad();
+            ciudadOrigen.setNombre(rs.getString("ciudadOrigen"));
+            paquete.setCiudadOrigen(ciudadOrigen);
+
+            Ciudad ciudadDestino = new Ciudad();
+            ciudadDestino.setNombre(rs.getString("ciudadDestino"));
+            paquete.setCiudadDestino(ciudadDestino);
+
+            paquete.setEstado(rs.getInt("estado") == 1);
+
+            paquetes.add(paquete);
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al listar paquetes por estado: " + e.getMessage());
+    }
+    return paquetes;
+}
     }
 
     
